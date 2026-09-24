@@ -1,16 +1,17 @@
 {#
-  Démarche : introduction et photo à gauche, étapes numérotées à droite.
+  Démarche : introduction (et photo optionnelle) à gauche, étapes numérotées à droite.
   Usage : {% from "sections/demarche.njk" import demarche %}
           {{ demarche({ label, titre: [lignes…], texte, image, alt, etapes: [{ titre, texte }] }) }}
+          variante: "compacte" → intro 416px + étapes 832px, espacées de 64px (page Studio : sans texte ni photo)
 #}
 {% macro demarche(d) %}
 {% from "components/etape.njk" import etape %}
-<section class="demarche"{% if d.id %} id="{{ d.id }}"{% endif %}>
+<section class="demarche{% if d.variante %} demarche--{{ d.variante }}{% endif %}"{% if d.id %} id="{{ d.id }}"{% endif %}>
   <div class="container">
     <div class="demarche__intro">
       <p class="t-label taupe">{{ d.label }}</p>
       <h2 class="t-titre-l">{{ d.titre | lignes | safe }}</h2>
-      <p class="t-texte">{{ d.texte }}</p>
+      {% if d.texte %}<p class="t-texte">{{ d.texte }}</p>{% endif %}
       {% if d.image %}<img class="photo" src="{{ d.image }}" alt="{{ d.alt }}" loading="lazy">{% endif %}
     </div>
     <ol class="etapes">

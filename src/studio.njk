@@ -1,0 +1,71 @@
+---
+layout: layouts/base.njk
+title: Studio
+permalink: /studio/
+description: Innea, un petit atelier d’architecture d’intérieur mené par Nathalie et Christophe, en Suisse romande.
+
+intro:
+  label: Studio
+  titre: ["Un petit atelier,", "deux regards."]
+  texte: Nathalie et Christophe dessinent ensemble chaque projet, de la première esquisse au dernier objet posé.
+
+equipe:
+  label: Nathalie et Christophe
+  titre: Innea est né de la passion commune d’un couple d’architectes.
+  texte: "[Parcours à rédiger avec le client : formation, parcours, ce qui les a réunis autour d’Innea. Trois à cinq lignes.]"
+  portraits:
+    - { image: /assets/photos/portrait-1.png, alt: "Portrait de Nathalie" }
+    - { image: /assets/photos/portrait-2.png, alt: "Portrait de Christophe" }
+
+valeurs:
+  titre: Ce qui nous guide
+  valeurs:
+    - { titre: La lumière, texte: "Nous travaillons la lumière et les volumes pour des intérieurs contemporains et chaleureux, où l’on se sent bien." }
+    - { titre: Le détail, texte: "Tout est dessiné : plans, 3D, mobilier. Nous choisissons avec vous le sol, le carrelage, chaque luminaire." }
+    - { titre: Le temps, texte: "Nous prenons peu de projets, pour prendre le temps de comprendre ce que chacun attend de son lieu." }
+
+respiration:
+  image: /assets/photos/coucher-soleil-lac.jpg
+  alt: Coucher de soleil sur le lac, depuis une terrasse
+  legende: Extérieurs, projet résidentiel
+
+demarche:
+  variante: compacte
+  label: Démarche
+  titre: ["Quatre temps,", "un seul interlocuteur."]
+  etapes:
+    - { titre: Écoute, texte: "Une première rencontre ouverte : votre lieu, vos envies, votre budget." }
+    - { titre: Avant-projet, texte: "Croquis, premiers plans, deux ou trois pistes. Les grandes lignes du projet." }
+    - { titre: Projet et chantier, texte: "Offres détaillées des entreprises, budget précis, suivi du chantier." }
+    - { titre: Dernière touche, texte: "Finitions, lumières, mobilier, objets. Ce qui rend un intérieur habité." }
+
+savoirFaire:
+  titre: Ce que nous dessinons
+  objets:
+    - { titre: Architecture d’intérieur, texte: "Rénovations complètes : volumes, lumière, circulation.", image: /assets/photos/architecture-entree.jpg, alt: "Entrée rénovée avec escalier" }
+    - { titre: Mobilier sur mesure, texte: "Bibliothèques, rangements, cuisines dessinés pour le lieu.", image: /assets/photos/mobilier-bibliotheque.jpg, alt: "Bibliothèque dessinée sur mesure" }
+    - { titre: Objets et matières, texte: "Conseil sur le mobilier, les luminaires et les objets.", image: /assets/photos/objets-matieres.jpg, alt: "Composition d’objets et de fleurs" }
+
+showroom:
+  label: Showroom
+  titre: ["Un lieu pour voir", "et toucher les matières."]
+  texte: "Objets, échantillons, mobilier : notre sélection est réunie au showroom. Visite sur rendez-vous."
+  image: /assets/photos/showroom-blonay.jpg
+  alt: Le showroom Innea à Blonay
+  lien: { texte: Visiter le showroom, url: /showroom/ }
+---
+{% from "sections/intro-de-page.njk" import introDePage %}
+{% from "sections/equipe.njk" import equipe as equipeSection %}
+{% from "sections/valeurs.njk" import valeurs as valeursSection %}
+{% from "sections/respiration.njk" import respiration as respirationSection %}
+{% from "sections/demarche.njk" import demarche as demarcheSection %}
+{% from "sections/savoir-faire.njk" import savoirFaire as savoirFaireSection %}
+{% from "sections/showroom.njk" import showroom as showroomSection %}
+
+{{ introDePage(intro) }}
+{{ equipeSection(equipe) }}
+{{ valeursSection(valeurs) }}
+{{ respirationSection(respiration) }}
+{{ demarcheSection(demarche) }}
+{{ savoirFaireSection(savoirFaire) }}
+{{ showroomSection(showroom) }}

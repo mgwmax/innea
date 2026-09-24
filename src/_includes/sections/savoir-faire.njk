@@ -1,13 +1,21 @@
 {#
-  Savoir-faire : titre et objets en trois colonnes.
+  Grille d'objets : titre (et légende optionnelle à droite), objets en trois colonnes sur autant de rangées que nécessaire.
+  Sert à « Ce que nous dessinons » (accueil, studio) et à la « Sélection » du showroom.
   Usage : {% from "sections/savoir-faire.njk" import savoirFaire %}
-          {{ savoirFaire({ titre, objets: [{ image, alt, titre, texte }] }) }}
+          {{ savoirFaire({ id, titre, legende, objets: [{ image, alt, titre, texte }] }) }}
 #}
 {% macro savoirFaire(s) %}
 {% from "components/objet.njk" import objet %}
 <section class="savoir"{% if s.id %} id="{{ s.id }}"{% endif %}>
   <div class="container">
+    {% if s.legende %}
+    <div class="section-head">
+      <h2 class="t-display-l">{{ s.titre }}</h2>
+      <p class="t-legende taupe">{{ s.legende }}</p>
+    </div>
+    {% else %}
     <h2 class="t-display-l">{{ s.titre }}</h2>
+    {% endif %}
     <div class="cols-3">
       {% for o in s.objets %}{{ objet(o) }}{% endfor %}
     </div>

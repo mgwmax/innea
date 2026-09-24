@@ -1,0 +1,18 @@
+{#
+  Champ de formulaire : label (Label) au-dessus d'une zone de saisie à filet fin.
+  Utilisé uniquement sur la page Contact (formulaire à valider avec le client).
+  Usage : {% from "components/champ.njk" import champ %}
+          {{ champ({ label: "Nom", nom: "nom", type: "text", requis: true, autocomplete: "name" }) }}
+          {{ champ({ label: "Votre projet", nom: "message", multiligne: true }) }}   → <textarea>
+#}
+{% macro champ(c) %}
+{% set id = "champ-" + c.nom %}
+<div class="champ">
+  <label class="t-label taupe" for="{{ id }}">{{ c.label }}</label>
+  {% if c.multiligne %}
+  <textarea class="champ__saisie champ__saisie--multiligne t-texte" id="{{ id }}" name="{{ c.nom }}" rows="5"{% if c.requis %} required{% endif %}></textarea>
+  {% else %}
+  <input class="champ__saisie t-texte" id="{{ id }}" name="{{ c.nom }}" type="{{ c.type or 'text' }}"{% if c.autocomplete %} autocomplete="{{ c.autocomplete }}"{% endif %}{% if c.requis %} required{% endif %}>
+  {% endif %}
+</div>
+{% endmacro %}

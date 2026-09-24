@@ -2,11 +2,12 @@
   Respiration : photo pleine largeur avec légende.
   Usage : {% from "sections/respiration.njk" import respiration %}
           {{ respiration({ image, alt, legende }) }}
+          masque: "photo" → dégradé plus soutenu (noir 50 %), comme la photo plein cadre de la page Contact
 #}
 {% macro respiration(r) %}
 <section class="respiration" aria-label="{{ r.legende }}">
   <img src="{{ r.image }}" alt="{{ r.alt }}" loading="lazy">
-  <div class="mask-bottom mask-bottom--leger"></div>
+  <div class="mask-bottom {{ 'mask-bottom--photo' if r.masque == 'photo' else 'mask-bottom--leger' }}"></div>
   <div class="container"><p class="t-legende">{{ r.legende }}</p></div>
 </section>
 {% endmacro %}

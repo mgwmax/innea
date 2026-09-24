@@ -1,0 +1,17 @@
+{#
+  Méta projet : informations du projet sous la photo d'ouverture (Lieu, Année, Catégorie, Surface).
+  Chaque information absente est omise. Surface : seulement si le client l'accepte.
+  Usage : {% from "components/meta-projet.njk" import metaProjet %}
+          {{ metaProjet({ lieu, annee, categorie, surface }) }}
+#}
+{% macro metaProjet(p) %}
+{% set infos = [["Lieu", p.lieu], ["Année", p.annee], ["Catégorie", p.categorie], ["Surface", p.surface]] %}
+<dl class="meta-projet">
+  {% for info in infos %}{% if info[1] %}
+  <div class="meta-projet__item">
+    <dt class="t-label taupe">{{ info[0] }}</dt>
+    <dd class="t-titre-s">{{ info[1] }}</dd>
+  </div>
+  {% endif %}{% endfor %}
+</dl>
+{% endmacro %}

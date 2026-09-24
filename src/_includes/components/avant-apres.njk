@@ -1,0 +1,19 @@
+{#
+  Avant / après : curseur de comparaison, glissé à la souris ou au doigt (et au clavier : flèches).
+  L'image « après » occupe le cadre ; l'image « avant » est découpée à gauche de la poignée.
+  Comportement : js/components/avant-apres.js (met à jour la variable CSS --position).
+  Usage : {% from "components/avant-apres.njk" import avantApres %}
+          {{ avantApres({ avant: { image, alt }, apres: { image, alt } }) }}
+#}
+{% macro avantApres(a) %}
+<div class="avant-apres" style="--position: 50%">
+  <img class="avant-apres__apres" src="{{ a.apres.image }}" alt="{{ a.apres.alt }}" loading="lazy">
+  <img class="avant-apres__avant" src="{{ a.avant.image }}" alt="{{ a.avant.alt }}" loading="lazy">
+  <div class="avant-apres__poignee" aria-hidden="true">
+    <img src="/assets/ui/avant-apres-poignee.svg" alt="" width="56" height="56">
+  </div>
+  <p class="avant-apres__label avant-apres__label--avant t-label" aria-hidden="true">Avant</p>
+  <p class="avant-apres__label avant-apres__label--apres t-label" aria-hidden="true">Après</p>
+  <input class="avant-apres__curseur" type="range" min="0" max="100" value="50" step="0.1" aria-label="Comparer avant et après">
+</div>
+{% endmacro %}

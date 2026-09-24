@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+title: Mentions légales
+permalink: /mentions-legales/
+contact: false
+
+intro:
+  label: Informations
+  titre: Mentions légales
+
+texte:
+  # Textes entre crochets : à rédiger / confirmer avec le client
+  rubriques:
+    - { titre: Éditeur, lignes: ["Innea Sàrl [raison sociale à confirmer]", "Chemin du Péage 39, 1807 Blonay", "info@innea.ch"] }
+    - { titre: Hébergement, texte: "[À confirmer]" }
+    - { titre: Propriété intellectuelle, texte: "[Texte à rédiger : photos et contenus propriété d’Innea, reproduction soumise à autorisation.]" }
+    - { titre: Protection des données, texte: "[Texte à rédiger conformément à la loi fédérale sur la protection des données.]" }
+---
+{% from "sections/intro-de-page.njk" import introDePage %}
+{% from "sections/texte-legal.njk" import texteLegal %}
+
+{{ introDePage(intro) }}
+{{ texteLegal(texte) }}

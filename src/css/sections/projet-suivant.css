@@ -1,0 +1,14 @@
+/* Projet suivant : photo pleine largeur cliquable, voile, texte blanc en bas à gauche */
+.projet-suivant { position: relative; display: block; height: 600px; overflow: hidden; color: var(--innea-blanc); }
+.projet-suivant > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+.projet-suivant__voile { position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(26,23,20,.3) 0%, rgba(26,23,20,0) 35%, rgba(26,23,20,0) 60%, rgba(26,23,20,.55) 100%); }
+.projet-suivant__texte { position: absolute; left: var(--section-x); right: var(--section-x); bottom: 60px; width: auto; margin: 0 auto;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.projet-suivant:hover > img, .projet-suivant:focus-visible > img { transform: scale(1.03); }
+.projet-suivant:hover .btn-link__arrow, .projet-suivant:focus-visible .btn-link__arrow { width: 56px; }
+
+@media (max-width: 640px) {
+  .projet-suivant { height: 480px; }
+  .projet-suivant__texte { bottom: 40px; gap: 14px; }
+}

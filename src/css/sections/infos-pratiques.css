@@ -1,0 +1,15 @@
+/* Informations pratiques (Showroom) : filet pleine largeur en haut, colonnes réparties sur la largeur */
+.infos-pratiques { border-top: 1px solid var(--innea-ligne); padding: 64px var(--section-x) 160px; }
+.infos-pratiques .container { display: flex; justify-content: space-between; gap: 32px; }
+.infos-pratiques__item { display: flex; flex-direction: column; gap: 12px; }
+.infos-pratiques__item--lien { gap: 16px; }
+
+@media (max-width: 900px) {
+  .infos-pratiques { padding-bottom: var(--section-y); }
+  .infos-pratiques .container { flex-wrap: wrap; row-gap: 40px; }
+  .infos-pratiques__item { flex: 1 1 40%; }
+}
+@media (max-width: 640px) {
+  .infos-pratiques { padding-top: 48px; }
+  .infos-pratiques__item { flex-basis: 100%; }
+}

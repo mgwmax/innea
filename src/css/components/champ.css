@@ -1,0 +1,24 @@
+/* Champ de formulaire (page Contact) : label, zone de saisie à filet fin ; case à cocher de consentement */
+.champ { display: flex; flex-direction: column; gap: 8px; }
+.champ__saisie {
+  width: 100%; height: 40px; margin: 0; padding: 0 12px; border: 1px solid var(--innea-ligne); border-radius: 0;
+  background: transparent; color: var(--innea-encre); appearance: none; transition: border-color .25s ease;
+}
+.champ__saisie--multiligne { height: 140px; padding: 10px 12px; resize: vertical; }
+.champ__saisie:hover { border-color: var(--innea-taupe); }
+.champ__saisie:focus { outline: none; border-color: var(--innea-encre); }
+.is-verifie .champ__saisie:invalid { border-color: #a0523d; }
+
+.consentement { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.consentement input {
+  flex: none; width: 20px; height: 20px; margin: 0; appearance: none; cursor: pointer;
+  background: var(--innea-blanc) center / 12px no-repeat; border: 1px solid var(--innea-ligne); border-radius: 4px;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.consentement input:checked {
+  background-color: var(--innea-encre); border-color: var(--innea-encre);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.2 4.8 9 10 3' fill='none' stroke='%23fff' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.consentement input:focus-visible { outline: 1px solid var(--innea-encre); outline-offset: 3px; }
+.is-verifie .consentement input:invalid { border-color: #a0523d; }
+.consentement a { text-decoration: underline; text-underline-offset: 2px; }

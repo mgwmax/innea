@@ -1,0 +1,3 @@
+/* Valeur : filet fin en haut, numéro, titre, texte */
+.valeur { border-top: 1px solid var(--innea-ligne); padding-top: 28px; display: flex; flex-direction: column; gap: 18px; }
+.valeur .t-texte { max-width: 380px; opacity: .8; }

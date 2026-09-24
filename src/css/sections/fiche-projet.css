@@ -1,0 +1,12 @@
+/* Fiche projet : méta puis texte « Le projet », sous la photo d'ouverture */
+.fiche-projet { padding: 64px var(--section-x) 140px; }
+.fiche-projet .container { display: flex; flex-direction: column; gap: 96px; }
+
+@media (max-width: 900px) {
+  .fiche-projet { padding-bottom: var(--section-y); }
+  .fiche-projet .container { gap: 64px; }
+}
+@media (max-width: 640px) {
+  .fiche-projet { padding-top: 40px; }
+  .fiche-projet .container { gap: 48px; }
+}

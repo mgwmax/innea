@@ -1,0 +1,13 @@
+/* Section texte (pages légales) : colonne centrée de 1024px, rubriques espacées de 48px, textes sur 640px */
+.texte-legal { padding: 0 var(--section-x) 160px; }
+.texte-legal__colonne { max-width: 1024px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px; }
+.texte-legal__rubrique { display: flex; flex-direction: column; gap: 14px; }
+.texte-legal__rubrique .t-texte { max-width: 640px; opacity: .8; }
+
+@media (max-width: 900px) {
+  .texte-legal { padding-bottom: var(--section-y); }
+  .texte-legal__colonne { gap: 40px; }
+}
+@media (max-width: 640px) {
+  .texte-legal__rubrique .t-titre-m { font-size: 26px; }
+}

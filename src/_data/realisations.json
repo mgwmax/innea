@@ -1,15 +1,32 @@
 {
-  "_note": "Liste des projets, dans l’ordre d’affichage. « accueil: true » = affiché dans la sélection de la page d’accueil. Noms et photos provisoires : la correspondance photo / projet est à valider avec le client.",
+  "_note": "Liste des projets, dans l’ordre d’affichage. Chaque projet a sa page /projets/<slug>/ (gabarit : src/projets/projet.njk). « accueil: true » = affiché dans la sélection de la page d’accueil. Champs de la fiche, tous optionnels sauf titre/slug/categorie/image : lieu, annee, surface (seulement si le client l’accepte), texte, galerie (1 pleine largeur puis 2 côte à côte, en boucle), details { texte, image, alt }, avantApres { avant, apres }. Noms, photos et textes provisoires : à valider avec le client.",
   "projets": [
-    { "titre": "Sur les hauts de Vevey", "categorie": "Résidentiel", "image": "/assets/photos/vevey-escalier.jpg", "alt": "Escalier et bibliothèque en bois, Vevey", "accueil": true },
-    { "titre": "Alpes vaudoises", "categorie": "Résidentiel", "image": "/assets/photos/alpes-vaudoises-sejour.jpg", "alt": "Séjour, Alpes vaudoises", "accueil": true },
-    { "titre": "Projet pierre, Blonay", "categorie": "Mobilier sur mesure", "image": "/assets/photos/blonay-bibliotheque.jpg", "alt": "Bibliothèque sur mesure, Blonay", "accueil": true },
-    { "titre": "Atelier showroom, Vevey", "categorie": "Commercial", "image": "/assets/photos/showroom-blonay.jpg", "alt": "Atelier showroom, Vevey" },
-    { "titre": "Bureau, Genève", "categorie": "Commercial", "image": "/assets/photos/atelier-bureau.jpg", "alt": "Bureau, Genève" },
-    { "titre": "La Tour-de-Peilz", "categorie": "Résidentiel", "image": "/assets/photos/architecture-entree.jpg", "alt": "Entrée et escalier, La Tour-de-Peilz" },
-    { "titre": "Saint-Prex", "categorie": "Extérieurs", "image": "/assets/photos/saint-prex-piscine.jpg", "alt": "Piscine face au lac, Saint-Prex", "accueil": true },
-    { "titre": "[Nom du projet]", "categorie": "Extérieurs", "image": "/assets/photos/jardin-terrasse.jpg", "alt": "Terrasse de jardin éclairée" },
-    { "titre": "[Nom du projet]", "categorie": "Mobilier sur mesure", "image": "/assets/photos/mobilier-bibliotheque.jpg", "alt": "Bibliothèque dessinée sur mesure" },
-    { "titre": "[Nom du projet]", "categorie": "Extérieurs", "image": "/assets/photos/jardin-piscine.jpg", "alt": "Piscine dans un jardin arboré" }
+    {
+      "slug": "sur-les-hauts-de-vevey",
+      "titre": "Sur les hauts de Vevey", "categorie": "Résidentiel", "lieu": "Vevey",
+      "annee": "[À confirmer]", "surface": "[À confirmer]",
+      "image": "/assets/photos/vevey-escalier.jpg", "alt": "Escalier et bibliothèque en bois, Vevey",
+      "accueil": true,
+      "texte": "[Texte à rédiger avec le client : deux à quatre lignes sur le lieu, la demande et la réponse apportée. Exemple de ton : un appartement sombre, ouvert à la lumière du lac.]",
+      "galerie": [
+        { "image": "/assets/photos/mobilier-bibliotheque.jpg", "alt": "Bibliothèque dessinée sur mesure" },
+        { "image": "/assets/photos/architecture-entree.jpg", "alt": "Entrée et escalier" },
+        { "image": "/assets/photos/objets-matieres.jpg", "alt": "Composition d’objets et de fleurs" }
+      ],
+      "details": { "texte": "[Détails et légende à rédiger]", "image": "/assets/photos/blonay-bibliotheque.jpg", "alt": "Détail de la bibliothèque" },
+      "avantApres": {
+        "avant": { "image": "/assets/photos/vevey-avant.jpg", "alt": "Le séjour avant les travaux" },
+        "apres": { "image": "/assets/photos/alpes-vaudoises-sejour.jpg", "alt": "Le séjour après les travaux" }
+      }
+    },
+    { "slug": "alpes-vaudoises", "titre": "Alpes vaudoises", "categorie": "Résidentiel", "lieu": "Alpes vaudoises", "image": "/assets/photos/alpes-vaudoises-sejour.jpg", "alt": "Séjour, Alpes vaudoises", "accueil": true },
+    { "slug": "projet-pierre-blonay", "titre": "Projet pierre, Blonay", "categorie": "Mobilier sur mesure", "lieu": "Blonay", "image": "/assets/photos/blonay-bibliotheque.jpg", "alt": "Bibliothèque sur mesure, Blonay", "accueil": true },
+    { "slug": "atelier-showroom-vevey", "titre": "Atelier showroom, Vevey", "categorie": "Commercial", "lieu": "Vevey", "image": "/assets/photos/showroom-blonay.jpg", "alt": "Atelier showroom, Vevey" },
+    { "slug": "bureau-geneve", "titre": "Bureau, Genève", "categorie": "Commercial", "lieu": "Genève", "image": "/assets/photos/atelier-bureau.jpg", "alt": "Bureau, Genève" },
+    { "slug": "la-tour-de-peilz", "titre": "La Tour-de-Peilz", "categorie": "Résidentiel", "lieu": "La Tour-de-Peilz", "image": "/assets/photos/architecture-entree.jpg", "alt": "Entrée et escalier, La Tour-de-Peilz" },
+    { "slug": "saint-prex", "titre": "Saint-Prex", "categorie": "Extérieurs", "lieu": "Saint-Prex", "image": "/assets/photos/saint-prex-piscine.jpg", "alt": "Piscine face au lac, Saint-Prex", "accueil": true },
+    { "slug": "projet-08", "titre": "[Nom du projet]", "categorie": "Extérieurs", "image": "/assets/photos/jardin-terrasse.jpg", "alt": "Terrasse de jardin éclairée" },
+    { "slug": "projet-09", "titre": "[Nom du projet]", "categorie": "Mobilier sur mesure", "image": "/assets/photos/mobilier-bibliotheque.jpg", "alt": "Bibliothèque dessinée sur mesure" },
+    { "slug": "projet-10", "titre": "[Nom du projet]", "categorie": "Extérieurs", "image": "/assets/photos/jardin-piscine.jpg", "alt": "Piscine dans un jardin arboré" }
   ]
 }

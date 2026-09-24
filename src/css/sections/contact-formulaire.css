@@ -1,0 +1,20 @@
+/* Contact (page Contact) : titre et coordonnées à gauche, formulaire de 560px à droite */
+.contact-page { padding: 200px var(--section-x) 160px; }
+.contact-page .container { display: flex; justify-content: space-between; align-items: flex-start; gap: 64px; }
+.contact-page__coords { display: flex; flex-direction: column; gap: 56px; }
+.contact-page__titre { display: flex; flex-direction: column; gap: 24px; }
+.contact-page__titre .t-texte { max-width: 460px; opacity: .8; }
+.contact-page__sep { margin: 0 .6em; }
+.contact-page__formulaire { width: 560px; flex: 0 1 560px; padding-top: 24px; display: flex; flex-direction: column; gap: 40px; }
+.contact-page__envoi { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.contact-page__statut:empty { display: none; }
+.contact-page__statut.is-erreur { color: #a0523d; }
+
+@media (max-width: 900px) {
+  .contact-page { padding: var(--section-y) var(--section-x); }
+  .contact-page .container { flex-direction: column; gap: 72px; }
+  .contact-page__formulaire { width: 100%; flex: none; padding-top: 0; gap: 32px; }
+}
+@media (max-width: 640px) {
+  .contact-page__coords { gap: 40px; }
+}

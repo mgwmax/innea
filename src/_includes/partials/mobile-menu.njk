@@ -2,7 +2,7 @@
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true" tabindex="-1">
   <nav class="mobile-menu__entrees t-titre-l" aria-label="Navigation mobile">
     {% for item in site.navigation %}
-    <a href="{{ item.url }}"{% if item.url == page.url %} aria-current="page"{% endif %}>{{ item.texte }}</a>
+    <a href="{{ item.url }}"{% if item.url == page.url or (item.url.length > 1 and page.url.indexOf(item.url) == 0) %} aria-current="page"{% endif %}>{{ item.texte }}</a>
     {% endfor %}
   </nav>
   <div class="mobile-menu__bas">

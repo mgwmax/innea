@@ -8,6 +8,8 @@ const files = [
   "components/lang.js",
   "components/hero-carousel.js",
   "components/grille-projets.js",
+  "components/avant-apres.js",
+  "components/formulaire-contact.js",
 ];
 
 export const data = { permalink: "/js/main.js", eleventyExcludeFromCollections: true };

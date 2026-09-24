@@ -18,6 +18,17 @@ export default function (eleventyConfig) {
   const escape = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   eleventyConfig.addFilter("lignes", (v) => [].concat(v ?? []).map(escape).join("<br>"));
 
+  // Découpe une liste en groupes de tailles répétées : [a,b,c,d,e] | decouper([1, 2]) → [[a], [b,c], [d], [e]]
+  eleventyConfig.addFilter("decouper", (liste = [], tailles = [1]) => {
+    const groupes = [];
+    for (let i = 0, g = 0; i < liste.length; g++) {
+      const n = tailles[g % tailles.length];
+      groupes.push(liste.slice(i, i + n));
+      i += n;
+    }
+    return groupes;
+  });
+
   // Grille projets : répartit une liste de projets en rangées selon le motif du design.
   // Même motif que js/components/grille-projets.js — les garder identiques.
   const MOTIF_GRILLE = [

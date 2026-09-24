@@ -1,0 +1,15 @@
+{#
+  Bloc label : label à gauche, texte (Titre M) à droite sur 880px, photo optionnelle sous le texte.
+  Utilisé par la fiche projet (« Le projet », « Détails »).
+  Usage : {% from "components/bloc-label.njk" import blocLabel %}
+          {{ blocLabel({ label, texte, italique: false, image, alt }) }}
+#}
+{% macro blocLabel(b) %}
+<div class="bloc-label">
+  <p class="t-label taupe">{{ b.label }}</p>
+  <div class="bloc-label__corps">
+    {% if b.texte %}<p class="t-titre-m{% if b.italique %} bloc-label__texte--italique{% endif %}">{{ b.texte }}</p>{% endif %}
+    {% if b.image %}<img class="bloc-label__photo" src="{{ b.image }}" alt="{{ b.alt }}" loading="lazy">{% endif %}
+  </div>
+</div>
+{% endmacro %}

@@ -1,0 +1,11 @@
+/* Section Avant, après : titre et consigne, puis le curseur de comparaison */
+.avant-apres-section { padding: 0 var(--section-x) 160px; }
+.avant-apres-section .container { display: flex; flex-direction: column; gap: 40px; }
+
+@media (max-width: 900px) {
+  .avant-apres-section { padding-bottom: var(--section-y); }
+  .avant-apres-section .container { gap: 24px; }
+}
+@media (max-width: 640px) {
+  .avant-apres-section .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+}

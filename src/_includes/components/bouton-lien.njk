@@ -1,13 +1,18 @@
 {#
   Bouton lien : seul appel à l'action du site, un texte et un filet fléché. Jamais de bouton plein.
   Usage : {% from "components/bouton-lien.njk" import boutonLien %}
-          {{ boutonLien("Tous les projets", "/projets/") }}        → lien <a>
-          {{ boutonLien("Afficher plus", false, "grille-plus") }}  → <button> (action JS), avec une classe en plus
+          {{ boutonLien("Tous les projets", "/projets/") }}                  → lien <a>
+          {{ boutonLien("Afficher plus", false, "grille__plus-bouton") }}    → <button> (action JS), avec une classe en plus
+          {{ boutonLien("Voir le projet", false, "btn-link--blanc", "span") }} → <span> décoratif, dans un lien parent
+  Ton blanc sur photo : classe "btn-link--blanc".
 #}
-{% macro boutonLien(texte, url="#", classe="") %}
-{% if url %}
-<a href="{{ url }}" class="btn-link t-nav{% if classe %} {{ classe }}{% endif %}">{{ texte }} <span class="btn-link__arrow"></span></a>
+{% macro boutonLien(texte, url="#", classe="", balise="") %}
+{% set classes = "btn-link t-nav" + ((" " + classe) if classe else "") %}
+{% if balise == "span" %}
+<span class="{{ classes }}">{{ texte }} <span class="btn-link__arrow"></span></span>
+{% elif url %}
+<a href="{{ url }}" class="{{ classes }}">{{ texte }} <span class="btn-link__arrow"></span></a>
 {% else %}
-<button type="button" class="btn-link t-nav{% if classe %} {{ classe }}{% endif %}">{{ texte }} <span class="btn-link__arrow"></span></button>
+<button type="button" class="{{ classes }}">{{ texte }} <span class="btn-link__arrow"></span></button>
 {% endif %}
 {% endmacro %}

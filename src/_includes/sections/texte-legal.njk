@@ -1,0 +1,19 @@
+{#
+  Section texte (pages légales) : rubriques titrées dans une colonne centrée de 1024px, textes sur 640px.
+  Usage : {% from "sections/texte-legal.njk" import texteLegal %}
+          {{ texteLegal({ rubriques: [{ titre, lignes: [...] }, { titre, texte }] }) }}
+          lignes → une ligne par élément (adresse, coordonnées) ; texte → un paragraphe.
+#}
+{% macro texteLegal(s) %}
+<section class="texte-legal">
+  <div class="texte-legal__colonne">
+    {% for r in s.rubriques %}
+    <div class="texte-legal__rubrique">
+      <h2 class="t-titre-m">{{ r.titre }}</h2>
+      {% if r.lignes %}<p class="t-texte">{{ r.lignes | lignes | safe }}</p>{% endif %}
+      {% if r.texte %}<p class="t-texte">{{ r.texte }}</p>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endmacro %}

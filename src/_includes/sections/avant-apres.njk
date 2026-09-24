@@ -1,0 +1,17 @@
+{#
+  Section Avant, après : titre, consigne, puis le curseur de comparaison. Optionnelle par projet.
+  Usage : {% from "sections/avant-apres.njk" import avantApresSection %}
+          {{ avantApresSection({ avant: { image, alt }, apres: { image, alt } }) }}
+#}
+{% macro avantApresSection(a, titre="Avant, après", consigne="Glisser pour comparer") %}
+{% from "components/avant-apres.njk" import avantApres %}
+<section class="avant-apres-section">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="t-titre-l">{{ titre }}</h2>
+      <p class="t-label taupe">{{ consigne }}</p>
+    </div>
+    {{ avantApres(a) }}
+  </div>
+</section>
+{% endmacro %}

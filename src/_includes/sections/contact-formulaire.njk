@@ -1,0 +1,56 @@
+{#
+  Contact (page Contact) : titre et coordonnées à gauche, formulaire court à droite.
+  Coordonnées : _data/site.json → contact. Envoi : _data/site.json → formulaire (voir js/components/formulaire-contact.js).
+  Usage : {% from "sections/contact-formulaire.njk" import contactFormulaire %}
+          {{ contactFormulaire(site, { label, titre: [lignes…], texte, formulaire: { intro, champs: [...], consentement, bouton } }) }}
+#}
+{% macro contactFormulaire(site, s) %}
+{% from "components/champ.njk" import champ %}
+{% from "components/bouton-lien.njk" import boutonLien %}
+{% set c = site.contact %}
+<section class="contact-page">
+  <div class="container">
+    <div class="contact-page__coords">
+      <div class="contact-page__titre">
+        <p class="t-label taupe">{{ s.label }}</p>
+        <h1 class="t-display-xl">{{ s.titre | lignes | safe }}</h1>
+        {% if s.texte %}<p class="t-texte">{{ s.texte }}</p>{% endif %}
+      </div>
+      <div class="coord">
+        <p class="t-label taupe">Écrire</p>
+        <a class="t-titre-s" href="mailto:{{ c.email }}">{{ c.email }}</a>
+      </div>
+      <div class="coord">
+        <p class="t-label taupe">Appeler</p>
+        <p class="t-titre-s tel">
+          {% for t in c.telephones %}<a href="tel:{{ t.numero | replace(' ', '') }}"><span>{{ t.nom }}</span>{{ t.numero }}</a>{% if not loop.last %}<br>{% endif %}{% endfor %}
+        </p>
+      </div>
+      <div class="coord">
+        <p class="t-label taupe">Showroom</p>
+        <p class="t-titre-s">{{ c.showroom[0] }}, {{ c.showroom[1] }}{% if c.showroom[2] %}<br>{{ c.showroom[2] }}{% endif %}</p>
+      </div>
+      <div class="coord">
+        <p class="t-label taupe">Suivre</p>
+        <p class="t-titre-s">{% for r in c.reseaux %}{% if not loop.first %}<span class="contact-page__sep" aria-hidden="true">·</span>{% endif %}<a href="{{ r.url }}">{{ r.nom }}</a>{% endfor %}</p>
+      </div>
+    </div>
+
+    {% set f = s.formulaire %}
+    <form class="contact-page__formulaire" method="post" novalidate
+          {% if site.formulaire.action %}action="{{ site.formulaire.action }}"{% endif %}
+          data-email="{{ c.email }}">
+      <p class="t-legende taupe">{{ f.intro }}</p>
+      {% for ch in f.champs %}{{ champ(ch) }}{% endfor %}
+      <label class="consentement">
+        <input type="checkbox" name="consentement" required>
+        <span class="t-texte-s">{{ f.consentement.avant }}<a href="{{ f.consentement.url }}">{{ f.consentement.lien }}</a>{{ f.consentement.apres }}</span>
+      </label>
+      <div class="contact-page__envoi">
+        <button type="submit" class="btn-link t-nav">{{ f.bouton }} <span class="btn-link__arrow"></span></button>
+        <p class="contact-page__statut t-texte-s" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+{% endmacro %}

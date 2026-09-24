@@ -6,9 +6,9 @@
 
   "navigation": [
     { "texte": "Projets", "url": "/projets/" },
-    { "texte": "Studio", "url": "/#studio" },
-    { "texte": "Showroom", "url": "/#showroom" },
-    { "texte": "Contact", "url": "/#contact" }
+    { "texte": "Studio", "url": "/studio/" },
+    { "texte": "Showroom", "url": "/showroom/" },
+    { "texte": "Contact", "url": "/contact/" }
   ],
 
   "contact": {
@@ -25,11 +25,16 @@
     ]
   },
 
+  "formulaire": {
+    "_note": "Formulaire de la page Contact. Sans « action », « Envoyer » ouvre la messagerie du visiteur avec le message prérempli (adresse : contact.email). Pour un vrai envoi, indiquer l’URL d’un service de formulaire (Formspree, Netlify Forms, script PHP…) : le formulaire lui est alors envoyé en POST.",
+    "action": ""
+  },
+
   "legal": {
     "copyright": "© 2026 Innea Sàrl",
     "liens": [
-      { "texte": "Mentions légales", "url": "#" },
-      { "texte": "Confidentialité", "url": "#" }
+      { "texte": "Mentions légales", "url": "/mentions-legales/" },
+      { "texte": "Confidentialité", "url": "/confidentialite/" }
     ]
   }
 }

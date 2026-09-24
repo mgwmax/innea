@@ -1,0 +1,17 @@
+{#
+  Projet suivant : fin de fiche projet, photo pleine largeur cliquable qui enchaîne sur le projet suivant.
+  Usage : {% from "sections/projet-suivant.njk" import projetSuivant %}
+          {{ projetSuivant(projet) }}   → projet de _data/realisations.json (titre, slug, image, alt)
+#}
+{% macro projetSuivant(p, lien="Voir le projet") %}
+{% from "components/bouton-lien.njk" import boutonLien %}
+<a class="projet-suivant" href="/projets/{{ p.slug }}/">
+  <img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy">
+  <div class="projet-suivant__voile" aria-hidden="true"></div>
+  <div class="projet-suivant__texte container">
+    <p class="t-label">Projet suivant</p>
+    <p class="t-display-l">{{ p.titre }}</p>
+    {{ boutonLien(lien, false, "btn-link--blanc", "span") }}
+  </div>
+</a>
+{% endmacro %}

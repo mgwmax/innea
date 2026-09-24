@@ -10,6 +10,11 @@
 .hero__inner { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
 .hero__title { display: flex; flex-direction: column; gap: 20px; }
 .hero__side { display: flex; flex-direction: column; align-items: flex-end; gap: 49px; }
+/* Fil d'Ariane (fiche projet) : en haut à gauche, sous le header */
+.hero__ariane { position: absolute; top: 120px; left: var(--section-x); right: var(--section-x); }
+.hero__ariane a { transition: opacity .25s; }
+.hero__ariane a:hover { opacity: .7; }
+.hero__ariane-sep { margin: 0 .6em 0 .9em; }
 .indicator { display: flex; align-items: center; gap: 14px; }
 .indicator button { all: unset; cursor: pointer; width: 36px; height: 1px; padding: 8px 0; background: linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat; opacity: .35; transition: opacity .3s; }
 .indicator button[aria-current="true"], .indicator button:hover { opacity: 1; }
@@ -22,4 +27,5 @@
 @media (max-width: 640px) {
   .hero { min-height: 640px; padding-bottom: 40px; }
   .hero__title .t-label { white-space: normal; }
+  .hero__ariane { top: 96px; }
 }

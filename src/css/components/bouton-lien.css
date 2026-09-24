@@ -1,6 +1,7 @@
 /* Bouton lien : seul appel à l'action du site, un texte et un filet fléché */
 .btn-link { display: inline-flex; align-items: center; gap: 16px; white-space: nowrap; color: var(--innea-encre); }
-button.btn-link { appearance: none; background: none; border: 0; padding: 0; cursor: pointer; }.btn-link__arrow { position: relative; width: 40px; height: 1px; background: currentColor; transition: width .35s ease; }
+button.btn-link { appearance: none; background: none; border: 0; padding: 0; cursor: pointer; }
+.btn-link--blanc { color: var(--innea-blanc); }.btn-link__arrow { position: relative; width: 40px; height: 1px; background: currentColor; transition: width .35s ease; }
 .btn-link__arrow::before, .btn-link__arrow::after { content: ""; position: absolute; right: -1px; top: 0; width: 8px; height: 1px; background: currentColor; transform-origin: right center; }
 .btn-link__arrow::before { transform: rotate(45deg); }
 .btn-link__arrow::after  { transform: rotate(-45deg); }

@@ -1,0 +1,16 @@
+{#
+  Valeurs (page Studio, « Ce qui nous guide ») : titre et trois valeurs numérotées en colonnes.
+  Usage : {% from "sections/valeurs.njk" import valeurs %}
+          {{ valeurs({ titre, valeurs: [{ titre, texte }] }) }}
+#}
+{% macro valeurs(v) %}
+{% from "components/valeur.njk" import valeur %}
+<section class="valeurs">
+  <div class="container">
+    <h2 class="t-display-l">{{ v.titre }}</h2>
+    <div class="valeurs__liste">
+      {% for item in v.valeurs %}{{ valeur(loop.index, item.titre, item.texte) }}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endmacro %}

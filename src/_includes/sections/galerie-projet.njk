@@ -1,0 +1,23 @@
+{#
+  Galerie projet : photos en alternance — une pleine largeur (1312×760), puis deux côte à côte (640×800) —
+  suivies d'un bloc « Détails » optionnel (texte en italique et photo).
+  Usage : {% from "sections/galerie-projet.njk" import galerieProjet %}
+          {{ galerieProjet(galerie, details) }}   → galerie : [{ image, alt }], details : { texte, image, alt }
+#}
+{% macro galerieProjet(galerie, details) %}
+{% from "components/bloc-label.njk" import blocLabel %}
+<section class="galerie-projet">
+  <div class="container">
+    {% for groupe in galerie | decouper([1, 2]) %}
+    <div class="galerie-projet__rangee galerie-projet__rangee--{{ 'pleine' if groupe.length == 1 else 'paire' }}">
+      {% for photo in groupe %}<img src="{{ photo.image }}" alt="{{ photo.alt }}" loading="lazy">{% endfor %}
+    </div>
+    {% endfor %}
+    {% if details %}
+    <div class="galerie-projet__details">
+      {{ blocLabel({ label: "Détails", texte: details.texte, italique: true, image: details.image, alt: details.alt }) }}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endmacro %}

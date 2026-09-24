@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+title: Showroom
+permalink: /showroom/
+description: "Le showroom Innea à Blonay : objets, échantillons et mobilier à voir et toucher, sur rendez-vous."
+
+hero:
+  titre: Le showroom
+  sousTitre: Objets · Matières · Sur rendez-vous
+  masque: photo
+  diapositives:
+    - { image: /assets/photos/showroom-blonay.jpg, alt: "Le showroom Innea à Blonay", legende: "Le showroom Innea" }
+
+intro:
+  variante: suite
+  label: Showroom
+  titre: Un lieu pour voir et toucher les matières.
+  texte: "Objets, échantillons, mobilier : notre sélection est réunie dans un même lieu. Nous vous y recevons sur rendez-vous, pour choisir ensemble."
+
+selection:
+  titre: Sélection
+  legende: À découvrir au showroom
+  # Objets et matières provisoires (le design répète les trois mêmes objets sur deux rangées)
+  objets:
+    - { titre: Bougies parfumées, texte: "[Matière à confirmer]", image: /assets/photos/objet-bougies.jpg, alt: "Bougies parfumées" }
+    - { titre: Vases en céramique, texte: "[Matière à confirmer]", image: /assets/photos/objet-vases.jpg, alt: "Vases en céramique noire" }
+    - { titre: Diffuseur de parfum, texte: "[Matière à confirmer]", image: /assets/photos/objet-diffuseur.jpg, alt: "Diffuseur de parfum" }
+    - { titre: Bougies parfumées, texte: "[Matière à confirmer]", image: /assets/photos/objet-bougies.jpg, alt: "Bougies parfumées" }
+    - { titre: Vases en céramique, texte: "[Matière à confirmer]", image: /assets/photos/objet-vases.jpg, alt: "Vases en céramique noire" }
+    - { titre: Diffuseur de parfum, texte: "[Matière à confirmer]", image: /assets/photos/objet-diffuseur.jpg, alt: "Diffuseur de parfum" }
+
+infos:
+  infos:
+    - { label: Adresse, lignes: ["Chemin du Péage 39", "1807 Blonay"] }
+    - { label: Visite, lignes: ["Sur rendez-vous uniquement,", "par e-mail ou par téléphone"] }
+    - { label: Rendez-vous, lien: { texte: Écrire pour une visite, url: "mailto:info@innea.ch?subject=Visite%20du%20showroom" } }
+---
+{% from "sections/hero.njk" import hero as heroSection %}
+{% from "sections/intro-de-page.njk" import introDePage %}
+{% from "sections/savoir-faire.njk" import savoirFaire as selectionSection %}
+{% from "sections/infos-pratiques.njk" import infosPratiques %}
+
+{{ heroSection(hero) }}
+{{ introDePage(intro) }}
+{{ selectionSection(selection) }}
+{{ infosPratiques(infos) }}

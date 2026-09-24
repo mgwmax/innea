@@ -1,0 +1,12 @@
+{#
+  Valeur (page Studio, « Ce qui nous guide ») : filet en haut, numéro, titre, texte.
+  Usage : {% from "components/valeur.njk" import valeur %}
+          {{ valeur(1, "La lumière", "Nous travaillons la lumière…") }}
+#}
+{% macro valeur(numero, titre, texte) %}
+<div class="valeur">
+  <p class="t-label taupe">{{ numero | pad }}</p>
+  <p class="t-titre-m">{{ titre }}</p>
+  <p class="t-texte">{{ texte }}</p>
+</div>
+{% endmacro %}

@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+title: Contact
+permalink: /contact/
+description: "Contactez Innea : un projet d’intérieur, une visite du showroom à Blonay. Nous répondons personnellement."
+contact: false   # la page est elle-même le bloc contact
+
+contactPage:
+  label: Contact
+  titre: ["Parlons de", "votre intérieur."]
+  texte: Racontez-nous votre lieu et votre projet. Nous répondons personnellement.
+  # Formulaire court, « à valider » avec le client (voir _data/site.json → formulaire pour l’envoi)
+  formulaire:
+    intro: Ou laissez-nous un message
+    champs:
+      - { label: Nom, nom: nom, requis: true, autocomplete: name }
+      - { label: E-mail, nom: email, type: email, requis: true, autocomplete: email }
+      - { label: Lieu du projet, nom: lieu, autocomplete: address-level2 }
+      - { label: Votre projet en quelques mots, nom: message, multiligne: true }
+    consentement: { avant: "J’accepte la ", lien: politique de confidentialité, url: /confidentialite/, apres: "." }
+    bouton: Envoyer
+
+photo:
+  image: /assets/photos/jardin-piscine.jpg
+  alt: Piscine et terrasse dans un jardin arboré
+  legende: Extérieurs, projet résidentiel
+  masque: photo
+---
+{% from "sections/contact-formulaire.njk" import contactFormulaire %}
+{% from "sections/respiration.njk" import respiration as photoSection %}
+
+{{ contactFormulaire(site, contactPage) }}
+{{ photoSection(photo) }}

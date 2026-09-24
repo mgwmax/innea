@@ -1,0 +1,21 @@
+/* Équipe (Studio) : deux portraits à gauche, le second décalé ; texte à droite */
+.equipe { padding: 0 var(--section-x) 160px; }
+.equipe .container { display: flex; justify-content: space-between; align-items: flex-start; gap: 64px; }
+.equipe__portraits { width: 640px; flex: 0 1 640px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start; }
+.equipe__portraits img { width: 100%; aspect-ratio: 312 / 416; object-fit: cover; }
+.equipe__portraits img:nth-child(2) { margin-top: 160px; }
+.equipe__texte { width: 528px; flex: 0 1 528px; padding-top: 160px; display: flex; flex-direction: column; gap: 28px; }
+.equipe__texte .t-titre-l { max-width: 520px; }
+.equipe__texte .t-texte { max-width: 480px; opacity: .8; }
+
+@media (max-width: 900px) {
+  .equipe { padding-bottom: var(--section-y); }
+  .equipe .container { flex-direction: column; gap: 48px; }
+  .equipe__portraits, .equipe__texte { width: 100%; flex: none; }
+  .equipe__portraits img:nth-child(2) { margin-top: 80px; }
+  .equipe__texte { padding-top: 0; }
+}
+@media (max-width: 640px) {
+  .equipe__portraits { gap: 16px; }
+  .equipe__portraits img:nth-child(2) { margin-top: 48px; }
+}

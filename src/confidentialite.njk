@@ -1,0 +1,26 @@
+---
+# Pas de maquette dédiée : même gabarit que les mentions légales (Figma 8041:8092).
+layout: layouts/base.njk
+title: Confidentialité
+permalink: /confidentialite/
+contact: false
+
+intro:
+  label: Informations
+  titre: Politique de confidentialité
+
+texte:
+  # Structure proposée (nLPD, loi fédérale sur la protection des données) ; textes entre crochets à rédiger avec le client
+  rubriques:
+    - { titre: Responsable du traitement, lignes: ["Innea Sàrl [raison sociale à confirmer]", "Chemin du Péage 39, 1807 Blonay", "info@innea.ch"] }
+    - { titre: Données collectées, texte: "[Texte à rédiger : données transmises par le formulaire de contact ou par e-mail (nom, e-mail, lieu et description du projet).]" }
+    - { titre: Finalités, texte: "[Texte à rédiger : répondre aux demandes et assurer le suivi des projets ; aucune utilisation commerciale ni transmission à des tiers.]" }
+    - { titre: Durée de conservation, texte: "[À confirmer]" }
+    - { titre: Services tiers, texte: "[À compléter : hébergement du site, service d’envoi du formulaire s’il est utilisé, polices Google Fonts chargées depuis les serveurs de Google.]" }
+    - { titre: Vos droits, texte: "[Texte à rédiger : droit d’accès, de rectification et d’effacement de vos données, sur simple demande à info@innea.ch.]" }
+---
+{% from "sections/intro-de-page.njk" import introDePage %}
+{% from "sections/texte-legal.njk" import texteLegal %}
+
+{{ introDePage(intro) }}
+{{ texteLegal(texte) }}

@@ -1,0 +1,19 @@
+{#
+  Informations pratiques (page Showroom) : filet en haut, colonnes d'informations ; une colonne peut
+  contenir un bouton lien au lieu de texte.
+  Usage : {% from "sections/infos-pratiques.njk" import infosPratiques %}
+          {{ infosPratiques({ infos: [{ label, lignes: [...] }, { label, lien: { texte, url } }] }) }}
+#}
+{% macro infosPratiques(s) %}
+{% from "components/bouton-lien.njk" import boutonLien %}
+<section class="infos-pratiques">
+  <div class="container">
+    {% for info in s.infos %}
+    <div class="infos-pratiques__item{% if info.lien %} infos-pratiques__item--lien{% endif %}">
+      <p class="t-label taupe">{{ info.label }}</p>
+      {% if info.lien %}{{ boutonLien(info.lien.texte, info.lien.url) }}{% else %}<p class="t-titre-s">{{ info.lignes | lignes | safe }}</p>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endmacro %}

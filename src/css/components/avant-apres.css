@@ -1,0 +1,20 @@
+/* Avant / après : l'image « avant » est découpée à gauche de --position (mis à jour par js/components/avant-apres.js).
+   Un <input type="range"> transparent couvre le cadre : glisser à la souris, au doigt ou au clavier. */
+.avant-apres { --position: 50%; position: relative; overflow: hidden; aspect-ratio: 1312 / 740; background: var(--innea-sable); }
+.avant-apres > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.avant-apres__avant { clip-path: inset(0 calc(100% - var(--position)) 0 0); }
+.avant-apres__poignee { position: absolute; top: 0; bottom: 0; left: var(--position); width: 2px; margin-left: -1px; background: var(--innea-blanc); pointer-events: none; }
+.avant-apres__poignee img { position: absolute; top: 50%; left: 50%; width: 56px; height: 56px; max-width: none; transform: translate(-50%, -50%); }
+.avant-apres__label { position: absolute; top: 32px; color: var(--innea-blanc); pointer-events: none; }
+.avant-apres__label--avant { left: 32px; }
+.avant-apres__label--apres { right: 32px; }
+.avant-apres__curseur { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; appearance: none; touch-action: pan-y; }
+.avant-apres:has(.avant-apres__curseur:focus-visible) { outline: 1px solid var(--innea-encre); outline-offset: 4px; }
+
+@media (max-width: 640px) {
+  .avant-apres { aspect-ratio: 4 / 5; }
+  .avant-apres__label { top: 16px; }
+  .avant-apres__label--avant { left: 16px; }
+  .avant-apres__label--apres { right: 16px; }
+  .avant-apres__poignee img { width: 44px; height: 44px; }
+}

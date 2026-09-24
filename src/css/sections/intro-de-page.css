@@ -3,6 +3,7 @@
 .intro .container { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--gap); }
 .intro__texte { width: 864px; max-width: 100%; display: flex; flex-direction: column; gap: 28px; }
 .intro__texte .t-texte { width: 560px; max-width: 100%; opacity: .8; }
+.intro--suite { padding-bottom: 140px; }
 
 @media (max-width: 900px) {
   .intro .container { flex-direction: column; gap: 24px; }

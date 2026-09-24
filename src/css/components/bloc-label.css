@@ -1,0 +1,13 @@
+/* Bloc label : label à gauche, texte Titre M sur 880px à droite, photo optionnelle dessous */
+.bloc-label { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--gap); }
+.bloc-label__corps { width: 880px; max-width: 100%; display: flex; flex-direction: column; gap: 48px; }
+.bloc-label__texte--italique { font-style: italic; }
+.bloc-label__photo { width: 640px; max-width: 100%; aspect-ratio: 640 / 800; object-fit: cover; }
+
+@media (max-width: 900px) {
+  .bloc-label { flex-direction: column; gap: 20px; }
+  .bloc-label__corps { gap: 32px; }
+}
+@media (max-width: 640px) {
+  .bloc-label .t-titre-m { font-size: 24px; }
+}

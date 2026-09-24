@@ -1,0 +1,38 @@
+---
+# Fiche projet : une page par projet de _data/realisations.json, publiée sur /projets/<slug>/
+layout: layouts/base.njk
+pagination:
+  data: realisations.projets
+  size: 1
+  alias: projet
+permalink: "/projets/{{ projet.slug }}/"
+eleventyComputed:
+  title: "{{ projet.titre }}"
+  description: "{{ projet.titre }} — {{ projet.categorie }}{% if projet.lieu %}, {{ projet.lieu }}{% endif %}. Un projet Innea."
+---
+{% from "sections/hero.njk" import hero as heroSection %}
+{% from "sections/fiche-projet.njk" import ficheProjet %}
+{% from "sections/galerie-projet.njk" import galerieProjet %}
+{% from "sections/avant-apres.njk" import avantApresSection %}
+{% from "sections/projet-suivant.njk" import projetSuivant %}
+
+{% set tous = realisations.projets %}
+{% set index = pagination.pageNumber %}
+{% set suivant = tous[(index + 1) % (tous | length)] %}
+{% set compteur = ((index + 1) | pad) + " / " + ((tous | length) | pad) %}
+
+{{ heroSection({
+  titre: projet.titre,
+  sousTitre: projet.categorie + ((" · " + projet.lieu) if projet.lieu else ""),
+  masque: "photo",
+  diapositives: [{ image: projet.image, alt: projet.alt, legende: compteur }],
+  filAriane: [{ texte: "Projets", url: "/projets/" }, { texte: projet.titre }]
+}) }}
+
+{{ ficheProjet(projet) }}
+
+{% if projet.galerie or projet.details %}{{ galerieProjet(projet.galerie or [], projet.details) }}{% endif %}
+
+{% if projet.avantApres %}{{ avantApresSection(projet.avantApres) }}{% endif %}
+
+{{ projetSuivant(suivant) }}

@@ -1,18 +1,36 @@
 {#
-  Hero carrousel. Photos et légendes en fondu enchaîné ; titre et sous-titre fixes.
+  Hero : photo plein cadre en ouverture de page, titre et sous-titre à gauche, légende à droite.
+  - Plusieurs diapositives → carrousel (fondu enchaîné des photos et des légendes, indicateur 01 — 05).
+  - Une seule diapositive → « Photo plein cadre » (fiche projet, showroom…).
   Usage : {% from "sections/hero.njk" import hero %}
-          {{ hero({ titre: [lignes…], sousTitre, intervalle: 5000, diapositives: [{ image, alt, legende }] }) }}
+          {{ hero({
+               titre: [lignes…], sousTitre, intervalle: 5000,
+               diapositives: [{ image, alt, legende }],
+               masque: "photo",                           → dégradé noir simple (sinon dégradé chaud haut + bas)
+               filAriane: [{ texte, url }, { texte }]     → fil d'Ariane en haut à gauche (optionnel)
+          }) }}
 #}
 {% macro hero(h) %}
 {% set total = h.diapositives | length %}
-<section class="hero" aria-label="{{ h.label or 'Innea' }}" aria-roledescription="carrousel" data-interval="{{ h.intervalle or 5000 }}">
+<section class="hero" aria-label="{{ h.label or (h.titre if h.titre is string else h.titre | join(' ')) }}"{% if total > 1 %} aria-roledescription="carrousel" data-interval="{{ h.intervalle or 5000 }}"{% endif %}>
   <div class="hero__slides">
     {% for d in h.diapositives %}
     <img class="hero__img{% if loop.first %} is-active{% endif %}" src="{{ d.image }}" alt="{{ d.alt }}"{% if not loop.first %} loading="lazy"{% endif %}>
     {% endfor %}
   </div>
+  {% if h.masque == "photo" %}
+  <div class="mask-bottom mask-bottom--photo"></div>
+  {% else %}
   <div class="mask-bottom"></div>
   <div class="mask-top"></div>
+  {% endif %}
+  {% if h.filAriane %}
+  <nav class="hero__ariane t-label" aria-label="Fil d’Ariane">
+    <div class="container">
+      {% for e in h.filAriane %}{% if not loop.first %}<span class="hero__ariane-sep" aria-hidden="true">/</span>{% endif %}{% if e.url %}<a href="{{ e.url }}">{{ e.texte }}</a>{% else %}<span aria-current="page">{{ e.texte }}</span>{% endif %}{% endfor %}
+    </div>
+  </nav>
+  {% endif %}
   <div class="container hero__inner">
     <div class="hero__title">
       <h1 class="t-display-xl">{{ h.titre | lignes | safe }}</h1>
@@ -28,7 +46,7 @@
         <span>{{ total | pad }}</span>
       </div>
       {% endif %}
-      <div class="hero__legendes t-legende" aria-live="polite">
+      <div class="hero__legendes t-legende"{% if total > 1 %} aria-live="polite"{% endif %}>
         {% for d in h.diapositives %}
         <p{% if loop.first %} class="is-active"{% else %} aria-hidden="true"{% endif %}>{{ d.legende }}</p>
         {% endfor %}

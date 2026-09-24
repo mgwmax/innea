@@ -7,7 +7,7 @@
     <button class="menu-toggle t-nav" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
     <nav class="nav t-nav" aria-label="Navigation principale">
       {% for item in site.navigation %}
-      <a href="{{ item.url }}"{% if item.url == page.url %} aria-current="page"{% endif %}>{{ item.texte }}</a>
+      <a href="{{ item.url }}"{% if item.url == page.url or (item.url.length > 1 and page.url.indexOf(item.url) == 0) %} aria-current="page"{% endif %}>{{ item.texte }}</a>
       {% endfor %}
       {% include "partials/lang.njk" %}
     </nav>

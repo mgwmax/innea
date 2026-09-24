@@ -1,0 +1,18 @@
+/* Galerie projet : une photo pleine largeur, puis deux côte à côte, en alternance ; bloc Détails en fin */
+.galerie-projet { padding: 0 var(--section-x) 160px; }
+.galerie-projet .container { display: flex; flex-direction: column; gap: 32px; }
+.galerie-projet__rangee img { width: 100%; object-fit: cover; }
+.galerie-projet__rangee--pleine img { aspect-ratio: 1312 / 760; }
+.galerie-projet__rangee--paire { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.galerie-projet__rangee--paire img { aspect-ratio: 640 / 800; }
+.galerie-projet__details { padding-top: 120px; }
+
+@media (max-width: 900px) {
+  .galerie-projet { padding-bottom: var(--section-y); }
+  .galerie-projet .container, .galerie-projet__rangee--paire { gap: 20px; }
+  .galerie-projet__details { padding-top: 64px; }
+}
+@media (max-width: 640px) {
+  .galerie-projet__rangee--pleine img { aspect-ratio: 4 / 3; }
+  .galerie-projet__rangee--paire { grid-template-columns: minmax(0, 1fr); }
+}

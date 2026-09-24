@@ -1,0 +1,15 @@
+{#
+  Fiche projet : méta (lieu, année, catégorie, surface) puis texte de présentation « Le projet ».
+  Usage : {% from "sections/fiche-projet.njk" import ficheProjet %}
+          {{ ficheProjet(projet) }}   → projet de _data/realisations.json
+#}
+{% macro ficheProjet(p) %}
+{% from "components/meta-projet.njk" import metaProjet %}
+{% from "components/bloc-label.njk" import blocLabel %}
+<section class="fiche-projet">
+  <div class="container">
+    {{ metaProjet(p) }}
+    {% if p.texte %}{{ blocLabel({ label: "Le projet", texte: p.texte }) }}{% endif %}
+  </div>
+</section>
+{% endmacro %}

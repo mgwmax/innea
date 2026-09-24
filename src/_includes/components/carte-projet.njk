@@ -2,12 +2,14 @@
   Carte projet : cliquable en entier, sans cadre ni ombre.
   Formats : "paysage" (816×560), "portrait" (464×600), "carre" (416×416). La photo est recadrée (object-fit: cover).
   Usage : {% from "components/carte-projet.njk" import carteProjet %}
-          {{ carteProjet({ titre, categorie, image, alt, url, format }) }}
+          {{ carteProjet({ titre, categorie, image, alt, slug, format }) }}
           {{ carteProjet(p, "carre") }}   → le 2e paramètre impose le format (sinon p.format, sinon paysage)
+  Lien : p.url si fourni, sinon la fiche /projets/<slug>/.
 #}
 {% macro carteProjet(p, format) %}
 {% set f = format or p.format or "paysage" %}
-<a href="{{ p.url or '#' }}" class="card card--{{ f }}" data-categorie="{{ p.categorie | slugify }}">
+{% set url = p.url or (("/projets/" + p.slug + "/") if p.slug else "#") %}
+<a href="{{ url }}" class="card card--{{ f }}" data-categorie="{{ p.categorie | slugify }}">
   <div class="card__frame"><img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy"></div>
   <div class="card__caption">
     <p class="t-titre-s">{{ p.titre }}</p>
