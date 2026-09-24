@@ -1,0 +1,12 @@
+/* Projets sélectionnés : rangées de deux cartes, la seconde décalée vers le bas */
+.projets { padding: 0 var(--section-x) var(--section-y); }
+.projets .container { display: flex; flex-direction: column; gap: 48px; }
+.row { display: grid; gap: var(--gap); align-items: start; }
+.row--paysage-portrait { grid-template-columns: 816fr 464fr; }
+.row--portrait-paysage { grid-template-columns: 464fr 816fr; }
+.offset { padding-top: 120px; }
+
+@media (max-width: 900px) {
+  .row--paysage-portrait, .row--portrait-paysage { grid-template-columns: 1fr; }
+  .offset { padding-top: 0; }
+}

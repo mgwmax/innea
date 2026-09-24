@@ -1,0 +1,80 @@
+---
+layout: layouts/base.njk
+description: Innea, atelier d’architecture d’intérieur et de mobilier sur mesure en Suisse romande.
+
+hero:
+  titre: ["Des intérieurs calmes,", "faits pour durer."]
+  sousTitre: Architecture d’intérieur · Mobilier sur mesure · Suisse romande
+  intervalle: 5000   # durée de chaque diapositive, en millisecondes
+  diapositives:
+    - { image: /assets/photos/salon-cheminee.jpg, alt: "Salon avec cheminée, projet résidentiel", legende: "Salon, projet résidentiel" }
+    - { image: /assets/photos/saint-prex-piscine.jpg, alt: "Piscine face au lac, Saint-Prex", legende: "Extérieurs, Saint-Prex" }
+    - { image: /assets/photos/showroom-blonay.jpg, alt: "Le showroom Innea à Blonay", legende: "Showroom, Blonay" }
+    - { image: /assets/photos/mobilier-bibliotheque.jpg, alt: "Bibliothèque dessinée sur mesure", legende: "Bibliothèque, mobilier sur mesure" }
+    - { image: /assets/photos/atelier-bureau.jpg, alt: "Bureau, projet résidentiel", legende: "Bureau, projet résidentiel" }
+
+manifeste:
+  id: studio
+  label: L’atelier
+  texte: "Innea est un petit atelier d’architecture d’intérieur. Nous prenons peu de projets et nous les menons jusqu’au dernier détail : la lumière, les volumes, le mobilier dessiné pour le lieu."
+  signature: Nathalie et Christophe
+  lien: { texte: Découvrir le studio, url: "#" }
+
+projets:
+  id: projets
+  titre: Projets
+  lien: { texte: Tous les projets, url: "#" }
+  projets:
+    - { titre: Sur les hauts de Vevey, categorie: Résidentiel, format: paysage, image: /assets/photos/vevey-escalier.jpg, alt: "Escalier et bibliothèque en bois, Vevey" }
+    - { titre: Alpes vaudoises, categorie: Résidentiel, format: portrait, image: /assets/photos/alpes-vaudoises-sejour.jpg, alt: "Séjour, Alpes vaudoises" }
+    - { titre: "Projet pierre, Blonay", categorie: Mobilier sur mesure, format: portrait, image: /assets/photos/blonay-bibliotheque.jpg, alt: "Bibliothèque sur mesure, Blonay" }
+    - { titre: Saint-Prex, categorie: Extérieurs, format: paysage, image: /assets/photos/saint-prex-piscine.jpg, alt: "Piscine face au lac, Saint-Prex" }
+
+respiration:
+  image: /assets/photos/exterieurs-bassin.jpg
+  alt: Bassin au coucher du soleil, projet résidentiel
+  legende: Extérieurs, projet résidentiel
+
+demarche:
+  label: Démarche
+  titre: ["Prendre le temps,", "jusqu’au bout des choses."]
+  texte: "Nous dessinons tout : plans, 3D, mobilier. Nous choisissons avec vous chaque matière, chaque luminaire, chaque finition."
+  image: /assets/photos/atelier-bureau.jpg
+  alt: Plans et échantillons sur la table de l’atelier
+  etapes:
+    - { titre: Écoute, texte: "Une première rencontre ouverte : votre lieu, vos envies, votre budget." }
+    - { titre: Avant-projet, texte: "Croquis, premiers plans, deux ou trois pistes. Les grandes lignes du projet." }
+    - { titre: Projet et chantier, texte: "Offres détaillées des entreprises, budget précis, suivi du chantier." }
+    - { titre: Dernière touche, texte: "Finitions, lumières, mobilier, objets. Ce qui rend un intérieur habité." }
+
+savoirFaire:
+  titre: Ce que nous dessinons
+  objets:
+    - { titre: Architecture d’intérieur, texte: "Rénovations complètes : volumes, lumière, circulation.", image: /assets/photos/architecture-entree.jpg, alt: "Entrée rénovée avec escalier" }
+    - { titre: Mobilier sur mesure, texte: "Bibliothèques, rangements, cuisines dessinés pour le lieu.", image: /assets/photos/mobilier-bibliotheque.jpg, alt: "Bibliothèque dessinée sur mesure" }
+    - { titre: Objets et matières, texte: "Conseil sur le mobilier, les luminaires et les objets.", image: /assets/photos/objets-matieres.jpg, alt: "Composition d’objets et de fleurs" }
+
+showroom:
+  id: showroom
+  label: Showroom
+  titre: ["Un lieu pour voir", "et toucher les matières."]
+  texte: "Objets, échantillons, mobilier : notre sélection est réunie au showroom. Visite sur rendez-vous."
+  image: /assets/photos/showroom-blonay.jpg
+  alt: Le showroom Innea à Blonay
+  lien: { texte: Visiter le showroom, url: "#contact" }
+---
+{% from "sections/hero.njk" import hero as heroSection %}
+{% from "sections/manifeste.njk" import manifeste as manifesteSection %}
+{% from "sections/projets.njk" import projets as projetsSection %}
+{% from "sections/respiration.njk" import respiration as respirationSection %}
+{% from "sections/demarche.njk" import demarche as demarcheSection %}
+{% from "sections/savoir-faire.njk" import savoirFaire as savoirFaireSection %}
+{% from "sections/showroom.njk" import showroom as showroomSection %}
+
+{{ heroSection(hero) }}
+{{ manifesteSection(manifeste) }}
+{{ projetsSection(projets) }}
+{{ respirationSection(respiration) }}
+{{ demarcheSection(demarche) }}
+{{ savoirFaireSection(savoirFaire) }}
+{{ showroomSection(showroom) }}

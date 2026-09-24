@@ -1,0 +1,16 @@
+/* Logo Innea : symbole + wordmark. 40px par défaut (header desktop), .logo--s = 36px */
+.logo { display: flex; align-items: center; gap: 16.667px; height: 40px; }
+.logo__mark { position: relative; width: 40px; height: 40px; overflow: hidden; flex: none; }
+.logo__mark img { position: absolute; top: 0; left: 0; }
+.logo__mark .main { width: 100.76%; height: 100%; }
+.logo__mark .dot { top: 69.76%; left: 94.49%; width: 0.1%; height: 0.09%; }
+.wordmark { position: relative; width: 93.333px; height: 11.714px; overflow: hidden; flex: none; }
+.wordmark img { position: absolute; top: 0; height: 100%; }
+.wordmark .l-i  { left: 0;      right: 98.04%; width: auto; transform: scaleX(-1); }
+.wordmark .l-n1 { left: 16.23%; right: 72.35%; width: auto; }
+.wordmark .l-n2 { left: 42.44%; right: 46.13%; width: auto; }
+.wordmark .l-e  { left: 68.03%; right: 24.81%; width: auto; }
+.wordmark .l-a  { left: 87.38%; right: 0;      width: auto; }
+.logo--s { gap: 15px; height: 36px; }
+.logo--s .logo__mark { width: 36px; height: 36px; }
+.logo--s .wordmark { width: 84px; height: 10.543px; }

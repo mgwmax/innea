@@ -1,0 +1,5 @@
+/* Colonne de contenu centrée, partagée par le header et toutes les sections */
+.container { width: 100%; max-width: var(--max); margin: 0 auto; }
+
+/* En-tête de section : titre à gauche, lien à droite */
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }

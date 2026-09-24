@@ -1,0 +1,18 @@
+/* Démarche : introduction et photo à gauche, liste des étapes à droite */
+.demarche { padding: 160px var(--section-x); }
+.demarche .container { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--gap); }
+.demarche__intro { width: 448px; flex: none; display: flex; flex-direction: column; gap: 28px; }
+.demarche__intro .t-texte { opacity: .8; }
+.demarche__intro .photo { width: 100%; height: 300px; object-fit: cover; }
+
+@media (max-width: 1180px) {
+  .demarche .container { gap: 64px; }
+  .demarche__intro { width: 38%; }
+}
+@media (max-width: 900px) {
+  .demarche .container { flex-direction: column; align-items: stretch; }
+  .demarche__intro { width: 100%; }
+}
+@media (max-width: 640px) {
+  .demarche { padding: var(--section-y) var(--section-x); }
+}

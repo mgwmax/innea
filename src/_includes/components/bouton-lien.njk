@@ -1,0 +1,8 @@
+{#
+  Bouton lien : seul appel à l'action du site, un texte et un filet fléché.
+  Usage : {% from "components/bouton-lien.njk" import boutonLien %}
+          {{ boutonLien("Tous les projets", "/projets/") }}
+#}
+{% macro boutonLien(texte, url="#") %}
+<a href="{{ url }}" class="btn-link t-nav">{{ texte }} <span class="btn-link__arrow"></span></a>
+{% endmacro %}

@@ -1,0 +1,20 @@
+{#
+  Manifeste : label à gauche, texte long, signature et lien à droite.
+  Usage : {% from "sections/manifeste.njk" import manifeste %}
+          {{ manifeste({ id, label, texte, signature, lien: { texte, url } }) }}
+#}
+{% macro manifeste(m) %}
+{% from "components/bouton-lien.njk" import boutonLien %}
+<section class="manifeste"{% if m.id %} id="{{ m.id }}"{% endif %}>
+  <div class="container">
+    <p class="t-label taupe">{{ m.label }}</p>
+    <div class="manifeste__text">
+      <p class="t-titre-l">{{ m.texte }}</p>
+      <div class="signature">
+        {% if m.signature %}<p class="t-legende taupe">{{ m.signature }}</p>{% endif %}
+        {% if m.lien %}{{ boutonLien(m.lien.texte, m.lien.url) }}{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endmacro %}

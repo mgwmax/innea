@@ -1,0 +1,14 @@
+{#
+  Carte projet : cliquable en entier, sans cadre ni ombre.
+  Usage : {% from "components/carte-projet.njk" import carteProjet %}
+          {{ carteProjet({ titre, categorie, image, alt, format: "paysage" | "portrait", url }) }}
+#}
+{% macro carteProjet(p) %}
+<a href="{{ p.url or '#' }}" class="card card--{{ p.format or 'paysage' }}">
+  <div class="card__frame"><img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy"></div>
+  <div class="card__caption">
+    <p class="t-titre-s">{{ p.titre }}</p>
+    <p class="t-label taupe">{{ p.categorie }}</p>
+  </div>
+</a>
+{% endmacro %}

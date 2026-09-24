@@ -1,0 +1,22 @@
+{#
+  Démarche : introduction et photo à gauche, étapes numérotées à droite.
+  Usage : {% from "sections/demarche.njk" import demarche %}
+          {{ demarche({ label, titre: [lignes…], texte, image, alt, etapes: [{ titre, texte }] }) }}
+#}
+{% macro demarche(d) %}
+{% from "components/etape.njk" import etape %}
+<section class="demarche"{% if d.id %} id="{{ d.id }}"{% endif %}>
+  <div class="container">
+    <div class="demarche__intro">
+      <p class="t-label taupe">{{ d.label }}</p>
+      <h2 class="t-titre-l">{{ d.titre | lignes | safe }}</h2>
+      <p class="t-texte">{{ d.texte }}</p>
+      {% if d.image %}<img class="photo" src="{{ d.image }}" alt="{{ d.alt }}" loading="lazy">{% endif %}
+    </div>
+    <ol class="etapes">
+      <li class="etapes__line" aria-hidden="true"><img src="/assets/ui/filet-etapes.svg" alt="" width="368" height="1"></li>
+      {% for e in d.etapes %}{{ etape(loop.index, e.titre, e.texte) }}{% endfor %}
+    </ol>
+  </div>
+</section>
+{% endmacro %}

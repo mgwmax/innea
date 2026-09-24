@@ -1,0 +1,12 @@
+{#
+  Objet : photo, titre et texte court. Aucun prix, aucun panier.
+  Usage : {% from "components/objet.njk" import objet %}
+          {{ objet({ image, alt, titre, texte }) }}
+#}
+{% macro objet(o) %}
+<div class="objet">
+  <img src="{{ o.image }}" alt="{{ o.alt }}" loading="lazy">
+  <p class="t-titre-s">{{ o.titre }}</p>
+  <p class="t-texte-s taupe">{{ o.texte }}</p>
+</div>
+{% endmacro %}

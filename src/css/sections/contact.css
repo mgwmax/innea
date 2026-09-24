@@ -1,0 +1,18 @@
+/* Bloc contact : fin de chaque page, avant le pied de page */
+.contact { background: var(--innea-sable); padding: 140px var(--section-x) 120px; }
+.contact .container { display: flex; flex-direction: column; gap: 80px; }
+.coords { display: flex; justify-content: space-between; gap: 32px; }
+.coord { display: flex; flex-direction: column; gap: 12px; white-space: nowrap; }
+.coord a { transition: color .25s; }
+.coord a:hover { color: var(--innea-taupe); }
+.coord .tel span { display: inline-block; margin-right: .5em; }
+
+@media (max-width: 1180px) {
+  .coords { flex-wrap: wrap; row-gap: 48px; }
+  .coord { flex: 1 1 40%; }
+}
+@media (max-width: 640px) {
+  .contact { padding: 96px var(--section-x) 72px; }
+  .contact .container { gap: 48px; }
+  .coord { flex-basis: 100%; }
+}

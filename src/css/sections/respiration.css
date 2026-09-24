@@ -1,0 +1,9 @@
+/* Respiration : photo pleine largeur avec légende */
+.respiration { position: relative; min-height: 720px; overflow: hidden; color: var(--innea-blanc);
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 64px var(--section-x); }
+.respiration > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.respiration .container { position: relative; }
+
+@media (max-width: 640px) {
+  .respiration { min-height: 480px; }
+}

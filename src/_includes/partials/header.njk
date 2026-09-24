@@ -1,0 +1,15 @@
+{# Header (commun à toutes les pages). Liens : _data/site.json → navigation #}
+{% from "components/logo.njk" import logo %}
+<header class="header" id="header">
+  <img class="header__bg" src="/assets/ui/header-degrade.png" alt="">
+  <div class="container header__inner">
+    {{ logo(header=true) }}
+    <button class="menu-toggle t-nav" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+    <nav class="nav t-nav" aria-label="Navigation principale">
+      {% for item in site.navigation %}
+      <a href="{{ item.url }}">{{ item.texte }}</a>
+      {% endfor %}
+      {% include "partials/lang.njk" %}
+    </nav>
+  </div>
+</header>

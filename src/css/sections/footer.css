@@ -1,0 +1,14 @@
+/* Pied de page : une seule ligne, toujours précédé du bloc contact */
+.footer { background: var(--innea-sable); border-top: 1px solid var(--innea-ligne); padding: 36px var(--section-x); }
+.footer .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.footer__left { display: flex; align-items: center; gap: 48px; }
+.footer__legal { white-space: nowrap; }
+.footer__legal a:hover { color: var(--innea-encre); }
+.footer__legal .sep { margin: 0 .75em; }
+
+@media (max-width: 900px) {
+  .footer .container, .footer__left { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+@media (max-width: 640px) {
+  .footer__legal { white-space: normal; }
+}

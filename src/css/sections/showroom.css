@@ -1,0 +1,15 @@
+/* Showroom : grande photo à gauche, texte et lien à droite */
+.showroom { padding: 0 var(--section-x) 160px; }
+.showroom .container { display: flex; align-items: flex-end; gap: 96px; }
+.showroom__photo { flex: 0 1 816px; min-width: 0; aspect-ratio: 816 / 620; object-fit: cover; }
+.showroom__text { display: flex; flex-direction: column; gap: 28px; flex: none; }
+.showroom__text .t-texte { width: 400px; max-width: 100%; opacity: .8; }
+
+@media (max-width: 1180px) {
+  .showroom .container { gap: 64px; }
+  .showroom__text .t-titre-l { font-size: 36px; }
+}
+@media (max-width: 900px) {
+  .showroom .container { flex-direction: column; align-items: stretch; }
+  .showroom__photo { flex: none; width: 100%; }
+}

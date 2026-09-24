@@ -1,0 +1,7 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { margin: 0; background: var(--innea-toile); color: var(--innea-encre); font-family: var(--sans); }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+p, h1, h2, h3 { margin: 0; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

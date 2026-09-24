@@ -1,0 +1,9 @@
+/* Manifeste : label à gauche, texte long et signature à droite */
+.manifeste { padding: var(--section-y) var(--section-x); }
+.manifeste .container { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--gap); }
+.manifeste__text { width: 864px; max-width: 100%; display: flex; flex-direction: column; gap: 36px; }
+.signature { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .manifeste .container { flex-direction: column; align-items: stretch; }
+}

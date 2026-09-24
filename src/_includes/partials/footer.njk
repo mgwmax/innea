@@ -1,0 +1,11 @@
+{# Pied de page (commun à toutes les pages). Textes : _data/site.json → accroche, legal #}
+{% from "components/logo.njk" import logo %}
+<footer class="footer">
+  <div class="container">
+    <div class="footer__left">
+      {{ logo(label=site.nom) }}
+      <p class="t-label taupe">{{ site.accroche }}</p>
+    </div>
+    <p class="footer__legal t-texte-s taupe">{{ site.legal.copyright }}{% for l in site.legal.liens %}<span class="sep">·</span><a href="{{ l.url }}">{{ l.texte }}</a>{% endfor %}</p>
+  </div>
+</footer>

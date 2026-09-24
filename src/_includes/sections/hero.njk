@@ -1,0 +1,39 @@
+{#
+  Hero carrousel. Photos et légendes en fondu enchaîné ; titre et sous-titre fixes.
+  Usage : {% from "sections/hero.njk" import hero %}
+          {{ hero({ titre: [lignes…], sousTitre, intervalle: 5000, diapositives: [{ image, alt, legende }] }) }}
+#}
+{% macro hero(h) %}
+{% set total = h.diapositives | length %}
+<section class="hero" aria-label="{{ h.label or 'Innea' }}" aria-roledescription="carrousel" data-interval="{{ h.intervalle or 5000 }}">
+  <div class="hero__slides">
+    {% for d in h.diapositives %}
+    <img class="hero__img{% if loop.first %} is-active{% endif %}" src="{{ d.image }}" alt="{{ d.alt }}"{% if not loop.first %} loading="lazy"{% endif %}>
+    {% endfor %}
+  </div>
+  <div class="mask-bottom"></div>
+  <div class="mask-top"></div>
+  <div class="container hero__inner">
+    <div class="hero__title">
+      <h1 class="t-display-xl">{{ h.titre | lignes | safe }}</h1>
+      {% if h.sousTitre %}<p class="t-label">{{ h.sousTitre }}</p>{% endif %}
+    </div>
+    <div class="hero__side">
+      {% if total > 1 %}
+      <div class="indicator t-label" role="group" aria-label="Diapositives">
+        <span>01</span>
+        {% for d in h.diapositives %}
+        <button{% if loop.first %} aria-current="true"{% endif %} aria-label="Diapositive {{ loop.index }}"></button>
+        {% endfor %}
+        <span>{{ total | pad }}</span>
+      </div>
+      {% endif %}
+      <div class="hero__legendes t-legende" aria-live="polite">
+        {% for d in h.diapositives %}
+        <p{% if loop.first %} class="is-active"{% else %} aria-hidden="true"{% endif %}>{{ d.legende }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endmacro %}

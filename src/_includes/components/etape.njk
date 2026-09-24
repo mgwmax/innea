@@ -1,0 +1,12 @@
+{#
+  Étape de la démarche. À placer dans une liste <ol class="etapes">.
+  Usage : {% from "components/etape.njk" import etape %}
+          {{ etape(1, "Écoute", "Une première rencontre…") }}
+#}
+{% macro etape(numero, titre, texte) %}
+<li class="etape">
+  <p class="etape__num t-label taupe">{{ numero | pad }}</p>
+  <p class="etape__titre t-titre-m">{{ titre }}</p>
+  <p class="etape__texte t-texte">{{ texte }}</p>
+</li>
+{% endmacro %}

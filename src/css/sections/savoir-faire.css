@@ -1,0 +1,11 @@
+/* Savoir-faire : titre et trois objets en colonnes */
+.savoir { padding: 0 var(--section-x) 160px; }
+.savoir .container { display: flex; flex-direction: column; gap: 48px; }
+.cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+
+@media (max-width: 900px) {
+  .cols-3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .cols-3 { grid-template-columns: 1fr; }
+}

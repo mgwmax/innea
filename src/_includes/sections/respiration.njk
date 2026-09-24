@@ -1,0 +1,12 @@
+{#
+  Respiration : photo pleine largeur avec légende.
+  Usage : {% from "sections/respiration.njk" import respiration %}
+          {{ respiration({ image, alt, legende }) }}
+#}
+{% macro respiration(r) %}
+<section class="respiration" aria-label="{{ r.legende }}">
+  <img src="{{ r.image }}" alt="{{ r.alt }}" loading="lazy">
+  <div class="mask-bottom mask-bottom--leger"></div>
+  <div class="container"><p class="t-legende">{{ r.legende }}</p></div>
+</section>
+{% endmacro %}

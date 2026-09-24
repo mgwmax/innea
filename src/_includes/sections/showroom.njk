@@ -1,0 +1,19 @@
+{#
+  Showroom : grande photo à gauche, texte et lien à droite.
+  Usage : {% from "sections/showroom.njk" import showroom %}
+          {{ showroom({ id, label, titre: [lignes…], texte, image, alt, lien: { texte, url } }) }}
+#}
+{% macro showroom(s) %}
+{% from "components/bouton-lien.njk" import boutonLien %}
+<section class="showroom"{% if s.id %} id="{{ s.id }}"{% endif %}>
+  <div class="container">
+    <img class="showroom__photo" src="{{ s.image }}" alt="{{ s.alt }}" loading="lazy">
+    <div class="showroom__text">
+      <p class="t-label taupe">{{ s.label }}</p>
+      <h2 class="t-titre-l">{{ s.titre | lignes | safe }}</h2>
+      <p class="t-texte">{{ s.texte }}</p>
+      {% if s.lien %}{{ boutonLien(s.lien.texte, s.lien.url) }}{% endif %}
+    </div>
+  </div>
+</section>
+{% endmacro %}

@@ -1,0 +1,35 @@
+{
+  "nom": "Innea",
+  "titre": "Innea · Architecture d’intérieur",
+  "accroche": "Architecture d’intérieur · Suisse romande",
+  "langue": "fr",
+
+  "navigation": [
+    { "texte": "Projets", "url": "/#projets" },
+    { "texte": "Studio", "url": "/#studio" },
+    { "texte": "Showroom", "url": "/#showroom" },
+    { "texte": "Contact", "url": "/#contact" }
+  ],
+
+  "contact": {
+    "titre": "Parlons de votre intérieur.",
+    "email": "info@innea.ch",
+    "telephones": [
+      { "nom": "Nathalie", "numero": "+41 79 315 59 51" },
+      { "nom": "Christophe", "numero": "+41 79 239 82 42" }
+    ],
+    "showroom": ["Chemin du Péage 39", "1807 Blonay", "Sur rendez-vous"],
+    "reseaux": [
+      { "nom": "Instagram", "url": "#" },
+      { "nom": "Pinterest", "url": "#" }
+    ]
+  },
+
+  "legal": {
+    "copyright": "© 2026 Innea Sàrl",
+    "liens": [
+      { "texte": "Mentions légales", "url": "#" },
+      { "texte": "Confidentialité", "url": "#" }
+    ]
+  }
+}

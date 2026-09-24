@@ -1,0 +1,27 @@
+{#
+  Logo Innea (symbole + wordmark).
+  Usage : {% from "components/logo.njk" import logo %}
+          {{ logo() }}                       → encre, 36px (pied de page)
+          {{ logo(header=true) }}            → header : blanc sur photo, encre sur Toile, 40px desktop / 36px mobile
+#}
+{% macro logo(header=false, url="/", label="Innea — accueil") %}
+<a href="{{ url }}" class="logo{% if not header %} logo--s{% endif %}" aria-label="{{ label }}">
+  <span class="logo__mark">
+    {% if header %}
+    <img class="main on-dark d-only" src="/assets/logo/symbole-blanc-40.svg" alt="" width="40.3027" height="40">
+    <img class="dot on-dark d-only" src="/assets/logo/symbole-point-blanc-40.svg" alt="" width="0.0382724" height="0.0383455">
+    <img class="main on-dark m-only" src="/assets/logo/symbole-blanc.svg" alt="" width="36.2724" height="36">
+    <img class="dot on-dark m-only" src="/assets/logo/symbole-point-blanc.svg" alt="" width="0.0344451" height="0.0345109">
+    {% endif %}
+    <img class="main{% if header %} on-light{% endif %}" src="/assets/logo/symbole-encre.svg" alt="" width="36.2724" height="36">
+    <img class="dot{% if header %} on-light{% endif %}" src="/assets/logo/symbole-point-encre.svg" alt="" width="0.0344451" height="0.0345109">
+  </span>
+  <span class="wordmark" aria-hidden="true">
+    <img class="l-i"  src="/assets/logo/lettre-i.svg" alt="" width="2.4973" height="15.9999">
+    <img class="l-n1" src="/assets/logo/lettre-n.svg" alt="" width="14.5656" height="15.9999">
+    <img class="l-n2" src="/assets/logo/lettre-n.svg" alt="" width="14.5656" height="15.9999">
+    <img class="l-e"  src="/assets/logo/lettre-e.svg" alt="" width="9.13169" height="15.9999">
+    <img class="l-a"  src="/assets/logo/lettre-a.svg" alt="" width="16.0875" height="15.9999">
+  </span>
+</a>
+{% endmacro %}

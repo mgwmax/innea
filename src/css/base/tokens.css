@@ -1,0 +1,19 @@
+/* Couleurs, espacements et polices Innea V3.
+   Points de rupture utilisés partout : 1180px, 900px, 640px (mobile). */
+:root {
+  --innea-toile: #f4f1ec;
+  --innea-sable: #e9e3d9;
+  --innea-ligne: #d9d3c9;
+  --innea-encre: #2b2926;
+  --innea-taupe: #8a847b;
+  --innea-blanc: #ffffff;
+  --section-x: 64px;
+  --section-y: 160px;
+  --gap: 32px;
+  --max: 1360px;
+  --serif: "Newsreader", Georgia, serif;
+  --sans: "Jost", system-ui, sans-serif;
+}
+@media (max-width: 1180px) { :root { --section-y: 120px; } }
+@media (max-width: 900px)  { :root { --section-x: 32px; --section-y: 96px; } }
+@media (max-width: 640px)  { :root { --section-x: 20px; --section-y: 72px; } }

@@ -1,0 +1,12 @@
+{# Menu ouvert · Mobile (commun à toutes les pages). Ouvert par le bouton « Menu » du header #}
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true" tabindex="-1">
+  <nav class="mobile-menu__entrees t-titre-l" aria-label="Navigation mobile">
+    {% for item in site.navigation %}
+    <a href="{{ item.url }}">{{ item.texte }}</a>
+    {% endfor %}
+  </nav>
+  <div class="mobile-menu__bas">
+    <a class="t-titre-s" href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
+    {% set langClass = "t-label taupe" %}{% include "partials/lang.njk" %}
+  </div>
+</div>

@@ -1,0 +1,7 @@
+/* Objet : photo, titre, texte court. Aucun prix, aucun panier */
+.objet { display: flex; flex-direction: column; gap: 14px; }
+.objet img { width: 100%; aspect-ratio: 416 / 500; object-fit: cover; }
+
+@media (max-width: 640px) {
+  .objet .t-texte-s { white-space: normal; }
+}
