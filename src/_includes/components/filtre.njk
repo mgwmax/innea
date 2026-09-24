@@ -1,0 +1,8 @@
+{#
+  Filtre (page Projets). Actif : encre et soulignement. Inactif : taupe.
+  Usage : {% from "components/filtre.njk" import filtre %}
+          {{ filtre("Résidentiel", "residentiel", actif=false) }}   → valeur "tous" = aucun filtre
+#}
+{% macro filtre(texte, valeur, actif=false) %}
+<button type="button" class="filtre t-nav" data-filtre="{{ valeur }}" aria-pressed="{{ 'true' if actif else 'false' }}">{{ texte }}</button>
+{% endmacro %}

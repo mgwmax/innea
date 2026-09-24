@@ -13,18 +13,20 @@ npm run build    # génère le site final dans _site/
 ```
 src/
   index.njk                 page d'accueil : contenu (en-tête YAML) + liste des sections
+  projets.njk               page Projets (/projets/) : intro + grille filtrable
   _data/site.json           données communes : navigation, coordonnées, mentions légales
+  _data/realisations.json   liste des projets (accueil: true = affiché aussi sur la page d’accueil)
   _includes/
     layouts/base.njk        squelette de page : <head>, header, menu mobile, contact, pied de page
     partials/               blocs présents sur toutes les pages (header, menu mobile, contact, footer, FR/EN)
     sections/               sections de page, une par fichier (hero, manifeste, projets, …)
-    components/             composants : logo, bouton lien, carte projet, étape, objet
+    components/             composants : logo, bouton lien, carte projet, filtre, étape, objet
   css/
     base/                   couleurs et espacements (tokens.css), reset, typographie, container
     components/  sections/  un fichier CSS par composant et par section, avec ses règles responsive
     styles.11ty.js          assemble tous les fichiers en un seul /css/styles.css (l'ordre y est défini)
   js/
-    components/             un script par comportement (header, menu mobile, FR/EN, carrousel)
+    components/             un script par comportement (header, menu mobile, FR/EN, carrousel, grille projets)
     main.11ty.js            assemble les scripts en un seul /js/main.js
   assets/                   logo/, photos/, ui/ — copiés tels quels
 ```

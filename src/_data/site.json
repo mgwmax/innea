@@ -5,7 +5,7 @@
   "langue": "fr",
 
   "navigation": [
-    { "texte": "Projets", "url": "/#projets" },
+    { "texte": "Projets", "url": "/projets/" },
     { "texte": "Studio", "url": "/#studio" },
     { "texte": "Showroom", "url": "/#showroom" },
     { "texte": "Contact", "url": "/#contact" }

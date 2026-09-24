@@ -8,10 +8,11 @@ Website redesign for **Innea**, a small interior-architecture and custom-furnitu
 
 - **Design source:** Figma file `KYRLht06crPP5jjDNJhLiA` ("Innea - Redesign Siteweb").
   - Homepage desktop: node `8036:12`
+  - Projects page desktop: node `8038:77`
   - Mobile menu open: node `8042:436`
   - Mobile header component: node `8033:7728`
 - **Fidelity:** the implementation matches Figma closely (pixel-checked at 1440px). Keep it that way. When a design question comes up, read the Figma node with the Figma MCP tools instead of guessing.
-- **Current scope:** the homepage (`src/index.njk`) plus the shared layout. The owner plans to add more pages that reuse the same sections and components.
+- **Current scope:** the homepage (`src/index.njk`), the projects page (`src/projets.njk`, served at `/projets/`) and the shared layout. The owner plans to add more pages that reuse the same sections and components.
 
 ## Commands
 
@@ -29,6 +30,7 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
 |---|---|
 | Page content (texts, images, lists) | YAML front matter at the top of each page, e.g. `src/index.njk` |
 | Site-wide data (nav, email, phones, address, socials, legal) | `src/_data/site.json` |
+| Project list: the projects page shows all of them, the homepage only those with `accueil: true` | `src/_data/realisations.json` |
 | Page skeleton (head, header, mobile menu, contact, footer) | `src/_includes/layouts/base.njk` |
 | Blocks present on every page | `src/_includes/partials/` |
 | Page sections (one Nunjucks macro each) | `src/_includes/sections/` |
@@ -50,6 +52,7 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
 - **Filters** (defined in `eleventy.config.js`):
   - `pad`: `5` → `"05"`.
   - `lignes`: turns an array of lines into escaped `<br>`-separated HTML. Use it with `| safe`, as in `{{ titre | lignes | safe }}`. Multi-line titles are stored as YAML arrays.
+  - `rangeesProjets`: splits a project list into the rows of the projects-page grid (see "Carte projet" below).
 - **URLs:** asset and page URLs are root-absolute (`/assets/photos/x.jpg`, `/#contact`). `EleventyHtmlBasePlugin` rewrites them if the site is deployed under a `pathPrefix`.
 - **CSS:**
   - Class names are BEM-ish (`.hero__img`, `.card--portrait`) plus state classes `.is-active`, `.is-open`, `.is-solid`.
@@ -67,7 +70,13 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
 - **Header:** transparent over a full-screen photo, Toile background on light pages and after scrolling, four menu entries, no buttons.
   - `js/components/header.js` adds `.is-solid`. On pages without a `.hero` the header is always solid.
   - On mobile (≤ 640px) it is 64px tall with a "Menu" / "Fermer" text toggle that opens the full-screen `mobile-menu`.
-- **Carte projet:** clickable as a whole, no frame, no shadow. Formats are `paysage` (816×560) and `portrait` (464×600). The `projets` section groups cards in pairs and offsets the second one down by 120px.
+  - When `<main>` doesn't start with a `.hero`, it gets top padding equal to the header height (88px, or 64px on mobile) so content isn't hidden under the fixed header. See `sections/header.css`.
+- **Intro de page:** opens inner pages, under the Toile header. Label on the left; a thin title (two lines at most) and optional text on the right.
+- **Carte projet:** clickable as a whole, no frame, no shadow. Formats are `paysage` (816×560), `portrait` (464×600) and `carre` (416×416). A card's format comes from its **position** in the layout, not from the project data:
+  - Homepage `projets` section: pairs of cards, paysage + portrait, then portrait + paysage. The second card of each pair sits 120px lower.
+  - Projects page `grille-projets` section: a repeating cycle of *grand + petit* (second card 160px lower), *three squares*, *petit + grand* (second card 120px lower), *three squares*.
+  - This cycle is written twice and the two copies must stay identical: the `rangeesProjets` filter in `eleventy.config.js` (initial render) and `src/js/components/grille-projets.js` (re-layout when filtering or clicking "Afficher plus").
+- **Filtre** (projects page): active is encre with a 1px underline, inactive is taupe. Each filter's value is its category passed through `slugify`, matched against each card's `data-categorie`. "Tous" has the value `tous`.
 - **Étape:** four stacked steps with a thin vertical line.
 - **Objet:** no price, no cart.
 - **Bloc contact:** closes every page, right before the footer. It is included by the layout; a page can opt out with `contact: false` in its front matter.
@@ -76,7 +85,9 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
 ## Known placeholders and open items
 
 - Hero slides 2–5 reuse other project photos with captions invented during development. The real hero set is still to come from the client. Figma only has slide 1 (`salon-cheminee.jpg`).
-- Most links are `#` placeholders: "Découvrir le studio", "Tous les projets", project cards, Instagram/Pinterest, and the legal pages.
+- Most links are `#` placeholders: "Découvrir le studio", project cards (there are no project detail pages yet), Instagram/Pinterest, and the legal pages.
+- Project names and photos in `realisations.json` are provisional, per a Figma annotation: the client still has to confirm which photo belongs to which project. Three projects are literally named `[Nom du projet]`.
+- "Afficher plus" only appears when there are more projects than `parPage` (10). With the current 10 projects it is hidden.
 - The FR / EN switch is only visual. No English content or i18n setup exists yet.
 - The Figma file says the showroom address (Chemin du Péage 39, 1807 Blonay) still needs confirming.
 

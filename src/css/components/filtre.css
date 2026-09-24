@@ -1,0 +1,13 @@
+/* Filtre : texte Nav, taupe au repos ; encre et soulignement (1px, 6px sous le texte) quand actif */
+.filtres { display: flex; flex-wrap: wrap; gap: 12px 40px; }
+.filtre {
+  appearance: none; background: none; border: 0; border-bottom: 1px solid transparent; border-radius: 0;
+  padding: 0 0 6px; cursor: pointer; color: var(--innea-taupe); transition: color .25s ease, border-color .25s ease;
+}
+.filtre:hover { color: var(--innea-encre); }
+.filtre[aria-pressed="true"] { color: var(--innea-encre); border-bottom-color: var(--innea-encre); }
+.filtre:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+
+@media (max-width: 640px) {
+  .filtres { gap: 12px 24px; }
+}

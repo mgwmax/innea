@@ -23,12 +23,7 @@ manifeste:
 projets:
   id: projets
   titre: Projets
-  lien: { texte: Tous les projets, url: "#" }
-  projets:
-    - { titre: Sur les hauts de Vevey, categorie: Résidentiel, format: paysage, image: /assets/photos/vevey-escalier.jpg, alt: "Escalier et bibliothèque en bois, Vevey" }
-    - { titre: Alpes vaudoises, categorie: Résidentiel, format: portrait, image: /assets/photos/alpes-vaudoises-sejour.jpg, alt: "Séjour, Alpes vaudoises" }
-    - { titre: "Projet pierre, Blonay", categorie: Mobilier sur mesure, format: portrait, image: /assets/photos/blonay-bibliotheque.jpg, alt: "Bibliothèque sur mesure, Blonay" }
-    - { titre: Saint-Prex, categorie: Extérieurs, format: paysage, image: /assets/photos/saint-prex-piscine.jpg, alt: "Piscine face au lac, Saint-Prex" }
+  lien: { texte: Tous les projets, url: /projets/ }   # projets : _data/realisations.json (accueil: true)
 
 respiration:
   image: /assets/photos/exterieurs-bassin.jpg
@@ -73,7 +68,7 @@ showroom:
 
 {{ heroSection(hero) }}
 {{ manifesteSection(manifeste) }}
-{{ projetsSection(projets) }}
+{{ projetsSection(projets, realisations.projets | selectattr("accueil")) }}
 {{ respirationSection(respiration) }}
 {{ demarcheSection(demarche) }}
 {{ savoirFaireSection(savoirFaire) }}

@@ -1,10 +1,11 @@
 {#
-  Projets sélectionnés : cartes groupées par deux, la seconde de chaque rangée décalée vers le bas.
-  Alterner les formats (paysage/portrait puis portrait/paysage) donne la composition du design.
+  Projets sélectionnés (accueil) : cartes groupées par deux, la seconde de chaque rangée décalée vers le bas.
+  Les formats suivent la position : rangée 1 paysage + portrait, rangée 2 portrait + paysage, etc.
   Usage : {% from "sections/projets.njk" import projets %}
-          {{ projets({ id, titre, lien: { texte, url }, projets: [{ titre, categorie, image, alt, format, url }] }) }}
+          {{ projets({ id, titre, lien: { texte, url } }, listeDeProjets) }}
+          listeDeProjets : [{ titre, categorie, image, alt, url }], par ex. realisations.projets | selectattr("accueil")
 #}
-{% macro projets(s) %}
+{% macro projets(s, liste) %}
 {% from "components/bouton-lien.njk" import boutonLien %}
 {% from "components/carte-projet.njk" import carteProjet %}
 <section class="projets"{% if s.id %} id="{{ s.id }}"{% endif %}>
@@ -13,10 +14,11 @@
       <h2 class="t-display-l">{{ s.titre }}</h2>
       {% if s.lien %}{{ boutonLien(s.lien.texte, s.lien.url) }}{% endif %}
     </div>
-    {% for rangee in s.projets | batch(2) %}
-    <div class="row row--{{ rangee[0].format or 'paysage' }}-{{ (rangee[1].format if rangee[1]) or 'portrait' }}">
-      {{ carteProjet(rangee[0]) }}
-      {% if rangee[1] %}<div class="offset">{{ carteProjet(rangee[1]) }}</div>{% endif %}
+    {% for rangee in liste | batch(2) %}
+    {% set formats = ["paysage", "portrait"] if loop.index0 % 2 == 0 else ["portrait", "paysage"] %}
+    <div class="row row--{{ formats[0] }}-{{ formats[1] }}">
+      {{ carteProjet(rangee[0], formats[0]) }}
+      {% if rangee[1] %}<div class="offset">{{ carteProjet(rangee[1], formats[1]) }}</div>{% endif %}
     </div>
     {% endfor %}
   </div>

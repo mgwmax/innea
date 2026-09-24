@@ -7,22 +7,28 @@
 }
 .header__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; transition: opacity .35s ease; }
 .header__inner { position: relative; height: 100%; display: flex; align-items: center; justify-content: space-between; }
-.header .logo .on-light { display: none; }
 .header .wordmark img { filter: brightness(0) invert(1); transition: filter .35s ease; }
-.header .m-only { display: none; }
 .header.is-solid, .header.is-open { background: var(--innea-toile); color: var(--innea-encre); box-shadow: 0 1px 0 var(--innea-ligne); }
 .header.is-solid .header__bg, .header.is-open .header__bg { opacity: 0; }
-.header.is-solid .logo .on-dark, .header.is-open .logo .on-dark { display: none; }
-.header.is-solid .logo .on-light, .header.is-open .logo .on-light { display: block; }
 .header.is-solid .wordmark img, .header.is-open .wordmark img { filter: none; }
+
+/* Symbole du logo : une image par cas — desktop/mobile (d-only/m-only) × sur photo/sur Toile (on-dark/on-light) */
+.header .logo__mark img { display: none; }
+.header .logo__mark .on-dark.d-only { display: block; }
+.header.is-solid .logo__mark .on-dark.d-only, .header.is-open .logo__mark .on-dark.d-only { display: none; }
+.header.is-solid .logo__mark .on-light.d-only, .header.is-open .logo__mark .on-light.d-only { display: block; }
 
 .nav { display: flex; align-items: center; gap: 44px; white-space: nowrap; }
 .nav a { position: relative; }
 .nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
-.nav a:hover::after, .nav a:focus-visible::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+.nav a:hover::after, .nav a:focus-visible::after { transform: scaleX(1); }
 .nav .lang { opacity: .6; }
+.header.is-solid .nav .lang { opacity: .5; }
 .nav .lang button[aria-pressed="true"] { opacity: 1; }
 .menu-toggle { display: none; }
+
+/* Pages sans hero en ouverture : le contenu commence sous le header fixe */
+main:not(:has(> .hero:first-child)) { padding-top: 88px; }
 
 @media (max-width: 900px) {
   .nav { gap: 28px; }
@@ -30,12 +36,15 @@
 /* Header mobile : 64px, logo 36px, entrée « Menu » */
 @media (max-width: 640px) {
   .header { height: 64px; }
+  main:not(:has(> .hero:first-child)) { padding-top: 64px; }
   .header .logo { gap: 15px; height: 36px; }
   .header .logo__mark { width: 36px; height: 36px; }
   .header .wordmark { width: 84px; height: 10.543px; }
-  .header .d-only { display: none !important; }
-  .header .m-only.on-dark { display: block; }
-  .header.is-solid .m-only.on-dark, .header.is-open .m-only.on-dark { display: none; }
+  .header .logo__mark .on-dark.d-only { display: none; }
+  .header.is-solid .logo__mark .on-light.d-only, .header.is-open .logo__mark .on-light.d-only { display: none; }
+  .header .logo__mark .on-dark.m-only { display: block; }
+  .header.is-solid .logo__mark .on-dark.m-only, .header.is-open .logo__mark .on-dark.m-only { display: none; }
+  .header.is-solid .logo__mark .on-light.m-only, .header.is-open .logo__mark .on-light.m-only { display: block; }
   .nav { display: none; }
   .menu-toggle { all: unset; display: inline-block; cursor: pointer; }
   .menu-toggle:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }

@@ -1,8 +1,13 @@
 {#
-  Bouton lien : seul appel à l'action du site, un texte et un filet fléché.
+  Bouton lien : seul appel à l'action du site, un texte et un filet fléché. Jamais de bouton plein.
   Usage : {% from "components/bouton-lien.njk" import boutonLien %}
-          {{ boutonLien("Tous les projets", "/projets/") }}
+          {{ boutonLien("Tous les projets", "/projets/") }}        → lien <a>
+          {{ boutonLien("Afficher plus", false, "grille-plus") }}  → <button> (action JS), avec une classe en plus
 #}
-{% macro boutonLien(texte, url="#") %}
-<a href="{{ url }}" class="btn-link t-nav">{{ texte }} <span class="btn-link__arrow"></span></a>
+{% macro boutonLien(texte, url="#", classe="") %}
+{% if url %}
+<a href="{{ url }}" class="btn-link t-nav{% if classe %} {{ classe }}{% endif %}">{{ texte }} <span class="btn-link__arrow"></span></a>
+{% else %}
+<button type="button" class="btn-link t-nav{% if classe %} {{ classe }}{% endif %}">{{ texte }} <span class="btn-link__arrow"></span></button>
+{% endif %}
 {% endmacro %}

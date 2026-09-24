@@ -1,8 +1,9 @@
-/* Carte projet : cliquable en entier, sans cadre ni ombre. Formats paysage / portrait */
+/* Carte projet : cliquable en entier, sans cadre ni ombre. Formats paysage / portrait / carré */
 .card { display: flex; flex-direction: column; gap: 18px; cursor: pointer; }
 .card__frame { overflow: hidden; width: 100%; }
 .card--paysage .card__frame { aspect-ratio: 816 / 560; }
 .card--portrait .card__frame { aspect-ratio: 464 / 600; }
+.card--carre .card__frame { aspect-ratio: 1 / 1; }
 .card__frame img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
 .card:hover .card__frame img, .card:focus-visible .card__frame img { transform: scale(1.03); }
 .card__caption { display: flex; align-items: center; justify-content: space-between; gap: 16px; white-space: nowrap; }

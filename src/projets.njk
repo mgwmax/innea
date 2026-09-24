@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+title: Projets
+permalink: /projets/
+description: Appartements, maisons, mobilier dessiné pour un lieu. Une sélection de projets menés en Suisse romande.
+
+intro:
+  label: Projets
+  titre: ["Des lieux transformés,", "jusqu’au dernier détail."]
+  texte: Appartements, maisons, mobilier dessiné pour un lieu. Une sélection de projets menés en Suisse romande.
+
+grille:
+  filtres: [Résidentiel, Mobilier sur mesure, Extérieurs]   # « Tous » est ajouté en premier
+  parPage: 10        # projets affichés avant « Afficher plus »
+  plus: Afficher plus
+  # projets : _data/realisations.json
+---
+{% from "sections/intro-de-page.njk" import introDePage %}
+{% from "sections/grille-projets.njk" import grilleProjets %}
+
+{{ introDePage(intro) }}
+{{ grilleProjets(grille, realisations.projets) }}

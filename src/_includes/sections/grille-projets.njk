@@ -1,0 +1,41 @@
+{#
+  Grille projets (page Projets) : filtres par catégorie, rangées alternées, bouton « Afficher plus ».
+  Alternance des rangées : grand + petit, trois carrés, petit + grand, trois carrés (puis on recommence).
+  Le motif est défini deux fois, à garder identiques : filtre « rangeesProjets » (eleventy.config.js)
+  pour le rendu initial, et js/components/grille-projets.js pour le filtrage et la pagination.
+  Usage : {% from "sections/grille-projets.njk" import grilleProjets %}
+          {{ grilleProjets({ filtres: ["Résidentiel", …], parPage: 10, plus: "Afficher plus" }, realisations.projets) }}
+#}
+{% macro grilleProjets(g, projets) %}
+{% from "components/filtre.njk" import filtre %}
+{% from "components/carte-projet.njk" import carteProjet %}
+{% from "components/bouton-lien.njk" import boutonLien %}
+{% set parPage = g.parPage or 10 %}
+<section class="grille" data-par-page="{{ parPage }}">
+  <div class="container">
+    {% if g.filtres %}
+    <div class="filtres" role="group" aria-label="Filtrer les projets">
+      {{ filtre(g.tous or "Tous", "tous", true) }}
+      {% for f in g.filtres %}{{ filtre(f, f | slugify) }}{% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="grille__rangees">
+      {% for r in projets.slice(0, parPage) | rangeesProjets %}
+      <div class="rangee rangee--{{ r.type }}">
+        {% for c in r.cartes %}{{ carteProjet(c.projet, c.format) }}{% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+
+    {# Projets au-delà de la première page : affichés par « Afficher plus » #}
+    <div class="grille__reserve" hidden>
+      {% for p in projets.slice(parPage) %}{{ carteProjet(p, "carre") }}{% endfor %}
+    </div>
+
+    <div class="grille__plus"{% if projets.length <= parPage %} hidden{% endif %}>
+      {{ boutonLien(g.plus or "Afficher plus", false, "grille__plus-bouton") }}
+    </div>
+  </div>
+</section>
+{% endmacro %}

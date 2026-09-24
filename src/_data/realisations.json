@@ -1,0 +1,15 @@
+{
+  "_note": "Liste des projets, dans l’ordre d’affichage. « accueil: true » = affiché dans la sélection de la page d’accueil. Noms et photos provisoires : la correspondance photo / projet est à valider avec le client.",
+  "projets": [
+    { "titre": "Sur les hauts de Vevey", "categorie": "Résidentiel", "image": "/assets/photos/vevey-escalier.jpg", "alt": "Escalier et bibliothèque en bois, Vevey", "accueil": true },
+    { "titre": "Alpes vaudoises", "categorie": "Résidentiel", "image": "/assets/photos/alpes-vaudoises-sejour.jpg", "alt": "Séjour, Alpes vaudoises", "accueil": true },
+    { "titre": "Projet pierre, Blonay", "categorie": "Mobilier sur mesure", "image": "/assets/photos/blonay-bibliotheque.jpg", "alt": "Bibliothèque sur mesure, Blonay", "accueil": true },
+    { "titre": "Atelier showroom, Vevey", "categorie": "Commercial", "image": "/assets/photos/showroom-blonay.jpg", "alt": "Atelier showroom, Vevey" },
+    { "titre": "Bureau, Genève", "categorie": "Commercial", "image": "/assets/photos/atelier-bureau.jpg", "alt": "Bureau, Genève" },
+    { "titre": "La Tour-de-Peilz", "categorie": "Résidentiel", "image": "/assets/photos/architecture-entree.jpg", "alt": "Entrée et escalier, La Tour-de-Peilz" },
+    { "titre": "Saint-Prex", "categorie": "Extérieurs", "image": "/assets/photos/saint-prex-piscine.jpg", "alt": "Piscine face au lac, Saint-Prex", "accueil": true },
+    { "titre": "[Nom du projet]", "categorie": "Extérieurs", "image": "/assets/photos/jardin-terrasse.jpg", "alt": "Terrasse de jardin éclairée" },
+    { "titre": "[Nom du projet]", "categorie": "Mobilier sur mesure", "image": "/assets/photos/mobilier-bibliotheque.jpg", "alt": "Bibliothèque dessinée sur mesure" },
+    { "titre": "[Nom du projet]", "categorie": "Extérieurs", "image": "/assets/photos/jardin-piscine.jpg", "alt": "Piscine dans un jardin arboré" }
+  ]
+}

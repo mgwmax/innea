@@ -1,0 +1,26 @@
+/* Grille projets (page Projets) : filtres, rangées alternées, « Afficher plus » (voir js/components/grille-projets.js) */
+.grille { padding: 0 var(--section-x) 160px; }
+.grille .container,
+.grille__rangees { display: flex; flex-direction: column; gap: 96px; }
+.grille__plus { display: flex; justify-content: center; }
+.grille__plus[hidden] { display: none; }
+
+.rangee { display: grid; gap: var(--gap); align-items: start; }
+.rangee--grand-petit { grid-template-columns: 816fr 464fr; }
+.rangee--petit-grand { grid-template-columns: 464fr 816fr; }
+.rangee--trois { grid-template-columns: repeat(3, 1fr); }
+/* Décalage vertical de la seconde carte */
+.rangee--grand-petit > .card:nth-child(2) { margin-top: 160px; }
+.rangee--petit-grand > .card:nth-child(2) { margin-top: 120px; }
+
+@media (max-width: 900px) {
+  .grille { padding-bottom: var(--section-y); }
+  .grille .container, .grille__rangees { gap: 64px; }
+  .rangee--grand-petit, .rangee--petit-grand { grid-template-columns: 1fr; row-gap: 64px; }
+  .rangee--grand-petit > .card:nth-child(2), .rangee--petit-grand > .card:nth-child(2) { margin-top: 0; }
+}
+@media (max-width: 640px) {
+  .grille .container, .grille__rangees { gap: 48px; }
+  .rangee { row-gap: 48px; }
+  .rangee--trois { grid-template-columns: 1fr; }
+}

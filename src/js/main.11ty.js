@@ -7,6 +7,7 @@ const files = [
   "components/mobile-menu.js",
   "components/lang.js",
   "components/hero-carousel.js",
+  "components/grille-projets.js",
 ];
 
 export const data = { permalink: "/js/main.js", eleventyExcludeFromCollections: true };

@@ -17,6 +17,25 @@ export default function (eleventyConfig) {
   // Titres sur plusieurs lignes : {{ ["Ligne 1", "Ligne 2"] | lignes | safe }} → "Ligne 1<br>Ligne 2" (texte échappé)
   const escape = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   eleventyConfig.addFilter("lignes", (v) => [].concat(v ?? []).map(escape).join("<br>"));
+
+  // Grille projets : répartit une liste de projets en rangées selon le motif du design.
+  // Même motif que js/components/grille-projets.js — les garder identiques.
+  const MOTIF_GRILLE = [
+    { type: "grand-petit", formats: ["paysage", "portrait"] },
+    { type: "trois", formats: ["carre", "carre", "carre"] },
+    { type: "petit-grand", formats: ["portrait", "paysage"] },
+    { type: "trois", formats: ["carre", "carre", "carre"] },
+  ];
+  eleventyConfig.addFilter("rangeesProjets", (projets = []) => {
+    const rangees = [];
+    for (let i = 0, r = 0; i < projets.length; r++) {
+      const m = MOTIF_GRILLE[r % MOTIF_GRILLE.length];
+      const cartes = projets.slice(i, i + m.formats.length).map((projet, n) => ({ projet, format: m.formats[n] }));
+      rangees.push({ type: m.type, cartes });
+      i += cartes.length;
+    }
+    return rangees;
+  });
 }
 
 export const config = {

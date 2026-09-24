@@ -8,13 +8,20 @@
 <a href="{{ url }}" class="logo{% if not header %} logo--s{% endif %}" aria-label="{{ label }}">
   <span class="logo__mark">
     {% if header %}
+    {# desktop 40px : sur photo / sur Toile #}
     <img class="main on-dark d-only" src="/assets/logo/symbole-blanc-40.svg" alt="" width="40.3027" height="40">
     <img class="dot on-dark d-only" src="/assets/logo/symbole-point-blanc-40.svg" alt="" width="0.0382724" height="0.0383455">
+    <img class="main on-light d-only" src="/assets/logo/symbole-encre-40.svg" alt="" width="40.3027" height="40">
+    <img class="dot on-light d-only" src="/assets/logo/symbole-point-encre-40.svg" alt="" width="0.0382724" height="0.0383455">
+    {# mobile 36px : sur photo / sur Toile #}
     <img class="main on-dark m-only" src="/assets/logo/symbole-blanc.svg" alt="" width="36.2724" height="36">
     <img class="dot on-dark m-only" src="/assets/logo/symbole-point-blanc.svg" alt="" width="0.0344451" height="0.0345109">
+    <img class="main on-light m-only" src="/assets/logo/symbole-encre.svg" alt="" width="36.2724" height="36">
+    <img class="dot on-light m-only" src="/assets/logo/symbole-point-encre.svg" alt="" width="0.0344451" height="0.0345109">
+    {% else %}
+    <img class="main" src="/assets/logo/symbole-encre.svg" alt="" width="36.2724" height="36">
+    <img class="dot" src="/assets/logo/symbole-point-encre.svg" alt="" width="0.0344451" height="0.0345109">
     {% endif %}
-    <img class="main{% if header %} on-light{% endif %}" src="/assets/logo/symbole-encre.svg" alt="" width="36.2724" height="36">
-    <img class="dot{% if header %} on-light{% endif %}" src="/assets/logo/symbole-point-encre.svg" alt="" width="0.0344451" height="0.0345109">
   </span>
   <span class="wordmark" aria-hidden="true">
     <img class="l-i"  src="/assets/logo/lettre-i.svg" alt="" width="2.4973" height="15.9999">
