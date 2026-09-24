@@ -67,7 +67,7 @@ Chaque fichier de `sections/` et `components/` décrit ses paramètres en commen
 
 ## Images
 
-Toutes les photos sont en WebP (qualité 85). Pour en ajouter une : la déposer en JPG/PNG dans `src/assets/photos/`, puis lancer `python scripts/convertir-webp.py` : elle est convertie, les références dans `src/` sont mises à jour et l’original est rangé dans `assets-originaux/` (non publié). Après une conversion, supprimer `_site/` avant de reconstruire (Eleventy ne nettoie pas les anciens fichiers).
+Toutes les photos sont en WebP (qualité 75), réduites à 1920 px au plus sur leur plus grand côté. Pour en ajouter une : la déposer en JPG/PNG dans `src/assets/photos/`, puis lancer `python scripts/convertir-webp.py` : elle est convertie, les références dans `src/` sont mises à jour et l’original est rangé dans `assets-originaux/` (non publié). Après une conversion, supprimer `_site/` avant de reconstruire (Eleventy ne nettoie pas les anciens fichiers).
 
 ## Animations d’apparition
 

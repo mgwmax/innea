@@ -97,11 +97,12 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
 - **Images:** every raster image in `src/assets` is WebP. To add a photo, drop the JPG/PNG into `src/assets/photos/`, reference it by its future `.webp` name or its current name, then run `python scripts/convertir-webp.py`. The script does the following:
   - applies the EXIF orientation, which matters for phone photos;
   - keeps transparency;
-  - encodes at quality 85 (change it with `--qualite N`);
+  - shrinks images whose width or height exceeds 1920px (`--max N`), keeping proportions;
+  - encodes at quality 75 (change it with `--qualite N`; to change the quality of every existing image, re-encode from the originals with `--depuis-originaux`);
   - rewrites the `/assets/….jpg|png` references in `src/`;
   - moves the original into `assets-originaux/`, which isn't published but should be kept as the source files.
 
-  Images keep their original pixel size. Eleventy doesn't clean its output folder, so after converting or deleting assets, delete `_site/` or `_site-local/` before rebuilding.
+  Eleventy doesn't clean its output folder, so after converting or deleting assets, delete `_site/` or `_site-local/` before rebuilding. Deleting `_site/` stops a running `npm run dev`, so restart it afterwards.
 - **Assets:** use the exported Figma SVGs and photos as they are. Don't redraw, inline or edit them, and keep the SVG `width`/`height` attributes. Give new files descriptive French names.
 
 ## Design rules (from the Figma component descriptions)
