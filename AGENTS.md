@@ -94,6 +94,14 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
   - `revelation.js` is listed first in `main.11ty.js`, and `animations.css` last in `styles.11ty.js`.
   - Testing: the fully revealed state should be pixel-identical to the page without animations. Headless screenshots can't show scroll-triggered states; Playwright driving the installed Edge (`channel: "msedge"`) can.
 - **JS:** each file is a self-contained IIFE that returns early when its elements are missing, so every script can be loaded on every page. Don't introduce globals or dependencies.
+- **Images:** every raster image in `src/assets` is WebP. To add a photo, drop the JPG/PNG into `src/assets/photos/`, reference it by its future `.webp` name or its current name, then run `python scripts/convertir-webp.py`. The script does the following:
+  - applies the EXIF orientation, which matters for phone photos;
+  - keeps transparency;
+  - encodes at quality 85 (change it with `--qualite N`);
+  - rewrites the `/assets/….jpg|png` references in `src/`;
+  - moves the original into `assets-originaux/`, which isn't published but should be kept as the source files.
+
+  Images keep their original pixel size. Eleventy doesn't clean its output folder, so after converting or deleting assets, delete `_site/` or `_site-local/` before rebuilding.
 - **Assets:** use the exported Figma SVGs and photos as they are. Don't redraw, inline or edit them, and keep the SVG `width`/`height` attributes. Give new files descriptive French names.
 
 ## Design rules (from the Figma component descriptions)
