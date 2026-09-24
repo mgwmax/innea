@@ -1,26 +1,58 @@
-/* Grille projets (page Projets) : filtres, rangées alternées, « Afficher plus » (voir js/components/grille-projets.js) */
+/* Grille projets (page Projets) : filtres, rangées alternées, « Afficher plus » (voir js/components/grille-projets.js)
+   Motif du design : grand + petit, trois carrés, petit + grand, trois carrés.
+   - desktop et tablette (> 640px) : le motif est conservé, colonnes proportionnelles et décalages réduits progressivement ;
+   - mobile (≤ 640px) : version resserrée du même rythme —
+       grand + petit  → grand pleine largeur, petit à 64 % calé à droite
+       petit + grand  → petit à 64 % calé à gauche, grand pleine largeur
+       trois carrés   → le premier pleine largeur, les deux suivants côte à côte */
 .grille { padding: 0 var(--section-x) 160px; }
 .grille .container,
 .grille__rangees { display: flex; flex-direction: column; gap: 96px; }
 .grille__plus { display: flex; justify-content: center; }
 .grille__plus[hidden] { display: none; }
 
+/* minmax(0, …) : les colonnes gardent leurs proportions quelle que soit la longueur des légendes */
 .rangee { display: grid; gap: var(--gap); align-items: start; }
-.rangee--grand-petit { grid-template-columns: 816fr 464fr; }
-.rangee--petit-grand { grid-template-columns: 464fr 816fr; }
-.rangee--trois { grid-template-columns: repeat(3, 1fr); }
+.rangee--grand-petit { grid-template-columns: minmax(0, 816fr) minmax(0, 464fr); }
+.rangee--petit-grand { grid-template-columns: minmax(0, 464fr) minmax(0, 816fr); }
+.rangee--trois { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* Rangées de trois : sous la largeur du design, toutes les légendes passent sur deux lignes ensemble
+   (titre puis catégorie) plutôt que certaines seulement */
+.rangee--trois { container-type: inline-size; }
+@container (max-width: 1260px) {
+  .rangee--trois .card__caption { flex-direction: column; align-items: flex-start; }
+}
+
 /* Décalage vertical de la seconde carte */
 .rangee--grand-petit > .card:nth-child(2) { margin-top: 160px; }
 .rangee--petit-grand > .card:nth-child(2) { margin-top: 120px; }
 
+@media (max-width: 1180px) {
+  .grille .container, .grille__rangees { gap: 80px; }
+  .rangee--grand-petit > .card:nth-child(2) { margin-top: 120px; }
+  .rangee--petit-grand > .card:nth-child(2) { margin-top: 88px; }
+}
+
 @media (max-width: 900px) {
   .grille { padding-bottom: var(--section-y); }
   .grille .container, .grille__rangees { gap: 64px; }
-  .rangee--grand-petit, .rangee--petit-grand { grid-template-columns: 1fr; row-gap: 64px; }
-  .rangee--grand-petit > .card:nth-child(2), .rangee--petit-grand > .card:nth-child(2) { margin-top: 0; }
+  .rangee { gap: 24px; }
+  .rangee--grand-petit > .card:nth-child(2) { margin-top: 80px; }
+  .rangee--petit-grand > .card:nth-child(2) { margin-top: 56px; }
 }
+
 @media (max-width: 640px) {
   .grille .container, .grille__rangees { gap: 48px; }
-  .rangee { row-gap: 48px; }
-  .rangee--trois { grid-template-columns: 1fr; }
+  .rangee { row-gap: 32px; column-gap: 16px; }
+
+  .rangee--grand-petit, .rangee--petit-grand { grid-template-columns: minmax(0, 1fr); }
+  .rangee--grand-petit > .card:nth-child(2),
+  .rangee--petit-grand > .card:nth-child(2) { margin-top: 0; }
+  .rangee--grand-petit > .card--portrait { width: 64%; justify-self: end; }
+  .rangee--petit-grand > .card--portrait { width: 64%; justify-self: start; }
+
+  .rangee--trois { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* 1 ou 3 cartes : la première prend toute la largeur ; 2 cartes : côte à côte */
+  .rangee--trois > .card:first-child:not(:nth-last-child(2)) { grid-column: 1 / -1; }
 }
