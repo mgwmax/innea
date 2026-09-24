@@ -5,7 +5,8 @@ Site statique généré avec [Eleventy](https://www.11ty.dev/). Les pages sont a
 ```bash
 npm install      # une seule fois
 npm run dev      # serveur local sur http://localhost:5173, rechargé à chaque modification
-npm run build    # génère le site final dans _site/
+npm run build    # génère le site final dans _site/ (à publier sur un serveur)
+npm run build-local-static   # génère _site-local/, ouvrable sans serveur : double-clic sur _site-local/index.html
 ```
 
 ## Structure
@@ -63,6 +64,10 @@ respiration:
 Le header, le menu mobile, le bloc contact et le pied de page sont ajoutés par le layout. Pour masquer le bloc contact : `contact: false`. Sans section hero, le header s'affiche directement sur fond Toile.
 
 Chaque fichier de `sections/` et `components/` décrit ses paramètres en commentaire en tête de fichier.
+
+## Animations d’apparition
+
+Ajouter `data-reveal="texte"` (ou `titre`, `carte`, `image`) sur un élément pour qu’il apparaisse en fondu lors du défilement. Détail des variantes : `src/css/base/animations.css`. Ne pas imbriquer deux éléments `data-reveal`.
 
 ## Ajouter une section ou un composant
 

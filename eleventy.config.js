@@ -1,6 +1,27 @@
+import path from "node:path";
 import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 
+// Build « local statique » (npm run build-local-static) : pages ouvrables directement depuis le disque (file://)
+const LOCAL_STATIQUE = process.env.INNEA_BUILD === "local-static";
+
 export default function (eleventyConfig) {
+  if (LOCAL_STATIQUE) {
+    // Réécrit chaque URL absolue (/assets/x.jpg, /projets/) en chemin relatif à la page (./assets/x.jpg,
+    // ../projets/index.html). Les dossiers pointent vers leur index.html : en file://, le navigateur
+    // n'ouvre pas l'index d'un dossier tout seul. Liens externes, mailto:, tel: et #ancres inchangés.
+    eleventyConfig.addTransform("urls-relatives", function (contenu) {
+      const sortie = this.page.outputPath;
+      if (!sortie || !sortie.endsWith(".html")) return contenu;
+      const dossierPage = path.dirname(path.relative(eleventyConfig.directories.output, sortie));
+      const racine = dossierPage === "." ? "./" : dossierPage.split(path.sep).map(() => "..").join("/") + "/";
+      return contenu.replace(/(\s(?:href|src|action|poster)=")\/(?!\/)([^"]*)"/g, (_, attribut, url) => {
+        const [, chemin, suite = ""] = url.match(/^([^?#]*)(.*)$/);
+        const cible = chemin === "" || chemin.endsWith("/") ? chemin + "index.html" : chemin;
+        return `${attribut}${racine}${cible}${suite}"`;
+      });
+    });
+  }
+
   // Images, SVG et logos copiés tels quels
   eleventyConfig.addPassthroughCopy("src/assets");
 
@@ -50,7 +71,7 @@ export default function (eleventyConfig) {
 }
 
 export const config = {
-  dir: { input: "src", includes: "_includes", data: "_data", output: "_site" },
+  dir: { input: "src", includes: "_includes", data: "_data", output: LOCAL_STATIQUE ? "_site-local" : "_site" },
   markdownTemplateEngine: "njk",
   htmlTemplateEngine: "njk",
 };

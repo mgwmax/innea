@@ -9,13 +9,13 @@
 <section class="demarche{% if d.variante %} demarche--{{ d.variante }}{% endif %}"{% if d.id %} id="{{ d.id }}"{% endif %}>
   <div class="container">
     <div class="demarche__intro">
-      <p class="t-label taupe">{{ d.label }}</p>
-      <h2 class="t-titre-l">{{ d.titre | lignes | safe }}</h2>
-      {% if d.texte %}<p class="t-texte">{{ d.texte }}</p>{% endif %}
-      {% if d.image %}<img class="photo" src="{{ d.image }}" alt="{{ d.alt }}" loading="lazy">{% endif %}
+      <p class="t-label taupe" data-reveal="texte">{{ d.label }}</p>
+      <h2 class="t-titre-l" data-reveal="titre">{{ d.titre | lignes | safe }}</h2>
+      {% if d.texte %}<p class="t-texte" data-reveal="texte">{{ d.texte }}</p>{% endif %}
+      {% if d.image %}<img class="photo" data-reveal="image" src="{{ d.image }}" alt="{{ d.alt }}" loading="lazy">{% endif %}
     </div>
     <ol class="etapes">
-      <li class="etapes__line" aria-hidden="true"><img src="/assets/ui/filet-etapes.svg" alt="" width="368" height="1"></li>
+      <li class="etapes__line" aria-hidden="true" data-reveal="trait"><img src="/assets/ui/filet-etapes.svg" alt="" width="368" height="1"></li>
       {% for e in d.etapes %}{{ etape(loop.index, e.titre, e.texte) }}{% endfor %}
     </ol>
   </div>

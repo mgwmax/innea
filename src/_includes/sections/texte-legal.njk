@@ -8,7 +8,7 @@
 <section class="texte-legal">
   <div class="texte-legal__colonne">
     {% for r in s.rubriques %}
-    <div class="texte-legal__rubrique">
+    <div class="texte-legal__rubrique" data-reveal="texte">
       <h2 class="t-titre-m">{{ r.titre }}</h2>
       {% if r.lignes %}<p class="t-texte">{{ r.lignes | lignes | safe }}</p>{% endif %}
       {% if r.texte %}<p class="t-texte">{{ r.texte }}</p>{% endif %}

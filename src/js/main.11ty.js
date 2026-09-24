@@ -3,6 +3,7 @@
 import { readFileSync } from "node:fs";
 
 const files = [
+  "components/revelation.js",
   "components/header.js",
   "components/mobile-menu.js",
   "components/lang.js",

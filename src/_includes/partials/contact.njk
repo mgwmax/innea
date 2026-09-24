@@ -2,23 +2,23 @@
 {% set c = site.contact %}
 <section class="contact" id="contact">
   <div class="container">
-    <h2 class="t-display-xl">{{ c.titre }}</h2>
+    <h2 class="t-display-xl" data-reveal="titre">{{ c.titre }}</h2>
     <div class="coords">
-      <div class="coord">
+      <div class="coord" data-reveal="texte">
         <p class="t-label taupe">Écrire</p>
         <a class="t-titre-s" href="mailto:{{ c.email }}">{{ c.email }}</a>
       </div>
-      <div class="coord">
+      <div class="coord" data-reveal="texte">
         <p class="t-label taupe">Appeler</p>
         <p class="t-titre-s tel">
           {% for t in c.telephones %}<a href="tel:{{ t.numero | replace(' ', '') }}"><span>{{ t.nom }}</span>{{ t.numero }}</a>{% if not loop.last %}<br>{% endif %}{% endfor %}
         </p>
       </div>
-      <div class="coord">
+      <div class="coord" data-reveal="texte">
         <p class="t-label taupe">Showroom</p>
         <p class="t-titre-s">{{ c.showroom | lignes | safe }}</p>
       </div>
-      <div class="coord">
+      <div class="coord" data-reveal="texte">
         <p class="t-label taupe">Suivre</p>
         <p class="t-titre-s">{% for r in c.reseaux %}<a href="{{ r.url }}">{{ r.nom }}</a>{% if not loop.last %}<br>{% endif %}{% endfor %}</p>
       </div>

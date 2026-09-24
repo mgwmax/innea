@@ -6,10 +6,10 @@
 #}
 {% macro blocLabel(b) %}
 <div class="bloc-label">
-  <p class="t-label taupe">{{ b.label }}</p>
+  <p class="t-label taupe" data-reveal="texte">{{ b.label }}</p>
   <div class="bloc-label__corps">
-    {% if b.texte %}<p class="t-titre-m{% if b.italique %} bloc-label__texte--italique{% endif %}">{{ b.texte }}</p>{% endif %}
-    {% if b.image %}<img class="bloc-label__photo" src="{{ b.image }}" alt="{{ b.alt }}" loading="lazy">{% endif %}
+    {% if b.texte %}<p class="t-titre-m{% if b.italique %} bloc-label__texte--italique{% endif %}" data-reveal="texte">{{ b.texte }}</p>{% endif %}
+    {% if b.image %}<img class="bloc-label__photo" data-reveal="image" src="{{ b.image }}" alt="{{ b.alt }}" loading="lazy">{% endif %}
   </div>
 </div>
 {% endmacro %}

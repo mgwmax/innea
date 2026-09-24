@@ -6,7 +6,7 @@
           {{ avantApres({ avant: { image, alt }, apres: { image, alt } }) }}
 #}
 {% macro avantApres(a) %}
-<div class="avant-apres" style="--position: 50%">
+<div class="avant-apres" style="--position: 50%" data-reveal="image">
   <img class="avant-apres__apres" src="{{ a.apres.image }}" alt="{{ a.apres.alt }}" loading="lazy">
   <img class="avant-apres__avant" src="{{ a.avant.image }}" alt="{{ a.avant.alt }}" loading="lazy">
   <div class="avant-apres__poignee" aria-hidden="true">

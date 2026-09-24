@@ -1,0 +1,47 @@
+/* Animations d'apparition au défilement (voir js/components/revelation.js).
+   Un élément s'anime s'il porte data-reveal="…" :
+     texte  → fondu en montant de 24px (labels, paragraphes, blocs de texte)
+     titre  → chaque ligne (séparée par <br>) glisse hors d'un masque, l'une après l'autre
+     carte  → fondu en montant de 48px ; la photo d'une carte projet se pose depuis un léger zoom
+     image  → fondu, la photo se pose depuis un léger zoom
+     zoom   → zoom arrière lent, sans fondu (photo du hero)
+     trait  → le filet se dessine du haut vers le bas (étapes de la démarche)
+   Les éléments ne sont masqués que si <html> a la classe « anim » (posée par le script en tête de page).
+   --delai est fixé par le script pour décaler les éléments qui apparaissent ensemble. */
+:root { --ease-reveal: cubic-bezier(.16, 1, .3, 1); }
+
+.anim [data-reveal] {
+  transition:
+    opacity 1.1s var(--ease-reveal) var(--delai, 0s),
+    transform 1.3s var(--ease-reveal) var(--delai, 0s),
+    scale 1.6s var(--ease-reveal) var(--delai, 0s);
+}
+.anim [data-reveal]:not(.est-revele) { opacity: 0; }
+.anim [data-reveal="texte"]:not(.est-revele) { transform: translateY(24px); }
+.anim [data-reveal="carte"]:not(.est-revele) { transform: translateY(48px); }
+.anim [data-reveal="image"]:not(.est-revele) { scale: 1.06; }
+
+/* Carte projet : la photo, recadrée par son cadre, se pose depuis un zoom */
+.anim [data-reveal="carte"] .card__frame img {
+  transition: scale 1.8s var(--ease-reveal) var(--delai, 0s), transform .9s cubic-bezier(.2, .7, .2, 1);
+}
+.anim [data-reveal="carte"]:not(.est-revele) .card__frame img { scale: 1.12; }
+
+/* Hero : zoom arrière lent, la photo reste visible */
+.anim [data-reveal="zoom"] { transition: scale 2.6s var(--ease-reveal) var(--delai, 0s); }
+.anim [data-reveal="zoom"]:not(.est-revele) { opacity: 1; scale: 1.08; }
+
+/* Filet vertical des étapes : se dessine du haut vers le bas */
+.anim [data-reveal="trait"] { transform-origin: top; transition: scale 1.8s var(--ease-reveal) calc(var(--delai, 0s) + .2s); }
+.anim [data-reveal="trait"]:not(.est-revele) { opacity: 1; scale: 1 0; }
+
+/* Titres : visibles, ce sont leurs lignes qui glissent (découpées en .ligne-masque par le script) */
+.anim.anim-prete [data-reveal="titre"] { opacity: 1; }
+/* Masque par clip-path (et non overflow + marges négatives, qui modifieraient l'interligne) :
+   déborde un peu de la ligne pour laisser passer accents et jambages (É, g, p). */
+.ligne-masque { display: block; clip-path: inset(-.3em -.5em -.3em -.5em); }
+.ligne-masque > span {
+  display: block;
+  transition: transform 1.3s var(--ease-reveal) calc(var(--delai, 0s) + var(--i, 0) * .1s);
+}
+.anim [data-reveal="titre"]:not(.est-revele) .ligne-masque > span { transform: translateY(110%); }

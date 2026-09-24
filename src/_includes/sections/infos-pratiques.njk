@@ -10,8 +10,8 @@
   <div class="container">
     {% for info in s.infos %}
     <div class="infos-pratiques__item{% if info.lien %} infos-pratiques__item--lien{% endif %}">
-      <p class="t-label taupe">{{ info.label }}</p>
-      {% if info.lien %}{{ boutonLien(info.lien.texte, info.lien.url) }}{% else %}<p class="t-titre-s">{{ info.lignes | lignes | safe }}</p>{% endif %}
+      <p class="t-label taupe" data-reveal="texte">{{ info.label }}</p>
+      {% if info.lien %}{{ boutonLien(info.lien.texte, info.lien.url) }}{% else %}<p class="t-titre-s" data-reveal="texte">{{ info.lignes | lignes | safe }}</p>{% endif %}
     </div>
     {% endfor %}
   </div>

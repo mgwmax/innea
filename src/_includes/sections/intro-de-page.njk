@@ -10,14 +10,14 @@
 {% set suite = i.variante == "suite" %}
 <section class="intro{% if suite %} intro--suite{% endif %}">
   <div class="container">
-    <p class="t-label taupe">{{ i.label }}</p>
+    <p class="t-label taupe" data-reveal="texte">{{ i.label }}</p>
     <div class="intro__texte">
       {% if suite %}
-      <h2 class="t-titre-l">{{ i.titre | lignes | safe }}</h2>
+      <h2 class="t-titre-l" data-reveal="titre">{{ i.titre | lignes | safe }}</h2>
       {% else %}
-      <h1 class="t-display-l">{{ i.titre | lignes | safe }}</h1>
+      <h1 class="t-display-l" data-reveal="titre">{{ i.titre | lignes | safe }}</h1>
       {% endif %}
-      {% if i.texte %}<p class="t-texte">{{ i.texte }}</p>{% endif %}
+      {% if i.texte %}<p class="t-texte" data-reveal="texte">{{ i.texte }}</p>{% endif %}
     </div>
   </div>
 </section>

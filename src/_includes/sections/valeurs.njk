@@ -7,7 +7,7 @@
 {% from "components/valeur.njk" import valeur %}
 <section class="valeurs">
   <div class="container">
-    <h2 class="t-display-l">{{ v.titre }}</h2>
+    <h2 class="t-display-l" data-reveal="titre">{{ v.titre }}</h2>
     <div class="valeurs__liste">
       {% for item in v.valeurs %}{{ valeur(loop.index, item.titre, item.texte) }}{% endfor %}
     </div>

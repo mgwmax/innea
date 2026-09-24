@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% if title %}{{ title }} · {{ site.nom }}{% else %}{{ site.titre }}{% endif %}</title>
 {% if description %}<meta name="description" content="{{ description }}">{% endif %}
+{# Animations d'apparition (js/components/revelation.js) : la classe « anim » masque les éléments [data-reveal]
+   avant le premier affichage. Jamais posée si le visiteur préfère moins d'animations ; retirée au bout de 3 s
+   si le script principal n'a pas démarré, pour que le contenu ne reste jamais caché. #}
+<script>(function(h){if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;h.classList.add('anim');setTimeout(function(){if(!h.classList.contains('anim-prete'))h.classList.remove('anim')},3000)})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&display=swap" rel="stylesheet">

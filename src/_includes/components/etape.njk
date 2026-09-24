@@ -4,7 +4,7 @@
           {{ etape(1, "Écoute", "Une première rencontre…") }}
 #}
 {% macro etape(numero, titre, texte) %}
-<li class="etape">
+<li class="etape" data-reveal="texte">
   <p class="etape__num t-label taupe">{{ numero | pad }}</p>
   <p class="etape__titre t-titre-m">{{ titre }}</p>
   <p class="etape__texte t-texte">{{ texte }}</p>

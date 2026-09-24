@@ -7,11 +7,11 @@
 {% from "components/bouton-lien.njk" import boutonLien %}
 <section class="manifeste"{% if m.id %} id="{{ m.id }}"{% endif %}>
   <div class="container">
-    <p class="t-label taupe">{{ m.label }}</p>
+    <p class="t-label taupe" data-reveal="texte">{{ m.label }}</p>
     <div class="manifeste__text">
-      <p class="t-titre-l">{{ m.texte }}</p>
+      <p class="t-titre-l" data-reveal="texte">{{ m.texte }}</p>
       <div class="signature">
-        {% if m.signature %}<p class="t-legende taupe">{{ m.signature }}</p>{% endif %}
+        {% if m.signature %}<p class="t-legende taupe" data-reveal="texte">{{ m.signature }}</p>{% endif %}
         {% if m.lien %}{{ boutonLien(m.lien.texte, m.lien.url) }}{% endif %}
       </div>
     </div>

@@ -11,8 +11,8 @@
 {% if balise == "span" %}
 <span class="{{ classes }}">{{ texte }} <span class="btn-link__arrow"></span></span>
 {% elif url %}
-<a href="{{ url }}" class="{{ classes }}">{{ texte }} <span class="btn-link__arrow"></span></a>
+<a href="{{ url }}" class="{{ classes }}" data-reveal="texte">{{ texte }} <span class="btn-link__arrow"></span></a>
 {% else %}
-<button type="button" class="{{ classes }}">{{ texte }} <span class="btn-link__arrow"></span></button>
+<button type="button" class="{{ classes }}" data-reveal="texte">{{ texte }} <span class="btn-link__arrow"></span></button>
 {% endif %}
 {% endmacro %}

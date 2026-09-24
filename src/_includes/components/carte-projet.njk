@@ -9,7 +9,7 @@
 {% macro carteProjet(p, format) %}
 {% set f = format or p.format or "paysage" %}
 {% set url = p.url or (("/projets/" + p.slug + "/") if p.slug else "#") %}
-<a href="{{ url }}" class="card card--{{ f }}" data-categorie="{{ p.categorie | slugify }}">
+<a href="{{ url }}" class="card card--{{ f }}" data-categorie="{{ p.categorie | slugify }}" data-reveal="carte">
   <div class="card__frame"><img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy"></div>
   <div class="card__caption">
     <p class="t-titre-s">{{ p.titre }}</p>

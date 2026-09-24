@@ -33,7 +33,8 @@ Website redesign for **Innea**, a small interior-architecture and custom-furnitu
 ```bash
 npm install
 npm run dev     # eleventy --serve on http://localhost:5173 (live reload)
-npm run build   # outputs to _site/
+npm run build   # outputs to _site/ (for a web server)
+npm run build-local-static   # outputs to _site-local/, opens from disk (file://)
 ```
 
 There are no tests and no linter. Verify changes visually (see "Verifying changes" below).
@@ -54,7 +55,9 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
 | Images and SVGs | `src/assets/{logo,photos,ui}/` (passthrough copy) |
 | Eleventy config, filters | `eleventy.config.js` |
 
-`_site/` and `node_modules/` are generated. Never edit them.
+`_site/`, `_site-local/` and `node_modules/` are generated. Never edit them.
+
+**`build-local-static`** runs `scripts/build-local-static.js`, which sets `INNEA_BUILD=local-static`. In that mode, `eleventy.config.js` writes to `_site-local/` and adds the `urls-relatives` transform. It rewrites every root URL in `href`, `src`, `action` and `poster` to a path relative to the page (`./assets/…`, `../../projets/index.html`), and points folder URLs at their `index.html`. Keep writing root-absolute URLs (`/assets/…`) in templates and data; the transform handles the local build. It only rewrites HTML attributes, so a root URL written in CSS or JS (e.g. `url(/assets/…)` or a path in a script) would not be converted.
 
 ## Conventions
 
@@ -76,6 +79,20 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
   - Tokens live in `src/css/base/tokens.css`: colours `--innea-toile|sable|ligne|encre|taupe|blanc`, spacing `--section-x` (64 → 32 → 20px), `--section-y`, `--gap`, and `--max: 1360px` (the width of `.container`, used by the header too). Use tokens rather than hardcoded colours.
   - Text styles are the utility classes `.t-label .t-nav .t-texte .t-texte-s .t-legende .t-titre-s|m|l .t-display-l|xl`, mirroring the Figma "Innea V3" text styles. Fonts are Newsreader Light / Light Italic and Jost Regular (Google Fonts).
   - **When adding a CSS file, add it to the ordered list in `src/css/styles.11ty.js`.** Order is base → components → sections. The same applies to JS and `src/js/main.11ty.js`.
+- **Scroll-reveal animations:** add `data-reveal="…"` to an element to animate it when it scrolls into view. The variants are in `css/base/animations.css`, and `js/components/revelation.js` does the observing.
+  - Variants:
+    - `texte`: fades in while rising 24px.
+    - `titre`: each line, as separated by `<br>`, slides up out of a clip-path mask. The script wraps the lines at runtime.
+    - `carte`: rises 48px, and the photo inside `.card__frame` settles from a zoom.
+    - `image`: fades in while settling from a zoom.
+    - `zoom`: the hero photo zooms out slowly, with no fade.
+    - `trait`: the étapes line draws itself downwards.
+  - Elements that enter the screen together are staggered by 90ms each, up to 6.
+  - **Never nest** `data-reveal` elements, or the offsets and fades add up. Put the attribute on siblings, as the existing sections do. `boutonLien` already adds `data-reveal="texte"`, except in its `span` mode.
+  - Elements are only hidden if the inline script in `layouts/base.njk` put the `anim` class on `<html>` before the first paint. It never does this when the visitor prefers reduced motion or when IntersectionObserver is unavailable, and it removes the class after 3s if `main.js` hasn't started. So with JavaScript off or broken, the content stays visible.
+  - Reveal transitions use the individual `scale` property, not `transform`, so they don't conflict with the hover zooms.
+  - `revelation.js` is listed first in `main.11ty.js`, and `animations.css` last in `styles.11ty.js`.
+  - Testing: the fully revealed state should be pixel-identical to the page without animations. Headless screenshots can't show scroll-triggered states; Playwright driving the installed Edge (`channel: "msedge"`) can.
 - **JS:** each file is a self-contained IIFE that returns early when its elements are missing, so every script can be loaded on every page. Don't introduce globals or dependencies.
 - **Assets:** use the exported Figma SVGs and photos as they are. Don't redraw, inline or edit them, and keep the SVG `width`/`height` attributes. Give new files descriptive French names.
 

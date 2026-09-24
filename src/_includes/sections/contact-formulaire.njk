@@ -12,25 +12,25 @@
   <div class="container">
     <div class="contact-page__coords">
       <div class="contact-page__titre">
-        <p class="t-label taupe">{{ s.label }}</p>
-        <h1 class="t-display-xl">{{ s.titre | lignes | safe }}</h1>
-        {% if s.texte %}<p class="t-texte">{{ s.texte }}</p>{% endif %}
+        <p class="t-label taupe" data-reveal="texte">{{ s.label }}</p>
+        <h1 class="t-display-xl" data-reveal="titre">{{ s.titre | lignes | safe }}</h1>
+        {% if s.texte %}<p class="t-texte" data-reveal="texte">{{ s.texte }}</p>{% endif %}
       </div>
-      <div class="coord">
+      <div class="coord" data-reveal="texte">
         <p class="t-label taupe">Écrire</p>
         <a class="t-titre-s" href="mailto:{{ c.email }}">{{ c.email }}</a>
       </div>
-      <div class="coord">
+      <div class="coord" data-reveal="texte">
         <p class="t-label taupe">Appeler</p>
         <p class="t-titre-s tel">
           {% for t in c.telephones %}<a href="tel:{{ t.numero | replace(' ', '') }}"><span>{{ t.nom }}</span>{{ t.numero }}</a>{% if not loop.last %}<br>{% endif %}{% endfor %}
         </p>
       </div>
-      <div class="coord">
+      <div class="coord" data-reveal="texte">
         <p class="t-label taupe">Showroom</p>
         <p class="t-titre-s">{{ c.showroom[0] }}, {{ c.showroom[1] }}{% if c.showroom[2] %}<br>{{ c.showroom[2] }}{% endif %}</p>
       </div>
-      <div class="coord">
+      <div class="coord" data-reveal="texte">
         <p class="t-label taupe">Suivre</p>
         <p class="t-titre-s">{% for r in c.reseaux %}{% if not loop.first %}<span class="contact-page__sep" aria-hidden="true">·</span>{% endif %}<a href="{{ r.url }}">{{ r.nom }}</a>{% endfor %}</p>
       </div>
@@ -40,13 +40,13 @@
     <form class="contact-page__formulaire" method="post" novalidate
           {% if site.formulaire.action %}action="{{ site.formulaire.action }}"{% endif %}
           data-email="{{ c.email }}">
-      <p class="t-legende taupe">{{ f.intro }}</p>
+      <p class="t-legende taupe" data-reveal="texte">{{ f.intro }}</p>
       {% for ch in f.champs %}{{ champ(ch) }}{% endfor %}
-      <label class="consentement">
+      <label class="consentement" data-reveal="texte">
         <input type="checkbox" name="consentement" required>
         <span class="t-texte-s">{{ f.consentement.avant }}<a href="{{ f.consentement.url }}">{{ f.consentement.lien }}</a>{{ f.consentement.apres }}</span>
       </label>
-      <div class="contact-page__envoi">
+      <div class="contact-page__envoi" data-reveal="texte">
         <button type="submit" class="btn-link t-nav">{{ f.bouton }} <span class="btn-link__arrow"></span></button>
         <p class="contact-page__statut t-texte-s" role="status" aria-live="polite"></p>
       </div>

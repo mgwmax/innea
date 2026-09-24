@@ -7,11 +7,11 @@
 {% from "components/bouton-lien.njk" import boutonLien %}
 <section class="showroom"{% if s.id %} id="{{ s.id }}"{% endif %}>
   <div class="container">
-    <img class="showroom__photo" src="{{ s.image }}" alt="{{ s.alt }}" loading="lazy">
+    <img class="showroom__photo" data-reveal="image" src="{{ s.image }}" alt="{{ s.alt }}" loading="lazy">
     <div class="showroom__text">
-      <p class="t-label taupe">{{ s.label }}</p>
-      <h2 class="t-titre-l">{{ s.titre | lignes | safe }}</h2>
-      <p class="t-texte">{{ s.texte }}</p>
+      <p class="t-label taupe" data-reveal="texte">{{ s.label }}</p>
+      <h2 class="t-titre-l" data-reveal="titre">{{ s.titre | lignes | safe }}</h2>
+      <p class="t-texte" data-reveal="texte">{{ s.texte }}</p>
       {% if s.lien %}{{ boutonLien(s.lien.texte, s.lien.url) }}{% endif %}
     </div>
   </div>

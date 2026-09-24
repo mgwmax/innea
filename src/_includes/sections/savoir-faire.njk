@@ -10,11 +10,11 @@
   <div class="container">
     {% if s.legende %}
     <div class="section-head">
-      <h2 class="t-display-l">{{ s.titre }}</h2>
-      <p class="t-legende taupe">{{ s.legende }}</p>
+      <h2 class="t-display-l" data-reveal="titre">{{ s.titre }}</h2>
+      <p class="t-legende taupe" data-reveal="texte">{{ s.legende }}</p>
     </div>
     {% else %}
-    <h2 class="t-display-l">{{ s.titre }}</h2>
+    <h2 class="t-display-l" data-reveal="titre">{{ s.titre }}</h2>
     {% endif %}
     <div class="cols-3">
       {% for o in s.objets %}{{ objet(o) }}{% endfor %}

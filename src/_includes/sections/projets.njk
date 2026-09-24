@@ -11,7 +11,7 @@
 <section class="projets"{% if s.id %} id="{{ s.id }}"{% endif %}>
   <div class="container">
     <div class="section-head">
-      <h2 class="t-display-l">{{ s.titre }}</h2>
+      <h2 class="t-display-l" data-reveal="titre">{{ s.titre }}</h2>
       {% if s.lien %}{{ boutonLien(s.lien.texte, s.lien.url) }}{% endif %}
     </div>
     {% for rangee in liste | batch(2) %}

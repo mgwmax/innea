@@ -6,8 +6,8 @@
 #}
 {% macro respiration(r) %}
 <section class="respiration" aria-label="{{ r.legende }}">
-  <img src="{{ r.image }}" alt="{{ r.alt }}" loading="lazy">
+  <img src="{{ r.image }}" alt="{{ r.alt }}" loading="lazy" data-reveal="image">
   <div class="mask-bottom {{ 'mask-bottom--photo' if r.masque == 'photo' else 'mask-bottom--leger' }}"></div>
-  <div class="container"><p class="t-legende">{{ r.legende }}</p></div>
+  <div class="container"><p class="t-legende" data-reveal="texte">{{ r.legende }}</p></div>
 </section>
 {% endmacro %}

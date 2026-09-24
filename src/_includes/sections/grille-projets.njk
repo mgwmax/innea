@@ -14,7 +14,7 @@
 <section class="grille" data-par-page="{{ parPage }}">
   <div class="container">
     {% if g.filtres %}
-    <div class="filtres" role="group" aria-label="Filtrer les projets">
+    <div class="filtres" data-reveal="texte" role="group" aria-label="Filtrer les projets">
       {{ filtre(g.tous or "Tous", "tous", true) }}
       {% for f in g.filtres %}{{ filtre(f, f | slugify) }}{% endfor %}
     </div>

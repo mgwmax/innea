@@ -7,7 +7,7 @@
 #}
 {% macro champ(c) %}
 {% set id = "champ-" + c.nom %}
-<div class="champ">
+<div class="champ" data-reveal="texte">
   <label class="t-label taupe" for="{{ id }}">{{ c.label }}</label>
   {% if c.multiligne %}
   <textarea class="champ__saisie champ__saisie--multiligne t-texte" id="{{ id }}" name="{{ c.nom }}" rows="5"{% if c.requis %} required{% endif %}></textarea>

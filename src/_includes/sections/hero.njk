@@ -13,7 +13,7 @@
 {% macro hero(h) %}
 {% set total = h.diapositives | length %}
 <section class="hero" aria-label="{{ h.label or (h.titre if h.titre is string else h.titre | join(' ')) }}"{% if total > 1 %} aria-roledescription="carrousel" data-interval="{{ h.intervalle or 5000 }}"{% endif %}>
-  <div class="hero__slides">
+  <div class="hero__slides" data-reveal="zoom">
     {% for d in h.diapositives %}
     <img class="hero__img{% if loop.first %} is-active{% endif %}" src="{{ d.image }}" alt="{{ d.alt }}"{% if not loop.first %} loading="lazy"{% endif %}>
     {% endfor %}
@@ -25,7 +25,7 @@
   <div class="mask-top"></div>
   {% endif %}
   {% if h.filAriane %}
-  <nav class="hero__ariane t-label" aria-label="Fil d’Ariane">
+  <nav class="hero__ariane t-label" aria-label="Fil d’Ariane" data-reveal="texte">
     <div class="container">
       {% for e in h.filAriane %}{% if not loop.first %}<span class="hero__ariane-sep" aria-hidden="true">/</span>{% endif %}{% if e.url %}<a href="{{ e.url }}">{{ e.texte }}</a>{% else %}<span aria-current="page">{{ e.texte }}</span>{% endif %}{% endfor %}
     </div>
@@ -33,10 +33,10 @@
   {% endif %}
   <div class="container hero__inner">
     <div class="hero__title">
-      <h1 class="t-display-xl">{{ h.titre | lignes | safe }}</h1>
-      {% if h.sousTitre %}<p class="t-label">{{ h.sousTitre }}</p>{% endif %}
+      <h1 class="t-display-xl" data-reveal="titre">{{ h.titre | lignes | safe }}</h1>
+      {% if h.sousTitre %}<p class="t-label" data-reveal="texte">{{ h.sousTitre }}</p>{% endif %}
     </div>
-    <div class="hero__side">
+    <div class="hero__side" data-reveal="texte">
       {% if total > 1 %}
       <div class="indicator t-label" role="group" aria-label="Diapositives">
         <span>01</span>

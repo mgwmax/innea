@@ -6,9 +6,9 @@
 {% macro projetSuivant(p, lien="Voir le projet") %}
 {% from "components/bouton-lien.njk" import boutonLien %}
 <a class="projet-suivant" href="/projets/{{ p.slug }}/">
-  <img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy">
+  <img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy" data-reveal="image">
   <div class="projet-suivant__voile" aria-hidden="true"></div>
-  <div class="projet-suivant__texte container">
+  <div class="projet-suivant__texte container" data-reveal="texte">
     <p class="t-label">Projet suivant</p>
     <p class="t-display-l">{{ p.titre }}</p>
     {{ boutonLien(lien, false, "btn-link--blanc", "span") }}

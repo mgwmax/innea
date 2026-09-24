@@ -8,7 +8,7 @@
 {% set infos = [["Lieu", p.lieu], ["Année", p.annee], ["Catégorie", p.categorie], ["Surface", p.surface]] %}
 <dl class="meta-projet">
   {% for info in infos %}{% if info[1] %}
-  <div class="meta-projet__item">
+  <div class="meta-projet__item" data-reveal="texte">
     <dt class="t-label taupe">{{ info[0] }}</dt>
     <dd class="t-titre-s">{{ info[1] }}</dd>
   </div>

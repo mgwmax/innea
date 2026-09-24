@@ -44,6 +44,9 @@ const files = [
   "sections/contact-formulaire.css",
   "sections/texte-legal.css",
   "sections/footer.css",
+
+  // En dernier : états des animations d'apparition (data-reveal)
+  "base/animations.css",
 ];
 
 export const data = { permalink: "/css/styles.css", eleventyExcludeFromCollections: true };

@@ -10,7 +10,7 @@
   <div class="container">
     {% for groupe in galerie | decouper([1, 2]) %}
     <div class="galerie-projet__rangee galerie-projet__rangee--{{ 'pleine' if groupe.length == 1 else 'paire' }}">
-      {% for photo in groupe %}<img src="{{ photo.image }}" alt="{{ photo.alt }}" loading="lazy">{% endfor %}
+      {% for photo in groupe %}<img src="{{ photo.image }}" alt="{{ photo.alt }}" loading="lazy" data-reveal="image">{% endfor %}
     </div>
     {% endfor %}
     {% if details %}

@@ -7,12 +7,12 @@
 <section class="equipe">
   <div class="container">
     <div class="equipe__portraits">
-      {% for p in e.portraits %}<img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy">{% endfor %}
+      {% for p in e.portraits %}<img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy" data-reveal="image">{% endfor %}
     </div>
     <div class="equipe__texte">
-      <p class="t-label taupe">{{ e.label }}</p>
-      <h2 class="t-titre-l">{{ e.titre }}</h2>
-      {% if e.texte %}<p class="t-texte">{{ e.texte }}</p>{% endif %}
+      <p class="t-label taupe" data-reveal="texte">{{ e.label }}</p>
+      <h2 class="t-titre-l" data-reveal="titre">{{ e.titre }}</h2>
+      {% if e.texte %}<p class="t-texte" data-reveal="texte">{{ e.texte }}</p>{% endif %}
     </div>
   </div>
 </section>
