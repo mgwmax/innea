@@ -133,6 +133,7 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
   - `savoir-faire` with a `legende` on the right of the title and any number of rows. It also renders the showroom "Sélection".
   - `intro-de-page` with `variante: "suite"` (Showroom, placed under a hero): 44px title as an h2.
 - **Navigation:** Projets → `/projets/`, Studio → `/studio/`, Showroom → `/showroom/`, Contact → `/contact/`. The footer links go to `/mentions-legales/` and `/confidentialite/`. A nav item is marked `aria-current` when the page URL starts with its URL, so project pages mark "Projets" as current.
+- **Contact block title per page:** the title defaults to `site.contact.titre` (« Parlons de votre intérieur. »). A page can override it in its front matter with `blocContact: { titre: … }`, as a string or as an array of lines. The showroom page uses « Prenez rendez-vous. ».
 - **Pages without the contact block:** the contact and legal pages set `contact: false` in their front matter. The contact page is itself the contact block, and the legal pages follow the design, which goes straight to the footer.
 - **Contact page:** `sections/contact-formulaire.njk` reads the contact details from `site.contact`. The form uses the `champ` component and `js/components/formulaire-contact.js`.
   - It validates on submit: name and a valid e-mail are required, as is the consent checkbox. Errors only show after a first attempt.

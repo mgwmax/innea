@@ -29,11 +29,14 @@ selection:
     - { titre: Vases en céramique, texte: "[Matière à confirmer]", image: /assets/photos/objet-vases.webp, alt: "Vases en céramique noire" }
     - { titre: Diffuseur de parfum, texte: "[Matière à confirmer]", image: /assets/photos/objet-diffuseur.webp, alt: "Diffuseur de parfum" }
 
+blocContact:
+  titre: Prenez rendez-vous.
+
 infos:
   infos:
     - { label: Adresse, lignes: ["Chemin du Péage 39", "1807 Blonay"] }
     - { label: Visite, lignes: ["Sur rendez-vous uniquement,", "par e-mail ou par téléphone"] }
-    - { label: Rendez-vous, lien: { texte: Écrire pour une visite, url: "mailto:info@innea.ch?subject=Visite%20du%20showroom" } }
+    - { label: Rendez-vous, lien: { texte: Prenez rendez-vous, url: "#contact" } }   # descend vers le bloc contact de la page
 ---
 {% from "sections/hero.njk" import hero as heroSection %}
 {% from "sections/intro-de-page.njk" import introDePage %}

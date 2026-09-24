@@ -5,3 +5,5 @@ img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 p, h1, h2, h3 { margin: 0; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+/* Liens d'ancre (ex. « Prenez rendez-vous » → #contact) : défilement fluide, sauf si le visiteur préfère moins d'animations */
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

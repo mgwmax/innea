@@ -1,8 +1,12 @@
-{# Bloc contact : fin de chaque page, avant le pied de page. Coordonnées : _data/site.json → contact #}
+{# Bloc contact : fin de chaque page, avant le pied de page. Coordonnées : _data/site.json → contact
+   Titre : « site.contact.titre » par défaut ; une page peut le remplacer dans son en-tête :
+     blocContact:
+       titre: Prenez rendez-vous.          (ou une liste de lignes : ["Ligne 1", "Ligne 2"]) #}
 {% set c = site.contact %}
+{% set titreContact = blocContact.titre if (blocContact and blocContact.titre) else c.titre %}
 <section class="contact" id="contact">
   <div class="container">
-    <h2 class="t-display-xl" data-reveal="titre">{{ c.titre }}</h2>
+    <h2 class="t-display-xl" data-reveal="titre">{{ titreContact | lignes | safe }}</h2>
     <div class="coords">
       <div class="coord" data-reveal="texte">
         <p class="t-label taupe">Écrire</p>

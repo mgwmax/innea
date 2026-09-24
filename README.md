@@ -61,7 +61,7 @@ respiration:
 {{ respirationSection(respiration) }}
 ```
 
-Le header, le menu mobile, le bloc contact et le pied de page sont ajoutés par le layout. Pour masquer le bloc contact : `contact: false`. Sans section hero, le header s'affiche directement sur fond Toile.
+Le header, le menu mobile, le bloc contact et le pied de page sont ajoutés par le layout. Pour masquer le bloc contact : `contact: false`. Pour changer son titre (« Parlons de votre intérieur. » par défaut) : `blocContact: { titre: "Prenez rendez-vous." }`. Sans section hero, le header s'affiche directement sur fond Toile.
 
 Chaque fichier de `sections/` et `components/` décrit ses paramètres en commentaire en tête de fichier.
 
