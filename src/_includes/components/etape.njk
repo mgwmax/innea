@@ -2,11 +2,13 @@
   Étape de la démarche. À placer dans une liste <ol class="etapes">.
   Usage : {% from "components/etape.njk" import etape %}
           {{ etape(1, "Écoute", "Une première rencontre…") }}
+          {{ etape(1, "Premier contact", ["Ligne 1…", "Ligne 2…"], "Phrase en gras.") }}
+          → texte : chaîne ou liste de lignes (retours à la ligne) ; fort : phrase optionnelle en gras, sur sa propre ligne
 #}
-{% macro etape(numero, titre, texte) %}
+{% macro etape(numero, titre, texte, fort) %}
 <li class="etape" data-reveal="texte">
   <p class="etape__num t-label taupe">{{ numero | pad }}</p>
   <p class="etape__titre t-titre-m">{{ titre }}</p>
-  <p class="etape__texte t-texte">{{ texte }}</p>
+  <p class="etape__texte t-texte">{{ texte | lignes | safe }}{% if fort %}<br><strong>{{ fort }}</strong>{% endif %}</p>
 </li>
 {% endmacro %}

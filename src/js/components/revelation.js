@@ -14,7 +14,18 @@
   });
   html.classList.add('anim-prete');
 
-  // Les éléments qui apparaissent en même temps sont décalés (dans l'ordre du document), 90ms chacun, 6 au plus
+  const reveler = (el, k) => {
+    el.style.setProperty('--delai', `${Math.min(k, 6) * 0.09}s`);
+    el.classList.add('est-revele');
+  };
+
+  // Hero (premier écran) : animé dès le chargement, même si une partie dépasse sous la fenêtre
+  // (le hero fait au moins 860px de haut, donc son bas peut être hors écran sur un écran peu haut ou sur mobile)
+  const dansHero = [...document.querySelectorAll('.hero [data-reveal]')];
+  dansHero.forEach(reveler);
+
+  // Ailleurs : au défilement. Les éléments qui apparaissent ensemble sont décalés (dans l'ordre du document),
+  // 90ms chacun, 6 au plus
   const avant = (a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1);
   const observateur = new IntersectionObserver((entrees) => {
     entrees
@@ -22,11 +33,10 @@
       .map((e) => e.target)
       .sort(avant)
       .forEach((el, k) => {
-        el.style.setProperty('--delai', `${Math.min(k, 6) * 0.09}s`);
-        el.classList.add('est-revele');
+        reveler(el, k);
         observateur.unobserve(el);
       });
   }, { rootMargin: '0px 0px -60px 0px', threshold: 0.12 }); // déclenche un peu avant le bas de l'écran
 
-  document.querySelectorAll('[data-reveal]').forEach((el) => observateur.observe(el));
+  document.querySelectorAll('[data-reveal]').forEach((el) => { if (!dansHero.includes(el)) observateur.observe(el); });
 })();

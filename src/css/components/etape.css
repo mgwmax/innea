@@ -1,8 +1,9 @@
 /* Étape de la démarche : numéro, titre, texte. S'empile dans une liste .etapes */
 .etapes { position: relative; width: 752px; max-width: 100%; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
-.etapes__line { position: absolute; left: 8px; top: 11.49%; bottom: 14.31%; width: 1px; container-type: size; }
+/* Filet vertical : placé du premier au dernier numéro par js/components/etapes.js (valeurs ci-dessous = repli sans JS) */
+.etapes__line { position: absolute; left: 8px; top: 8%; bottom: 16%; width: 1px; container-type: size; }
 .etapes__line img { position: absolute; top: 0; left: 1px; width: 100cqh; max-width: none; height: 1px; transform-origin: 0 0; transform: rotate(90deg); }
-.etape { position: relative; display: flex; align-items: flex-start; gap: var(--gap); padding: 36px 0; }
+.etape { position: relative; display: flex; align-items: flex-start; gap: var(--gap); padding: 20px 0; }
 .etape__num { background: var(--innea-toile); padding: 8px 0; flex: none; }
 .etape__titre { width: 240px; flex: none; }
 .etape__texte { flex: 1 1 0; min-width: 0; opacity: .75; }

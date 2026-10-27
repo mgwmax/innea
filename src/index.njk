@@ -3,15 +3,17 @@ layout: layouts/base.njk
 description: Innea, atelier d’architecture d’intérieur et de mobilier sur mesure en Suisse romande.
 
 hero:
-  titre: ["Des intérieurs calmes,", "faits pour durer."]
-  sousTitre: Architecture d’intérieur · Mobilier sur mesure · Suisse romande
-  intervalle: 5000   # durée de chaque diapositive, en millisecondes
+  titre: ["Simplifier les espaces", "pour mieux vivre."]
+  sousTitre: Architecture d’intérieur
+  intervalle: 5000     # durée de chaque diapositive, en millisecondes
+  legendes: numerotees # « 01 — Attique à la montagne »
+  # Figma ne montre que la 1re diapositive ; les suivantes reprennent des photos de projets (à valider)
   diapositives:
-    - { image: /assets/photos/salon-cheminee.webp, alt: "Salon avec cheminée, projet résidentiel", legende: "Salon, projet résidentiel" }
-    - { image: /assets/photos/saint-prex-piscine.webp, alt: "Piscine face au lac, Saint-Prex", legende: "Extérieurs, Saint-Prex" }
-    - { image: /assets/photos/showroom-blonay.webp, alt: "Le showroom Innea à Blonay", legende: "Showroom, Blonay" }
-    - { image: /assets/photos/mobilier-bibliotheque.webp, alt: "Bibliothèque dessinée sur mesure", legende: "Bibliothèque, mobilier sur mesure" }
-    - { image: /assets/photos/atelier-bureau.webp, alt: "Bureau, projet résidentiel", legende: "Bureau, projet résidentiel" }
+    - { image: /assets/photos/attique-montagne-sejour.webp, alt: "Séjour avec poêle et cuisine, attique à la montagne", legende: "Attique à la montagne" }
+    - { image: /assets/photos/villa-blonay-sejour.webp, alt: "Séjour et table en bois, villa à Blonay", legende: "Villa à Blonay" }
+    - { image: /assets/photos/attique-montagne-cuisine.webp, alt: "Cuisine noire et bois clair, attique à la montagne", legende: "Attique à la montagne" }
+    - { image: /assets/photos/saint-prex-piscine.webp, alt: "Piscine face au lac, Saint-Prex", legende: "Extérieurs à Saint-Prex" }
+    - { image: /assets/photos/mobilier-bibliotheque.webp, alt: "Bibliothèque dessinée sur mesure", legende: "Mobilier sur mesure" }
 
 manifeste:
   id: studio
@@ -23,7 +25,13 @@ manifeste:
 projets:
   id: projets
   titre: Projets
-  lien: { texte: Tous les projets, url: /projets/ }   # projets : _data/realisations.json (accueil: true)
+  lien: { texte: Tous les projets, url: /projets/ }
+  # Sélection propre à l'accueil (légende = titre). url : fiche du projet si elle existe, sinon la page Projets.
+  projets:
+    - { titre: Attique à la montagne, image: /assets/photos/attique-montagne-escalier.webp, alt: "Escalier en bois sous un plafond sombre, attique à la montagne", url: /projets/ }
+    - { titre: Les Hauts de Vevey, image: /assets/photos/hauts-de-vevey-couloir.webp, alt: "Couloir bordé de rangements en bois, Vevey", url: /projets/sur-les-hauts-de-vevey/ }
+    - { titre: Appartement à La Tour-de-Peilz, image: /assets/photos/tour-de-peilz-bibliotheque.webp, alt: "Bibliothèque et meuble TV sur mesure, La Tour-de-Peilz", url: /projets/la-tour-de-peilz/ }
+    - { titre: Villa à Blonay, image: /assets/photos/villa-blonay-sejour.webp, alt: "Séjour avec poêle et grande table en bois, villa à Blonay", url: /projets/ }
 
 respiration:
   image: /assets/photos/exterieurs-bassin.webp
@@ -31,45 +39,60 @@ respiration:
   legende: Extérieurs, projet résidentiel
 
 demarche:
-  label: Démarche
-  titre: ["Prendre le temps,", "jusqu’au bout des choses."]
-  texte: "Nous dessinons tout : plans, 3D, mobilier. Nous choisissons avec vous chaque matière, chaque luminaire, chaque finition."
-  image: /assets/photos/atelier-bureau.webp
-  alt: Plans et échantillons sur la table de l’atelier
+  variante: large
+  label: Les étapes du projet
+  titre: ["Du premier contact", "à la réalisation."]
+  texte: Un accompagnement en quatre étapes.
   etapes:
-    - { titre: Écoute, texte: "Une première rencontre ouverte : votre lieu, vos envies, votre budget." }
-    - { titre: Avant-projet, texte: "Croquis, premiers plans, deux ou trois pistes. Les grandes lignes du projet." }
-    - { titre: Projet et chantier, texte: "Offres détaillées des entreprises, budget précis, suivi du chantier." }
-    - { titre: Dernière touche, texte: "Finitions, lumières, mobilier, objets. Ce qui rend un intérieur habité." }
+    - titre: Premier contact
+      texte: "Vous nous présentez votre projet, vos envies et vos premières questions. Cet échange nous permet de comprendre votre demande, de voir si nous pouvons vous accompagner et de vous expliquer comment avancer ensemble."
+      fort: Ce premier contact est sans engagement.
+    - titre: Avant-projet
+      texte:
+        - "Nous commençons le travail de conception : visite du lieu, relevés, photos, étude des plans existants, premières idées, volumes, matières et ambiance. Nous vous présentons une première vision du projet sous la forme d’un support concret — moodboard, planche A3, esquisses et grandes lignes d’aménagement — avec lequel vous pouvez repartir."
+        - "Cette étape permet aussi de poser de premiers repères budgétaires."
+    - titre: Développement & réalisation
+      texte: "Une fois l’avant-projet validé, le projet se précise. Nous développons les plans de détail, affinons les choix techniques et esthétiques, demandons les offres aux entreprises et établissons un budget plus précis. Nous vous accompagnons ensuite dans la mise en œuvre et le suivi du chantier."
+    - titre: Finalisation
+      texte:
+        - "Nous accompagnons les derniers choix et ajustements : luminaires, rideaux, mobilier, objets, accessoires et détails de finition."
+        - "Cette dernière étape permet de conserver une vraie cohérence jusqu’au bout du projet."
+  complement:
+    titre: Honoraires
+    paragraphes:
+      - ["Chaque projet étant différent, nos honoraires s’adaptent à la nature et à l’ampleur de la mission.", "Avant de commencer, nous définissons clairement avec vous le cadre de notre intervention et son coût."]
+      - "Le premier contact est sans engagement. La prestation débute avec l’avant-projet."
 
-savoirFaire:
-  titre: Ce que nous dessinons
+apports:
+  titre: Ce que nous apportons
+  numerote: true
   objets:
-    - { titre: Architecture d’intérieur, texte: "Rénovations complètes : volumes, lumière, circulation.", image: /assets/photos/architecture-entree.webp, alt: "Entrée rénovée avec escalier" }
-    - { titre: Mobilier sur mesure, texte: "Bibliothèques, rangements, cuisines dessinés pour le lieu.", image: /assets/photos/mobilier-bibliotheque.webp, alt: "Bibliothèque dessinée sur mesure" }
-    - { titre: Objets et matières, texte: "Conseil sur le mobilier, les luminaires et les objets.", image: /assets/photos/objets-matieres.webp, alt: "Composition d’objets et de fleurs" }
+    - { titre: Architecture d’intérieur, texte: "Imaginer et transformer des espaces où volumes, matières et lumière dialoguent avec justesse.", image: /assets/photos/attique-montagne-cuisine.webp, alt: "Cuisine noire et bois clair sous les combles" }
+    - { titre: Mobilier sur mesure, texte: "Dessiner des éléments sur mesure, pensés pour le lieu, les usages et la durée.", image: /assets/photos/mobilier-etagere-tv.webp, alt: "Étagère et meuble TV en bois dessinés sur mesure" }
+    - { titre: Conseil & accompagnement, texte: "Guider les choix de matières, de couleurs et d’ambiances pour donner une direction claire au projet.", image: /assets/photos/planche-matieres.webp, alt: "Planche de matières : bois, textiles, carrelages et échantillons" }
 
 showroom:
   id: showroom
+  variante: centre
   label: Showroom
-  titre: ["Un lieu pour voir", "et toucher les matières."]
-  texte: "Objets, échantillons, mobilier : notre sélection est réunie au showroom. Visite sur rendez-vous."
-  image: /assets/photos/showroom-blonay.webp
-  alt: Le showroom Innea à Blonay
-  lien: { texte: Visiter le showroom, url: /showroom/ }
+  titre: Un lieu d’échange et de découverte.
+  texte: ["Le showroom est un espace où nous proposons des objets du quotidien que nous aimons et que nous avons", "envie de partager."]
+  image: /assets/photos/showroom-objets.webp
+  alt: Le showroom Innea, canapé et étagères d’objets
+  lien: { texte: Découvrir le showroom, url: /showroom/ }
 ---
 {% from "sections/hero.njk" import hero as heroSection %}
 {% from "sections/manifeste.njk" import manifeste as manifesteSection %}
 {% from "sections/projets.njk" import projets as projetsSection %}
 {% from "sections/respiration.njk" import respiration as respirationSection %}
 {% from "sections/demarche.njk" import demarche as demarcheSection %}
-{% from "sections/savoir-faire.njk" import savoirFaire as savoirFaireSection %}
+{% from "sections/savoir-faire.njk" import savoirFaire as apportsSection %}
 {% from "sections/showroom.njk" import showroom as showroomSection %}
 
 {{ heroSection(hero) }}
 {{ manifesteSection(manifeste) }}
-{{ projetsSection(projets, realisations.projets | selectattr("accueil")) }}
+{{ projetsSection(projets) }}
 {{ respirationSection(respiration) }}
 {{ demarcheSection(demarche) }}
-{{ savoirFaireSection(savoirFaire) }}
+{{ apportsSection(apports) }}
 {{ showroomSection(showroom) }}

@@ -1,0 +1,13 @@
+{#
+  Avantage (accueil, « Ce que nous apportons ») : photo carrée, surtitre numéroté avec filet, titre, texte court.
+  Usage : {% from "components/avantage.njk" import avantage %}
+          {{ avantage(1, { image, alt, titre, texte }) }}
+#}
+{% macro avantage(numero, a) %}
+<div class="avantage" data-reveal="carte">
+  <img class="avantage__photo" src="{{ a.image }}" alt="{{ a.alt }}" loading="lazy">
+  <p class="avantage__surtitre t-label taupe">{{ numero | pad }}<img src="/assets/ui/filet-avantage.svg" alt="" width="40" height="1"></p>
+  <p class="t-titre-s">{{ a.titre }}</p>
+  <p class="t-texte-s taupe">{{ a.texte }}</p>
+</div>
+{% endmacro %}

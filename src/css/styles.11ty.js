@@ -20,6 +20,7 @@ const files = [
   "components/bloc-label.css",
   "components/avant-apres.css",
   "components/valeur.css",
+  "components/avantage.css",
   "components/champ.css",
 
   "sections/header.css",

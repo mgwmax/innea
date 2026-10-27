@@ -88,6 +88,7 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
     - `zoom`: the hero photo zooms out slowly, with no fade.
     - `trait`: the étapes line draws itself downwards.
   - Elements that enter the screen together are staggered by 90ms each, up to 6.
+  - Exception: everything inside `.hero` reveals on page load, not on intersection. The hero is at least 860px tall, so its lower part (subtitle, caption) can sit below the fold on short screens and would otherwise wait for a scroll.
   - **Never nest** `data-reveal` elements, or the offsets and fades add up. Put the attribute on siblings, as the existing sections do. `boutonLien` already adds `data-reveal="texte"`, except in its `span` mode.
   - Elements are only hidden if the inline script in `layouts/base.njk` put the `anim` class on `<html>` before the first paint. It never does this when the visitor prefers reduced motion or when IntersectionObserver is unavailable, and it removes the class after 3s if `main.js` hasn't started. So with JavaScript off or broken, the content stays visible.
   - Reveal transitions use the individual `scale` property, not `transform`, so they don't conflict with the hover zooms.
@@ -113,7 +114,16 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
   - On mobile (≤ 640px) it is 64px tall with a "Menu" / "Fermer" text toggle that opens the full-screen `mobile-menu`.
   - When `<main>` doesn't start with a `.hero`, it gets top padding equal to the header height (88px, or 64px on mobile) so content isn't hidden under the fixed header. See `sections/header.css`.
 - **Intro de page:** opens inner pages, under the Toile header. Label on the left; a thin title (two lines at most) and optional text on the right.
-- **Carte projet:** clickable as a whole, no frame, no shadow. Formats are `paysage` (816×560), `portrait` (464×600) and `carre` (416×416). A card's format comes from its **position** in the layout, not from the project data:
+- **Homepage, design update of October 2026:** the homepage was re-synced with Figma node `8036:12`.
+  - The Figma text styles changed: Display XL is now 60px and Titre L 40px. They are updated globally in `typographie.css`.
+  - The hero uses `legendes: "numerotees"`, with labels in the form « 01 — Attique à la montagne ».
+  - The homepage Projets section has its own list in `index.njk` (`projets.projets`), separate from `realisations.json`. Its rows pair `paysage` with `etroit` cards (464×560), with no offset.
+  - Démarche uses `variante: "large"` plus a `complement` block (Honoraires). Steps accept multi-line `texte` and a bold `fort` sentence.
+  - « Ce que nous apportons » is `savoirFaire` with `numerote: true`, which renders the `avantage` component (square photo, « 01 —— » overline).
+  - Showroom uses `variante: "centre"`.
+  - The contact block has a Bureau column (`site.contact.bureau`, Blonay) and the new showroom address (`site.contact.showroom`, Granges).
+  - `js/components/etapes.js` positions the vertical step line from the first to the last number.
+- **Carte projet:** clickable as a whole, no frame, no shadow. Formats are `paysage` (816×560), `etroit` (464×560), `portrait` (464×600) and `carre` (416×416). The caption is now one or two Label texts separated by a 24px line (« Villa —— Blonay »). It shows `p.legende` if set, otherwise category and location, otherwise the title. A card's format comes from its **position** in the layout, not from the project data:
   - Homepage `projets` section: pairs of cards, paysage + portrait, then portrait + paysage. The second card of each pair sits 120px lower.
   - Projects page `grille-projets` section: a repeating cycle of *grand + petit* (second card 160px lower), *three squares*, *petit + grand* (second card 120px lower), *three squares*.
   - Responsive behaviour (in `sections/grille-projets.css`): above 640px the cycle is kept, with proportional `minmax(0, …fr)` columns and vertical offsets that shrink at each breakpoint. At 640px and below it becomes a condensed version of the same rhythm. In large + small rows, the large card is full width and the small one is 64% wide, aligned right (left for small + large). In three-square rows, the first square is full width and the other two sit side by side. When a three-square row is narrower than 1260px, a container query moves all its captions onto two lines together.

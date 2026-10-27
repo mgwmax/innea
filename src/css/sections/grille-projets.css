@@ -17,13 +17,6 @@
 .rangee--petit-grand { grid-template-columns: minmax(0, 464fr) minmax(0, 816fr); }
 .rangee--trois { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-/* Rangées de trois : sous la largeur du design, toutes les légendes passent sur deux lignes ensemble
-   (titre puis catégorie) plutôt que certaines seulement */
-.rangee--trois { container-type: inline-size; }
-@container (max-width: 1260px) {
-  .rangee--trois .card__caption { flex-direction: column; align-items: flex-start; }
-}
-
 /* Décalage vertical de la seconde carte */
 .rangee--grand-petit > .card:nth-child(2) { margin-top: 160px; }
 .rangee--petit-grand > .card:nth-child(2) { margin-top: 120px; }

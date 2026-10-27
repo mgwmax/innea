@@ -1,23 +1,35 @@
 {#
-  Démarche : introduction (et photo optionnelle) à gauche, étapes numérotées à droite.
+  Démarche : introduction (et photo optionnelle) à gauche, étapes numérotées à droite,
+  bloc complémentaire optionnel en dessous (ex. « Honoraires » sur l'accueil).
   Usage : {% from "sections/demarche.njk" import demarche %}
-          {{ demarche({ label, titre: [lignes…], texte, image, alt, etapes: [{ titre, texte }] }) }}
-          variante: "compacte" → intro 416px + étapes 832px, espacées de 64px (page Studio : sans texte ni photo)
+          {{ demarche({ label, titre: [lignes…], texte, image, alt,
+                        etapes: [{ titre, texte: "…" | [lignes…], fort }],
+                        complement: { titre, paragraphes: ["…" | [lignes…]] } }) }}
+          variante: "compacte" → intro 416px + étapes 832px, espacées de 64px (page Studio)
+          variante: "large"    → intro 416px + étapes 864px, réparties sur la largeur (accueil)
 #}
 {% macro demarche(d) %}
 {% from "components/etape.njk" import etape %}
 <section class="demarche{% if d.variante %} demarche--{{ d.variante }}{% endif %}"{% if d.id %} id="{{ d.id }}"{% endif %}>
   <div class="container">
-    <div class="demarche__intro">
-      <p class="t-label taupe" data-reveal="texte">{{ d.label }}</p>
-      <h2 class="t-titre-l" data-reveal="titre">{{ d.titre | lignes | safe }}</h2>
-      {% if d.texte %}<p class="t-texte" data-reveal="texte">{{ d.texte }}</p>{% endif %}
-      {% if d.image %}<img class="photo" data-reveal="image" src="{{ d.image }}" alt="{{ d.alt }}" loading="lazy">{% endif %}
+    <div class="demarche__rangee">
+      <div class="demarche__intro">
+        <p class="t-label taupe" data-reveal="texte">{{ d.label }}</p>
+        <h2 class="t-titre-l" data-reveal="titre">{{ d.titre | lignes | safe }}</h2>
+        {% if d.texte %}<p class="t-texte" data-reveal="texte">{{ d.texte }}</p>{% endif %}
+        {% if d.image %}<img class="photo" data-reveal="image" src="{{ d.image }}" alt="{{ d.alt }}" loading="lazy">{% endif %}
+      </div>
+      <ol class="etapes">
+        <li class="etapes__line" aria-hidden="true" data-reveal="trait"><img src="/assets/ui/filet-etapes.svg" alt="" width="368" height="1"></li>
+        {% for e in d.etapes %}{{ etape(loop.index, e.titre, e.texte, e.fort) }}{% endfor %}
+      </ol>
     </div>
-    <ol class="etapes">
-      <li class="etapes__line" aria-hidden="true" data-reveal="trait"><img src="/assets/ui/filet-etapes.svg" alt="" width="368" height="1"></li>
-      {% for e in d.etapes %}{{ etape(loop.index, e.titre, e.texte) }}{% endfor %}
-    </ol>
+    {% if d.complement %}
+    <div class="demarche__complement">
+      <h2 class="t-titre-l" data-reveal="titre">{{ d.complement.titre }}</h2>
+      {% for para in d.complement.paragraphes %}<p class="t-texte" data-reveal="texte">{{ para | lignes | safe }}</p>{% endfor %}
+    </div>
+    {% endif %}
   </div>
 </section>
 {% endmacro %}

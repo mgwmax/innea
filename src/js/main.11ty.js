@@ -10,6 +10,7 @@ const files = [
   "components/hero-carousel.js",
   "components/grille-projets.js",
   "components/avant-apres.js",
+  "components/etapes.js",
   "components/formulaire-contact.js",
 ];
 

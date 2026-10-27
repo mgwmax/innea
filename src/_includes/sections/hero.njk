@@ -6,7 +6,8 @@
           {{ hero({
                titre: [lignes…], sousTitre, intervalle: 5000,
                diapositives: [{ image, alt, legende }],
-               masque: "photo",                           → dégradé noir simple (sinon dégradé chaud haut + bas)
+               masque: "photo",                           → dégradé noir simple (sinon voile + dégradés chauds haut et bas)
+               legendes: "numerotees",                    → légendes en Label, préfixées « 01 — » (accueil) ; sinon Légende italique
                filAriane: [{ texte, url }, { texte }]     → fil d'Ariane en haut à gauche (optionnel)
           }) }}
 #}
@@ -21,6 +22,7 @@
   {% if h.masque == "photo" %}
   <div class="mask-bottom mask-bottom--photo"></div>
   {% else %}
+  <div class="hero__voile"></div>
   <div class="mask-bottom"></div>
   <div class="mask-top"></div>
   {% endif %}
@@ -46,9 +48,10 @@
         <span>{{ total | pad }}</span>
       </div>
       {% endif %}
-      <div class="hero__legendes t-legende"{% if total > 1 %} aria-live="polite"{% endif %}>
+      {% set numerotees = h.legendes == "numerotees" %}
+      <div class="hero__legendes {{ 't-label' if numerotees else 't-legende' }}"{% if total > 1 %} aria-live="polite"{% endif %}>
         {% for d in h.diapositives %}
-        <p{% if loop.first %} class="is-active"{% else %} aria-hidden="true"{% endif %}>{{ d.legende }}</p>
+        <p{% if loop.first %} class="is-active"{% else %} aria-hidden="true"{% endif %}>{% if numerotees %}{{ loop.index | pad }} — {% endif %}{{ d.legende }}</p>
         {% endfor %}
       </div>
     </div>

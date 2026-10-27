@@ -1,11 +1,13 @@
 {#
   Grille d'objets : titre (et légende optionnelle à droite), objets en trois colonnes sur autant de rangées que nécessaire.
-  Sert à « Ce que nous dessinons » (accueil, studio) et à la « Sélection » du showroom.
+  Sert à « Ce que nous dessinons » (studio), à la « Sélection » du showroom et à « Ce que nous apportons » (accueil).
   Usage : {% from "sections/savoir-faire.njk" import savoirFaire %}
           {{ savoirFaire({ id, titre, legende, objets: [{ image, alt, titre, texte }] }) }}
+          numerote: true → objets affichés en « Avantages » : photo carrée et surtitre numéroté (01 ——)
 #}
 {% macro savoirFaire(s) %}
 {% from "components/objet.njk" import objet %}
+{% from "components/avantage.njk" import avantage %}
 <section class="savoir"{% if s.id %} id="{{ s.id }}"{% endif %}>
   <div class="container">
     {% if s.legende %}
@@ -17,7 +19,7 @@
     <h2 class="t-display-l" data-reveal="titre">{{ s.titre }}</h2>
     {% endif %}
     <div class="cols-3">
-      {% for o in s.objets %}{{ objet(o) }}{% endfor %}
+      {% for o in s.objets %}{{ avantage(loop.index, o) if s.numerote else objet(o) }}{% endfor %}
     </div>
   </div>
 </section>

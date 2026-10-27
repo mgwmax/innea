@@ -1,19 +1,27 @@
 {#
   Carte projet : cliquable en entier, sans cadre ni ombre.
-  Formats : "paysage" (816×560), "portrait" (464×600), "carre" (416×416). La photo est recadrée (object-fit: cover).
+  Formats : "paysage" (816×560), "etroit" (464×560), "portrait" (464×600), "carre" (416×416).
+  La photo est recadrée (object-fit: cover).
+  Légende : libellés en petites capitales, séparés par un filet (« Villa —— Blonay ») :
+    - p.legende si fourni (texte ou liste de libellés) ;
+    - sinon catégorie et lieu (page Projets) ;
+    - sinon le titre seul (sélection de l'accueil).
   Usage : {% from "components/carte-projet.njk" import carteProjet %}
-          {{ carteProjet({ titre, categorie, image, alt, slug, format }) }}
+          {{ carteProjet({ titre, categorie, lieu, image, alt, slug, format }) }}
           {{ carteProjet(p, "carre") }}   → le 2e paramètre impose le format (sinon p.format, sinon paysage)
   Lien : p.url si fourni, sinon la fiche /projets/<slug>/.
 #}
 {% macro carteProjet(p, format) %}
 {% set f = format or p.format or "paysage" %}
 {% set url = p.url or (("/projets/" + p.slug + "/") if p.slug else "#") %}
-<a href="{{ url }}" class="card card--{{ f }}" data-categorie="{{ p.categorie | slugify }}" data-reveal="carte">
+{% if p.legende %}{% set libelles = [].concat(p.legende) %}
+{% elif p.categorie %}{% set libelles = [p.categorie, p.lieu] if p.lieu else [p.categorie] %}
+{% else %}{% set libelles = [p.titre] %}{% endif %}
+<a href="{{ url }}" class="card card--{{ f }}"{% if p.categorie %} data-categorie="{{ p.categorie | slugify }}"{% endif %} data-reveal="carte"
+   {%- if p.titre and libelles[0] != p.titre %} aria-label="{{ p.titre }} — {{ libelles | join(', ') }}"{% endif %}>
   <div class="card__frame"><img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy"></div>
-  <div class="card__caption">
-    <p class="t-titre-s">{{ p.titre }}</p>
-    <p class="t-label taupe">{{ p.categorie }}</p>
-  </div>
+  <p class="card__caption t-label taupe">
+    {% for l in libelles %}{% if not loop.first %}<span class="card__sep" aria-hidden="true"></span>{% endif %}<span>{{ l }}</span>{% endfor %}
+  </p>
 </a>
 {% endmacro %}

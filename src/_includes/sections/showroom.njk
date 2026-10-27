@@ -1,17 +1,18 @@
 {#
   Showroom : grande photo à gauche, texte et lien à droite.
   Usage : {% from "sections/showroom.njk" import showroom %}
-          {{ showroom({ id, label, titre: [lignes…], texte, image, alt, lien: { texte, url } }) }}
+          {{ showroom({ id, label, titre: [lignes…], texte: "…" | [lignes…], image, alt, lien: { texte, url } }) }}
+          variante: "centre" → photo 816×612, texte centré verticalement sur une colonne de 400px (accueil)
 #}
 {% macro showroom(s) %}
 {% from "components/bouton-lien.njk" import boutonLien %}
-<section class="showroom"{% if s.id %} id="{{ s.id }}"{% endif %}>
+<section class="showroom{% if s.variante %} showroom--{{ s.variante }}{% endif %}"{% if s.id %} id="{{ s.id }}"{% endif %}>
   <div class="container">
     <img class="showroom__photo" data-reveal="image" src="{{ s.image }}" alt="{{ s.alt }}" loading="lazy">
     <div class="showroom__text">
       <p class="t-label taupe" data-reveal="texte">{{ s.label }}</p>
       <h2 class="t-titre-l" data-reveal="titre">{{ s.titre | lignes | safe }}</h2>
-      <p class="t-texte" data-reveal="texte">{{ s.texte }}</p>
+      <p class="t-texte" data-reveal="texte">{{ s.texte | lignes | safe }}</p>
       {% if s.lien %}{{ boutonLien(s.lien.texte, s.lien.url) }}{% endif %}
     </div>
   </div>

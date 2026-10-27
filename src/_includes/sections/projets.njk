@@ -1,9 +1,10 @@
 {#
-  Projets sélectionnés (accueil) : cartes groupées par deux, la seconde de chaque rangée décalée vers le bas.
-  Les formats suivent la position : rangée 1 paysage + portrait, rangée 2 portrait + paysage, etc.
+  Projets sélectionnés (accueil) : rangées de deux cartes de même hauteur (560px), alignées en haut.
+  Les formats suivent la position : rangée 1 paysage + étroit, rangée 2 étroit + paysage, etc.
   Usage : {% from "sections/projets.njk" import projets %}
-          {{ projets({ id, titre, lien: { texte, url } }, listeDeProjets) }}
-          listeDeProjets : [{ titre, categorie, image, alt, url }], par ex. realisations.projets | selectattr("accueil")
+          {{ projets({ id, titre, lien: { texte, url }, projets: [{ titre, image, alt, url }] }) }}
+          → s.projets : sélection propre à l'accueil (titre seul en légende) ;
+            ou passer une liste en 2e paramètre, par ex. realisations.projets | selectattr("accueil")
 #}
 {% macro projets(s, liste) %}
 {% from "components/bouton-lien.njk" import boutonLien %}
@@ -14,11 +15,11 @@
       <h2 class="t-display-l" data-reveal="titre">{{ s.titre }}</h2>
       {% if s.lien %}{{ boutonLien(s.lien.texte, s.lien.url) }}{% endif %}
     </div>
-    {% for rangee in liste | batch(2) %}
-    {% set formats = ["paysage", "portrait"] if loop.index0 % 2 == 0 else ["portrait", "paysage"] %}
+    {% for rangee in (s.projets or liste) | batch(2) %}
+    {% set formats = ["paysage", "etroit"] if loop.index0 % 2 == 0 else ["etroit", "paysage"] %}
     <div class="row row--{{ formats[0] }}-{{ formats[1] }}">
       {{ carteProjet(rangee[0], formats[0]) }}
-      {% if rangee[1] %}<div class="offset">{{ carteProjet(rangee[1], formats[1]) }}</div>{% endif %}
+      {% if rangee[1] %}{{ carteProjet(rangee[1], formats[1]) }}{% endif %}
     </div>
     {% endfor %}
   </div>
