@@ -3,11 +3,12 @@
   Usage : {% from "sections/respiration.njk" import respiration %}
           {{ respiration({ image, alt, legende }) }}
           masque: "photo" → dégradé plus soutenu (noir 50 %), comme la photo plein cadre de la page Contact
+          position: "50% 21%" → cadrage de la photo (object-position) ; legende optionnelle
 #}
 {% macro respiration(r) %}
-<section class="respiration" aria-label="{{ r.legende }}">
-  <img src="{{ r.image }}" alt="{{ r.alt }}" loading="lazy" data-reveal="image">
-  <div class="mask-bottom {{ 'mask-bottom--photo' if r.masque == 'photo' else 'mask-bottom--leger' }}"></div>
-  <div class="container"><p class="t-legende" data-reveal="texte">{{ r.legende }}</p></div>
+<section class="respiration" aria-label="{{ r.legende or r.alt }}">
+  <img src="{{ r.image }}" alt="{{ r.alt }}" loading="lazy" data-reveal="image"{% if r.position %} style="object-position: {{ r.position }}"{% endif %}>
+  {% if r.legende or r.masque %}<div class="mask-bottom {{ 'mask-bottom--photo' if r.masque == 'photo' else 'mask-bottom--leger' }}"></div>{% endif %}
+  {% if r.legende %}<div class="container"><p class="t-legende" data-reveal="texte">{{ r.legende }}</p></div>{% endif %}
 </section>
 {% endmacro %}

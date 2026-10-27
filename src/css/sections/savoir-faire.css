@@ -1,10 +1,20 @@
-/* Savoir-faire : titre et trois objets en colonnes */
+/* Grille d'objets : titre et objets en trois colonnes */
 .savoir { padding: 0 var(--section-x) 160px; }
 .savoir .container { display: flex; flex-direction: column; gap: 48px; }
 .cols-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px var(--gap); }
 
+/* Intro : titre et paragraphe sur 896px */
+.savoir__intro { width: 896px; max-width: 100%; display: flex; flex-direction: column; gap: 28px; }
+.savoir__intro .t-texte { opacity: .8; }
+
+/* Options */
+.savoir--espace-haut { padding-top: 160px; }
+.savoir--filet { border-top: 1px solid var(--innea-ligne); padding-top: 160px; }
+.savoir--carre .objet img { aspect-ratio: 1 / 1; }
+
 @media (max-width: 900px) {
   .cols-3 { grid-template-columns: 1fr 1fr; }
+  .savoir--espace-haut, .savoir--filet { padding-top: var(--section-y); }
 }
 @media (max-width: 640px) {
   .cols-3 { grid-template-columns: 1fr; }

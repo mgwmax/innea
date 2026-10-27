@@ -1,0 +1,9 @@
+{#
+  Bouton contour : texte et flèche dans un cadre fin (48px de haut), pleine largeur de son conteneur.
+  Utilisé sur la page Showroom (« Prendre rendez-vous »). Pas de fond plein : au survol, le cadre se remplit d'Encre.
+  Usage : {% from "components/bouton-contour.njk" import boutonContour %}
+          {{ boutonContour("Prendre rendez-vous", "#contact") }}
+#}
+{% macro boutonContour(texte, url="#") %}
+<a href="{{ url }}" class="btn-contour t-nav">{{ texte }} <span class="btn-link__arrow"></span></a>
+{% endmacro %}

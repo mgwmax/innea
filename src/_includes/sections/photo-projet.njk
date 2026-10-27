@@ -1,0 +1,21 @@
+{#
+  Photo projet (page Projets) : photo pleine largeur cliquable vers la fiche, légende en libellés blancs en bas à gauche
+  (« Villa —— Blonay »), dégradé sombre en bas sauf si p.masque est false.
+  Usage : {% from "sections/photo-projet.njk" import photoProjet %}
+          {{ photoProjet(p) }}                         → 720px de haut, entre deux rangées de cartes
+          {{ photoProjet(p, { hero: true, label: "Projets" }) }}
+                                                       → ouverture de page : 860px, header transparent, label en haut à gauche (h1)
+#}
+{% macro photoProjet(p, o = {}) %}
+{% set libelles = [].concat(p.legende) if p.legende else [p.titre, p.lieu] %}
+<section class="photo-projet{% if o.hero %} hero photo-projet--hero{% endif %}">
+  {% if o.label %}<div class="photo-projet__haut"><h1 class="photo-projet__label container t-label" data-reveal="texte">{{ o.label }}</h1></div>{% endif %}
+  <a class="photo-projet__lien" href="/projets/{{ p.slug }}/" aria-label="{{ p.titre }}">
+    <img class="photo-projet__img" src="{{ p.image }}" alt="{{ p.alt }}"{% if not o.hero %} loading="lazy"{% endif %} data-reveal="{{ 'zoom' if o.hero else 'image' }}">
+    {% if p.masque !== false %}<span class="photo-projet__masque" aria-hidden="true"></span>{% endif %}
+    <span class="photo-projet__legende container t-label" data-reveal="texte">
+      {% for l in libelles %}{% if not loop.first %}<span class="photo-projet__sep" aria-hidden="true"></span>{% endif %}<span>{{ l }}</span>{% endfor %}
+    </span>
+  </a>
+</section>
+{% endmacro %}

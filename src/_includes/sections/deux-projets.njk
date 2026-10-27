@@ -1,0 +1,25 @@
+{#
+  Deux projets : deux cartes projet côte à côte (format paysage), légende « Type —— Lieu ».
+  - Page Projets : entre deux photos pleine largeur.
+  - Fiche projet : « Autres projets », avec titre, lien et filet en haut (options ci-dessous).
+  Usage : {% from "sections/deux-projets.njk" import deuxProjets %}
+          {{ deuxProjets([p1, p2]) }}
+          {{ deuxProjets([p1, p2], { titre: "Autres projets", lien: { texte: "Tous les projets", url: "/projets/" }, filet: true }) }}
+#}
+{% macro deuxProjets(projets, o = {}) %}
+{% from "components/carte-projet.njk" import carteProjet %}
+{% from "components/bouton-lien.njk" import boutonLien %}
+<section class="deux-projets{% if o.filet %} deux-projets--filet{% endif %}">
+  <div class="container">
+    {% if o.titre %}
+    <div class="section-head">
+      <h2 class="t-display-l" data-reveal="titre">{{ o.titre }}</h2>
+      {% if o.lien %}{{ boutonLien(o.lien.texte, o.lien.url) }}{% endif %}
+    </div>
+    {% endif %}
+    <div class="deux-projets__rangee">
+      {% for p in projets %}{{ carteProjet(p, "paysage") }}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endmacro %}

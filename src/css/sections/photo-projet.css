@@ -1,0 +1,24 @@
+/* Photo projet (page Projets) : photo pleine largeur cliquable, légende blanche en bas à gauche */
+.photo-projet { position: relative; height: 720px; overflow: hidden; color: var(--innea-blanc); }
+.photo-projet__lien { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 64px var(--section-x); }
+.photo-projet__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+.photo-projet__lien:hover .photo-projet__img, .photo-projet__lien:focus-visible .photo-projet__img { transform: scale(1.02); }
+.photo-projet__masque { position: absolute; left: 0; right: 0; bottom: 0; height: 217px; background: linear-gradient(to bottom, rgba(26,23,20,0), rgba(26,23,20,.6)); }
+.photo-projet__legende { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.photo-projet__sep { width: 24px; height: 1px; background: currentColor; flex: none; }
+
+/* Ouverture de page : même hauteur que le hero (860px min., hauteur d'écran, 1000px max.),
+   label « Projets » en haut à gauche, sous le header */
+.photo-projet--hero { height: 100vh; min-height: 860px; max-height: 1000px; padding: 0; }
+.photo-projet__haut { position: absolute; z-index: 1; top: 120px; left: 0; right: 0; padding: 0 var(--section-x); pointer-events: none; }
+.photo-projet__label { margin: 0 auto; }
+
+@media (max-width: 900px) {
+  .photo-projet { height: 560px; }
+}
+@media (max-width: 640px) {
+  .photo-projet { height: 440px; }
+  .photo-projet--hero { min-height: 640px; padding: 0; }
+  .photo-projet__lien { padding: 40px var(--section-x); }
+  .photo-projet__haut { top: 96px; }
+}

@@ -2,21 +2,15 @@
 layout: layouts/base.njk
 title: Projets
 permalink: /projets/
-description: Appartements, maisons, mobilier dessiné pour un lieu. Une sélection de projets menés en Suisse romande.
-
-intro:
-  label: Projets
-  titre: ["Des lieux transformés,", "jusqu’au dernier détail."]
-  texte: Appartements, maisons, mobilier dessiné pour un lieu. Une sélection de projets menés en Suisse romande.
-
-grille:
-  filtres: [Résidentiel, Mobilier sur mesure, Extérieurs]   # « Tous » est ajouté en premier
-  parPage: 10        # projets affichés avant « Afficher plus »
-  plus: Afficher plus
-  # projets : _data/realisations.json
+description: Appartements, maisons, mobilier dessiné pour un lieu. Une sélection de projets INNEA en Suisse romande.
+# Projets : _data/realisations.json. Le 1er ouvre la page (photo pleine hauteur),
+# les suivants alternent deux cartes / une photo pleine largeur.
 ---
-{% from "sections/intro-de-page.njk" import introDePage %}
-{% from "sections/grille-projets.njk" import grilleProjets %}
+{% from "sections/photo-projet.njk" import photoProjet %}
+{% from "sections/deux-projets.njk" import deuxProjets %}
 
-{{ introDePage(intro) }}
-{{ grilleProjets(grille, realisations.projets) }}
+{% set liste = realisations.projets %}
+{{ photoProjet(liste[0], { hero: true, label: "Projets" }) }}
+{% for groupe in liste.slice(1) | decouper([2, 1]) %}
+  {% if groupe.length == 1 %}{{ photoProjet(groupe[0]) }}{% else %}{{ deuxProjets(groupe) }}{% endif %}
+{% endfor %}

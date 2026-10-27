@@ -8,31 +8,28 @@ pagination:
 permalink: "/projets/{{ projet.slug }}/"
 eleventyComputed:
   title: "{{ projet.titre }}"
-  description: "{{ projet.titre }} — {{ projet.categorie }}{% if projet.lieu %}, {{ projet.lieu }}{% endif %}. Un projet Innea."
+  description: "{{ projet.titre }}{% if projet.lieu %}, {{ projet.lieu }}{% endif %}. Un projet INNEA."
 ---
 {% from "sections/hero.njk" import hero as heroSection %}
 {% from "sections/fiche-projet.njk" import ficheProjet %}
 {% from "sections/galerie-projet.njk" import galerieProjet %}
-{% from "sections/avant-apres.njk" import avantApresSection %}
-{% from "sections/projet-suivant.njk" import projetSuivant %}
+{% from "sections/deux-projets.njk" import deuxProjets %}
 
 {% set tous = realisations.projets %}
+{% set n = tous | length %}
 {% set index = pagination.pageNumber %}
-{% set suivant = tous[(index + 1) % (tous | length)] %}
-{% set compteur = ((index + 1) | pad) + " / " + ((tous | length) | pad) %}
+{# « Autres projets » : les deux projets qui suivent dans la liste (on reprend au début après le dernier) #}
+{% set autres = [tous[(index + 1) % n], tous[(index + 2) % n]] %}
 
 {{ heroSection({
   titre: projet.titre,
-  sousTitre: projet.categorie + ((" · " + projet.lieu) if projet.lieu else ""),
   masque: "photo",
-  diapositives: [{ image: projet.image, alt: projet.alt, legende: compteur }],
+  diapositives: [{ image: projet.image, alt: projet.alt }],
   filAriane: [{ texte: "Projets", url: "/projets/" }, { texte: projet.titre }]
 }) }}
 
 {{ ficheProjet(projet) }}
 
-{% if projet.galerie or projet.details %}{{ galerieProjet(projet.galerie or [], projet.details) }}{% endif %}
+{% if projet.galerie %}{{ galerieProjet(projet.galerie, projet.details) }}{% endif %}
 
-{% if projet.avantApres %}{{ avantApresSection(projet.avantApres) }}{% endif %}
-
-{{ projetSuivant(suivant) }}
+{{ deuxProjets(autres, { titre: "Autres projets", lien: { texte: "Tous les projets", url: "/projets/" }, filet: true }) }}

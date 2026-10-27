@@ -1,0 +1,16 @@
+{#
+  Carte catégorie (sélection du showroom) : photo au ratio donné, puis légende « —— 01 Nom ».
+  Usage : {% from "components/carte-categorie.njk" import carteCategorie %}
+          {{ carteCategorie({ nom, image, alt, ratio: "416/520", numero }) }}
+          ratio : largeur/hauteur de la photo (416/520 portrait, 1 carré, 416/312 paysage…) ; numero optionnel
+#}
+{% macro carteCategorie(c) %}
+<div class="categorie" data-reveal="carte">
+  <div class="categorie__photo" style="aspect-ratio: {{ c.ratio or 1 }}"><img src="{{ c.image }}" alt="{{ c.alt or c.nom }}" loading="lazy"></div>
+  <p class="categorie__legende t-label">
+    <span class="categorie__trait" aria-hidden="true"></span>
+    {% if c.numero %}<span class="taupe">{{ c.numero | pad }}</span>{% endif %}
+    <span>{{ c.nom }}</span>
+  </p>
+</div>
+{% endmacro %}

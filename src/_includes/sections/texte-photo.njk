@@ -1,0 +1,17 @@
+{#
+  Texte et photo (page Showroom, présentation) : texte sur 416px à gauche, photo à droite sur la largeur restante.
+  Usage : {% from "sections/texte-photo.njk" import textePhoto %}
+          {{ textePhoto({ label, titre, texte: "…" | ["paragraphe", "paragraphe"], image, alt, ratio: "832/446" }) }}
+#}
+{% macro textePhoto(s) %}
+<section class="texte-photo">
+  <div class="container">
+    <div class="texte-photo__texte">
+      <p class="t-label taupe" data-reveal="texte">{{ s.label }}</p>
+      <h2 class="t-titre-l" data-reveal="titre">{{ s.titre | lignes | safe }}</h2>
+      <div class="texte-photo__paragraphes t-texte" data-reveal="texte">{% for para in [].concat(s.texte) %}<p>{{ para }}</p>{% endfor %}</div>
+    </div>
+    <img class="texte-photo__photo" src="{{ s.image }}" alt="{{ s.alt }}" loading="lazy" data-reveal="image" style="aspect-ratio: {{ s.ratio or '16/9' }}">
+  </div>
+</section>
+{% endmacro %}

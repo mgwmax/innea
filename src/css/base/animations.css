@@ -27,8 +27,9 @@
 }
 .anim [data-reveal="carte"]:not(.est-revele) .card__frame img { scale: 1.12; }
 
-/* Hero : zoom arrière lent, la photo reste visible */
-.anim [data-reveal="zoom"] { transition: scale 2.6s var(--ease-reveal) var(--delai, 0s); }
+/* Hero : zoom arrière lent, la photo reste visible. transform garde la transition du zoom au survol (photo-projet). */
+.anim [data-reveal="zoom"] { transition: scale 2.6s var(--ease-reveal) var(--delai, 0s), transform .9s cubic-bezier(.2, .7, .2, 1); }
+.anim .photo-projet__img[data-reveal="image"] { transition: opacity 1.1s var(--ease-reveal) var(--delai, 0s), scale 1.6s var(--ease-reveal) var(--delai, 0s), transform .9s cubic-bezier(.2, .7, .2, 1); }
 .anim [data-reveal="zoom"]:not(.est-revele) { opacity: 1; scale: 1.08; }
 
 /* Filet vertical des étapes : se dessine du haut vers le bas */

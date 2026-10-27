@@ -45,7 +45,7 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
 |---|---|
 | Page content (texts, images, lists) | YAML front matter at the top of each page, e.g. `src/index.njk` |
 | Site-wide data (nav, email, phones, address, socials, legal) | `src/_data/site.json` |
-| Project list and each project's detail-page content: the projects page shows all of them, the homepage only those with `accueil: true`. Every project needs a unique `slug`. Detail-page fields are optional: `lieu`, `annee`, `surface`, `texte`, `galerie`, `details`, `avantApres` | `src/_data/realisations.json` |
+| Project list (in projects-page order) and each project's detail-page content. Fields: `slug` (unique), `titre` (detail-page title), `legende` (two caption labels, e.g. `["Villa", "Blonay"]`), `lieu`, `categorie`, `image`, `alt`, `masque` (`false` removes the dark gradient on the projects page), and the optional `texte` and `galerie` | `src/_data/realisations.json` |
 | Page skeleton (head, header, mobile menu, contact, footer) | `src/_includes/layouts/base.njk` |
 | Blocks present on every page | `src/_includes/partials/` |
 | Page sections (one Nunjucks macro each) | `src/_includes/sections/` |
@@ -125,23 +125,32 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
   - `js/components/etapes.js` positions the vertical step line from the first to the last number.
 - **Carte projet:** clickable as a whole, no frame, no shadow. Formats are `paysage` (816×560), `etroit` (464×560), `portrait` (464×600) and `carre` (416×416). The caption is now one or two Label texts separated by a 24px line (« Villa —— Blonay »). It shows `p.legende` if set, otherwise category and location, otherwise the title. A card's format comes from its **position** in the layout, not from the project data:
   - Homepage `projets` section: pairs of cards, paysage + portrait, then portrait + paysage. The second card of each pair sits 120px lower.
-  - Projects page `grille-projets` section: a repeating cycle of *grand + petit* (second card 160px lower), *three squares*, *petit + grand* (second card 120px lower), *three squares*.
-  - Responsive behaviour (in `sections/grille-projets.css`): above 640px the cycle is kept, with proportional `minmax(0, …fr)` columns and vertical offsets that shrink at each breakpoint. At 640px and below it becomes a condensed version of the same rhythm. In large + small rows, the large card is full width and the small one is 64% wide, aligned right (left for small + large). In three-square rows, the first square is full width and the other two sit side by side. When a three-square row is narrower than 1260px, a container query moves all its captions onto two lines together.
-  - This cycle is written twice and the two copies must stay identical: the `rangeesProjets` filter in `eleventy.config.js` (initial render) and `src/js/components/grille-projets.js` (re-layout when filtering or clicking "Afficher plus").
+  - The homepage is the only page that still uses project cards in a staggered grid. The projects page now uses full-bleed photos (see below).
 - **Hero / Photo plein cadre:** `sections/hero.njk` covers both. With several `diapositives` it is the homepage carousel. With one, it is the static full-bleed photo used on project pages and the showroom page, with `masque: "photo"` for the plain dark gradient and an optional `filAriane` breadcrumb. In both cases it is a `.hero`, so the header stays transparent over it.
-- **Fiche projet** (project detail page), in order:
-  1. Hero with the project title, `Catégorie · Lieu` and an `NN / total` counter.
-  2. Méta projet: Lieu, Année, Catégorie, Surface. Missing entries are skipped, and Surface is shown only if the client agrees.
-  3. "Le projet" text (`bloc-label` component).
-  4. Gallery: full-width photo, then a pair, repeating, followed by an optional "Détails" block.
-  5. Optional Avant / après slider.
-  6. Projet suivant: the whole block links to the next project, and the last project links back to the first.
-- **Avant / après:** the slider is an invisible `<input type="range">` laid over the frame, so mouse, touch and keyboard all work. `js/components/avant-apres.js` updates the `--position` CSS variable, which drives the before-image clip and the handle. Both photos fill the whole frame, so their framing differs from the static Figma mock-up, where each photo is a separate half.
+- **Projects page, design update of October 2026** (Figma `8234:9482`): `src/projets.njk` alternates two sections, driven by the order of `realisations.json`:
+  - `photo-projet`: a clickable full-bleed photo (720px tall) with a white `« Label —— Label »` caption at the bottom left. The first project is the page hero (`{ hero: true, label: "Projets" }`, 100vh between 860 and 1000px, h1 « Projets » at the top).
+  - `deux-projets`: two `paysage` cards side by side.
+  - The rest of the list is cut with `decouper([2, 1])`: a pair, then one full-bleed photo, repeating. To reorder the page, reorder the JSON.
+  - There are no filters and no "Afficher plus" any more.
+- **Fiche projet** (project detail page, Figma `8039:153`), in order:
+  1. Hero with the project `titre`, plain photo gradient and breadcrumb (no caption).
+  2. `fiche-projet`: Méta (Lieu, Catégorie; missing entries are skipped) and the "Le projet" text (`bloc-label`).
+  3. Gallery (full-width photo, then a pair, repeating), only if `galerie` is set.
+  4. « Autres projets »: `deux-projets` with a top rule (`filet: true`) and a « Tous les projets » link, showing the next two projects in the list (wrapping round).
+- **Studio, design update of October 2026** (Figma `8040:210`): intro, `equipe` with a single photo (`portraits` with one entry; options `ratio` for the frame, `cadrage` or `position` for the crop), `valeurs` with `numerote: false`, a `respiration` without caption (`position` sets the crop), then two `savoir-faire` grids (« Notre regard. » with `carre`, « Des idées posées sur le papier. » with `filet` and `numerote`).
+  - The couple photo is a square image supplied by the client (`nathalie-christophe-carre.webp`), shown in the 640px square with the Sable colour-burn overlay (sepia tone).
+- **Showroom, design update of October 2026** (Figma `8041:262`): hero, `texte-photo` (text + photo), `categories` (photo | list and rendez-vous button | photo), the « Sélection » mosaics, a `respiration`, then the contact block titled « Prenez rendez-vous. ».
+  - **The Figma page has four alternative « Sélection · mosaïque » layouts, and all four are on the page on purpose: the client will pick one later.** Each is one entry of `selections` in `showroom.njk`. They share their texts through the YAML anchor `selectionCommun` (`<<: *commun`) and the categories through the `categories` map. To keep only one, delete the other entries.
+  - `sections/mosaique.njk` takes `colonnes` (relative widths), `contenu` (one list of items per column, with `espace` between them) and items of type `intro`, `carte` (Sable card with button), `rdv` (button without card), `groupe` (two categories side by side) or a category (`cat`, `ratio`, optional `numero`). At 900px and below each column becomes a 2-column grid (1 column at 640px); intros and groups span the full width.
+  - Its buttons use the new `bouton-contour` component (a bordered button, used only on the showroom page as in the design), and its photos the `carte-categorie` component.
+- **Contact page** (Figma `8041:8037`): the Bureau and Showroom addresses sit side by side; the photo below uses `masque: "photo"` without caption.
+- **Sections and components no longer used by any page** (kept in case they come back): `grille-projets` + `filtre` + `js/components/grille-projets.js` (old projects grid, whose cycle is also written in the `rangeesProjets` filter), `avant-apres`, `projet-suivant`, `infos-pratiques`, the `intro-de-page` variant `suite`.
 - **Bouton lien** has a white tone for use over photos (class `btn-link--blanc`) and a `span` mode for use inside a parent link: `boutonLien(texte, false, "btn-link--blanc", "span")`.
 - **Reused sections with variants:**
   - `demarche` with `variante: "compacte"` (Studio): intro 416px wide, steps 832px wide.
-  - `savoir-faire` with a `legende` on the right of the title and any number of rows. It also renders the showroom "Sélection".
-  - `intro-de-page` with `variante: "suite"` (Showroom, placed under a hero): 44px title as an h2.
+  - `savoir-faire` with a `legende` on the right of the title and any number of rows. Options: `texte` (intro under the title), `carre` (square photos), `numerote` (`avantage` cards), `espaceHaut` and `filet` (top spacing / top rule).
+  - `valeurs` with `numerote: false` hides the numbers.
+  - `respiration` with `position` (object-position of the photo). `legende` is optional; without it (and without `masque`) there is no gradient.
 - **Navigation:** Projets → `/projets/`, Studio → `/studio/`, Showroom → `/showroom/`, Contact → `/contact/`. The footer links go to `/mentions-legales/` and `/confidentialite/`. A nav item is marked `aria-current` when the page URL starts with its URL, so project pages mark "Projets" as current.
 - **Contact block title per page:** the title defaults to `site.contact.titre` (« Parlons de votre intérieur. »). A page can override it in its front matter with `blocContact: { titre: … }`, as a string or as an array of lines. The showroom page uses « Prenez rendez-vous. ».
 - **Pages without the contact block:** the contact and legal pages set `contact: false` in their front matter. The contact page is itself the contact block, and the legal pages follow the design, which goes straight to the footer.
@@ -151,7 +160,6 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
   - The Figma component description says the fields should have only a bottom line, but the mock-up draws full boxes. The implementation follows the mock-up.
 - **Legal pages:** `sections/texte-legal.njk` renders a centred 1024px column of titled sections, with text 640px wide. Each section uses `lignes` (one line per item) or `texte` (a paragraph).
 - **Respiration** accepts `masque: "photo"` for the stronger 50% black gradient used on the contact page.
-- **Filtre** (projects page): active is encre with a 1px underline, inactive is taupe. Each filter's value is its category passed through `slugify`, matched against each card's `data-categorie`. "Tous" has the value `tous`.
 - **Étape:** four stacked steps with a thin vertical line.
 - **Objet:** no price, no cart.
 - **Bloc contact:** closes every page, right before the footer. It is included by the layout; a page can opt out with `contact: false` in its front matter.
@@ -163,11 +171,9 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
 - Remaining `#` placeholder links: Instagram and Pinterest.
 - The contact form has no back end yet: "Envoyer" only opens a pre-filled e-mail. The client also still has to approve the form itself (the Figma frame calls it « à valider »).
 - The legal texts are placeholders in square brackets. The Confidentialité structure is a suggestion based on the Swiss data-protection law (nLPD) and needs review. It mentions Google Fonts because the site loads its fonts from Google's servers.
-- Only "Sur les hauts de Vevey" has full detail-page content (texts, gallery, details, before/after), taken from Figma. The other project pages show only the hero, the category and location, and "Projet suivant" until their content is written. The project, studio and showroom texts in square brackets are placeholders from the design.
-- Studio portraits (`portrait-1.png`, `portrait-2.png`): the alt texts assume Nathalie on the left and Christophe on the right. Please confirm.
-- The showroom "Sélection" repeats the same three objects on two rows, as in the design. Their materials are `[Matière à confirmer]`.
-- Project names and photos in `realisations.json` are provisional, per a Figma annotation: the client still has to confirm which photo belongs to which project. Three projects are literally named `[Nom du projet]`.
-- "Afficher plus" only appears when there are more projects than `parPage` (10). With the current 10 projects it is hidden.
+- Only « Les Hauts de Vevey » has a text and a gallery (from Figma). The other project pages show the hero, the Méta block and « Autres projets » until their content is written. Their `titre` (detail-page title) was written during development, as Figma only has one project page.
+- The fourth project's caption is « Attique à la montagne —— Les Diablerets »; Figma reads « Les Hauts de Vevey —— Les Diablerets », which looks like a copy-paste slip.
+- The showroom has four « Sélection » variants to choose from (see above).
 - The FR / EN switch is only visual. No English content or i18n setup exists yet.
 - The Figma file says the showroom address (Chemin du Péage 39, 1807 Blonay) still needs confirming.
 

@@ -1,0 +1,22 @@
+{#
+  Catégories (page Showroom) : photo, liste des catégories avec bouton contour, photo — trois colonnes de même hauteur.
+  Usage : {% from "sections/categories.njk" import categories %}
+          {{ categories({ label, liste: [...], bouton: { texte, url }, mention, photos: [{ image, alt }, { image, alt }] }) }}
+#}
+{% macro categories(s) %}
+{% from "components/bouton-contour.njk" import boutonContour %}
+<section class="categories">
+  <div class="container">
+    <img class="categories__photo" src="{{ s.photos[0].image }}" alt="{{ s.photos[0].alt }}" loading="lazy" data-reveal="image">
+    <div class="categories__texte">
+      <p class="t-label taupe" data-reveal="texte">{{ s.label }}</p>
+      <p class="t-titre-m" data-reveal="texte">{{ s.liste | lignes | safe }}</p>
+      <div class="categories__rdv" data-reveal="texte">
+        {{ boutonContour(s.bouton.texte, s.bouton.url) }}
+        {% if s.mention %}<p class="t-texte">{{ s.mention }}</p>{% endif %}
+      </div>
+    </div>
+    <img class="categories__photo" src="{{ s.photos[1].image }}" alt="{{ s.photos[1].alt }}" loading="lazy" data-reveal="image">
+  </div>
+</section>
+{% endmacro %}

@@ -18,3 +18,6 @@
 @media (max-width: 640px) {
   .contact-page__coords { gap: 40px; }
 }
+
+/* Bureau et Showroom côte à côte */
+.contact-page__adresses { display: flex; flex-wrap: wrap; gap: 32px 56px; }

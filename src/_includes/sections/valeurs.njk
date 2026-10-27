@@ -1,7 +1,8 @@
 {#
-  Valeurs (page Studio, « Ce qui nous guide ») : titre et trois valeurs numérotées en colonnes.
+  Valeurs (page Studio, « Notre approche ») : titre et trois valeurs en colonnes.
   Usage : {% from "sections/valeurs.njk" import valeurs %}
-          {{ valeurs({ titre, valeurs: [{ titre, texte }] }) }}
+          {{ valeurs({ titre, numerote: false, valeurs: [{ titre, texte }] }) }}
+          numerote: false → sans les numéros 01, 02, 03
 #}
 {% macro valeurs(v) %}
 {% from "components/valeur.njk" import valeur %}
@@ -9,7 +10,7 @@
   <div class="container">
     <h2 class="t-display-l" data-reveal="titre">{{ v.titre }}</h2>
     <div class="valeurs__liste">
-      {% for item in v.valeurs %}{{ valeur(loop.index, item.titre, item.texte) }}{% endfor %}
+      {% for item in v.valeurs %}{{ valeur(loop.index if v.numerote !== false else false, item.titre, item.texte) }}{% endfor %}
     </div>
   </div>
 </section>

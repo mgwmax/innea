@@ -1,18 +1,28 @@
 {#
-  Équipe (page Studio) : deux portraits à gauche (le second décalé vers le bas), texte à droite.
+  Équipe (page Studio) : photo(s) à gauche, texte à droite.
   Usage : {% from "sections/equipe.njk" import equipe %}
-          {{ equipe({ label, titre, texte, portraits: [{ image, alt }, { image, alt }] }) }}
+          {{ equipe({ label, titre, texte: "…" | ["paragraphe", "paragraphe"], portraits: [{ image, alt }] }) }}
+          - deux portraits : le second est décalé vers le bas, le texte commence à sa hauteur ;
+          - un seul portrait : photo de 640px de large (teintée Sable), texte centré verticalement. Options du portrait :
+            ratio : proportions du cadre ("1 / 1" par défaut) ;
+            cadrage : { largeur, gauche, haut } en % du cadre, pour reprendre exactement une zone de la photo
+              (largeur = largeur photo / largeur zone, gauche = -x zone / largeur zone, haut = -y zone / hauteur zone) ;
+            sinon position : object-position de la photo (par défaut centrée en bas).
 #}
 {% macro equipe(e) %}
-<section class="equipe">
+{% set unique = (e.portraits | length) == 1 %}
+<section class="equipe{% if unique %} equipe--unique{% endif %}">
   <div class="container">
     <div class="equipe__portraits">
-      {% for p in e.portraits %}<img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy" data-reveal="image">{% endfor %}
+      {% for p in e.portraits %}
+      {% if unique %}<div class="equipe__photo" data-reveal="image"{% if p.ratio %} style="aspect-ratio: {{ p.ratio }}"{% endif %}><img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy"{% if p.cadrage %} class="equipe__photo-cadree" style="width: {{ p.cadrage.largeur }}; left: {{ p.cadrage.gauche }}; top: {{ p.cadrage.haut }}"{% elif p.position %} style="object-position: {{ p.position }}"{% endif %}></div>
+      {% else %}<img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy" data-reveal="image">{% endif %}
+      {% endfor %}
     </div>
     <div class="equipe__texte">
       <p class="t-label taupe" data-reveal="texte">{{ e.label }}</p>
       <h2 class="t-titre-l" data-reveal="titre">{{ e.titre }}</h2>
-      {% if e.texte %}<p class="t-texte" data-reveal="texte">{{ e.texte }}</p>{% endif %}
+      {% if e.texte %}<div class="equipe__paragraphes t-texte" data-reveal="texte">{% for para in [].concat(e.texte) %}<p>{{ para }}</p>{% endfor %}</div>{% endif %}
     </div>
   </div>
 </section>

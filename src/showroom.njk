@@ -2,48 +2,98 @@
 layout: layouts/base.njk
 title: Showroom
 permalink: /showroom/
-description: "Le showroom Innea à Blonay : objets, échantillons et mobilier à voir et toucher, sur rendez-vous."
+description: "Le showroom INNEA : objets de décoration, pièces chinées, échantillons et catalogues, à découvrir sur rendez-vous."
 
 hero:
   titre: Le showroom
-  sousTitre: Objets · Matières · Sur rendez-vous
+  sousTitre: Objets de décoration · Échantillons · Pièces chinées
   masque: photo
   diapositives:
-    - { image: /assets/photos/showroom-blonay.webp, alt: "Le showroom Innea à Blonay", legende: "Le showroom Innea" }
+    - { image: /assets/photos/showroom-objets.webp, alt: "Le showroom INNEA : canapé, table et étagères d’objets" }
 
-intro:
-  variante: suite
+presentation:
   label: Showroom
-  titre: Un lieu pour voir et toucher les matières.
-  texte: "Objets, échantillons, mobilier : notre sélection est réunie dans un même lieu. Nous vous y recevons sur rendez-vous, pour choisir ensemble."
+  titre: Un lieu d'inspiration et de découverte.
+  texte:
+    - "Notre showroom réunit une sélection d'objets de décoration, de pièces chinées, ainsi que des échantillons et catalogues pour accompagner vos projets."
+    - "Un lieu d'échange où nous prenons le temps de choisir ensemble les matières, les textiles et les derniers détails qui donneront à votre intérieur toute sa personnalité."
+  image: /assets/photos/showroom-espace.webp
+  alt: L’espace du showroom, table de travail et étagères
+  ratio: "832/446"
 
-selection:
-  titre: Sélection
-  legende: À découvrir au showroom
-  # Objets et matières provisoires (le design répète les trois mêmes objets sur deux rangées)
-  objets:
-    - { titre: Bougies parfumées, texte: "[Matière à confirmer]", image: /assets/photos/objet-bougies.webp, alt: "Bougies parfumées" }
-    - { titre: Vases en céramique, texte: "[Matière à confirmer]", image: /assets/photos/objet-vases.webp, alt: "Vases en céramique noire" }
-    - { titre: Diffuseur de parfum, texte: "[Matière à confirmer]", image: /assets/photos/objet-diffuseur.webp, alt: "Diffuseur de parfum" }
-    - { titre: Bougies parfumées, texte: "[Matière à confirmer]", image: /assets/photos/objet-bougies.webp, alt: "Bougies parfumées" }
-    - { titre: Vases en céramique, texte: "[Matière à confirmer]", image: /assets/photos/objet-vases.webp, alt: "Vases en céramique noire" }
-    - { titre: Diffuseur de parfum, texte: "[Matière à confirmer]", image: /assets/photos/objet-diffuseur.webp, alt: "Diffuseur de parfum" }
+liste:
+  label: À découvrir au showroom
+  liste: [Objets de décoration, Pièces chinées, Échantillons de matières, Catalogues et inspirations, Conseils personnalisés]
+  bouton: { texte: Prendre rendez-vous, url: "#contact" }
+  mention: Visite du showroom sur rendez-vous
+  photos:
+    - { image: /assets/photos/showroom-vaisselle.webp, alt: "Assiettes et bol en grès bleu-gris" }
+    - { image: /assets/photos/showroom-salle-de-bain.webp, alt: "Baignoire, bougies et branches fleuries" }
+
+# Catégories de la sélection, communes aux quatre variantes de mosaïque
+categories:
+  art: { nom: Art de la table, image: /assets/photos/categorie-art-de-la-table.webp, alt: "Assiettes et bols en céramique" }
+  bain: { nom: Bain, image: /assets/photos/categorie-bain.webp, alt: "Serviettes, savons et flacons" }
+  bougies: { nom: Bougies & senteurs, image: /assets/photos/categorie-bougies.webp, alt: "Bougies parfumées et diffuseur" }
+  livres: { nom: Livres, image: /assets/photos/categorie-livres.webp, alt: "Livres de décoration et bougie" }
+  tapis: { nom: Tapis, image: /assets/photos/categorie-tapis.webp, alt: "Tapis tissés roulés" }
+  textiles: { nom: Textiles, image: /assets/photos/categorie-textiles.webp, alt: "Plaids pliés sur une chaise en bois" }
+  vases: { nom: Vases & bougeoirs, image: /assets/photos/categorie-vases.webp, alt: "Vase noir, bougeoirs en verre et branches" }
+
+# Sélection : quatre variantes, toutes affichées en attendant le choix — supprimer celles qui ne sont pas retenues
+selectionCommun: &commun
+  intro: { label: À découvrir au showroom, titre: ["Objets &", "inspirations."], texte: "Une sélection de pièces, de matières et de textures choisies avec soin pour créer des intérieurs singuliers." }
+  carte: { titre: Venez voir et toucher les matières., bouton: { texte: Prendre rendez-vous, url: "#contact" }, mention: Visite du showroom sur rendez-vous }
+
+selections:
+  - <<: *commun
+    nom: "Mosaïque (variante 1)"
+    contenu:
+      - items: [{ type: intro, ratio: "416/349" }, { cat: bougies, ratio: "416/520" }, { cat: vases, ratio: "1" }]
+      - items: [{ cat: art, ratio: "1" }, { cat: livres, ratio: "416/312" }, { cat: textiles, ratio: "416/520" }]
+      - items: [{ cat: bain, ratio: "416/312" }, { cat: tapis, ratio: "416/520" }, { type: carte, ratio: "1" }]
+  - <<: *commun
+    nom: "Mosaïque carrés (variante 2)"
+    contenu:
+      - items: [{ type: intro, ratio: "416/453" }, { cat: bougies, ratio: "1" }, { cat: vases, ratio: "1" }]
+      - items: [{ cat: art, ratio: "1" }, { cat: livres, ratio: "1" }, { cat: textiles, ratio: "1" }]
+      - items: [{ cat: bain, ratio: "1" }, { cat: tapis, ratio: "1" }, { type: carte, ratio: "1" }]
+  - <<: *commun
+    nom: "Mosaïque portraits (variante 3)"
+    contenu:
+      - items: [{ type: intro, ratio: "416/557" }, { cat: bougies, ratio: "416/520" }, { cat: vases, ratio: "416/520" }]
+      - items: [{ cat: art, ratio: "416/520" }, { cat: livres, ratio: "416/520" }, { cat: textiles, ratio: "416/520" }]
+      - items: [{ cat: bain, ratio: "416/520" }, { cat: tapis, ratio: "416/520" }, { type: carte, ratio: "416/520" }]
+  - <<: *commun
+    nom: "Mosaïque numérotée (variante 4)"
+    colonnes: [376, 504, 368]
+    contenu:
+      - espace: 126
+        items: [{ type: intro }, { cat: bougies, ratio: "376/475", numero: 3 }]
+      - espace: 39
+        items:
+          - { cat: art, ratio: "504/360", numero: 1 }
+          - { cat: livres, ratio: "504/220", numero: 4 }
+          - { type: groupe, items: [{ cat: textiles, ratio: "236/178", numero: 6 }, { cat: vases, ratio: "236/178", numero: 7 }] }
+      - espace: 46
+        items: [{ cat: bain, ratio: "368/304", numero: 2 }, { cat: tapis, ratio: "368/380", numero: 5 }, { type: rdv }]
+
+respiration:
+  image: /assets/photos/showroom-innea.webp
+  alt: Le showroom INNEA, table de travail et étagères d’objets
+  position: "50% 54%"
 
 blocContact:
   titre: Prenez rendez-vous.
-
-infos:
-  infos:
-    - { label: Adresse, lignes: ["Rte de PraCharbon 34", "1614 Granges"] }
-    - { label: Visite, lignes: ["Sur rendez-vous uniquement,", "par e-mail ou par téléphone"] }
-    - { label: Rendez-vous, lien: { texte: Prenez rendez-vous, url: "#contact" } }   # descend vers le bloc contact de la page
 ---
 {% from "sections/hero.njk" import hero as heroSection %}
-{% from "sections/intro-de-page.njk" import introDePage %}
-{% from "sections/savoir-faire.njk" import savoirFaire as selectionSection %}
-{% from "sections/infos-pratiques.njk" import infosPratiques %}
+{% from "sections/texte-photo.njk" import textePhoto %}
+{% from "sections/categories.njk" import categories as categoriesSection %}
+{% from "sections/mosaique.njk" import mosaique %}
+{% from "sections/respiration.njk" import respiration as respirationSection %}
 
 {{ heroSection(hero) }}
-{{ introDePage(intro) }}
-{{ selectionSection(selection) }}
-{{ infosPratiques(infos) }}
+{{ textePhoto(presentation) }}
+{{ categoriesSection(liste) }}
+{% for sel in selections %}{{ mosaique(sel, categories) }}{% endfor %}
+{{ respirationSection(respiration) }}

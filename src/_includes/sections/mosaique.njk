@@ -1,0 +1,61 @@
+{#
+  Mosaïque (page Showroom, « Sélection ») : trois colonnes d'éléments empilés.
+  Les catégories sont définies une fois (2e paramètre) et référencées par leur clé.
+  Usage : {% from "sections/mosaique.njk" import mosaique %}
+          {{ mosaique({
+               nom: "Mosaïque",                         → libellé de la variante (aria-label), utile tant que le choix n'est pas fait
+               colonnes: [416, 416, 416],                → largeurs relatives des colonnes
+               intro: { label, titre: [lignes…], texte },
+               carte: { titre, bouton: { texte, url }, mention },
+               contenu: [                                → une entrée par colonne
+                 { espace: 48, items: [
+                   { type: "intro", ratio: "416/349" },               → ratio : hauteur minimale de l'intro
+                   { cat: "bougies", ratio: "416/520", numero: 3 },   → carte catégorie
+                   { type: "groupe", items: [{ cat, ratio, numero }, …] },  → catégories côte à côte
+                   { type: "carte", ratio: "1" },                     → carte Sable « Venez voir… » avec bouton contour
+                   { type: "rdv" }                                    → bouton contour et mention, sans carte
+                 ] } ] }, categories) }}
+          categories : { cle: { nom, image, alt } }
+#}
+{% macro elementMosaique(it, s, categories) %}
+{% from "components/carte-categorie.njk" import carteCategorie %}
+{% from "components/bouton-contour.njk" import boutonContour %}
+{% if it.type == "intro" %}
+<div class="mosaique__intro{% if not it.ratio %} mosaique__intro--libre{% endif %}"{% if it.ratio %} style="aspect-ratio: {{ it.ratio }}"{% endif %}>
+  <p class="t-label taupe" data-reveal="texte">{{ s.intro.label }}</p>
+  <h2 class="t-display-l" data-reveal="titre">{{ s.intro.titre | lignes | safe }}</h2>
+  <span class="mosaique__trait" aria-hidden="true" data-reveal="texte"></span>
+  <p class="t-texte taupe" data-reveal="texte">{{ s.intro.texte }}</p>
+</div>
+{% elif it.type == "carte" %}
+<div class="mosaique__carte" style="aspect-ratio: {{ it.ratio or 1 }}" data-reveal="carte">
+  <p class="t-titre-m">{{ s.carte.titre }}</p>
+  {{ boutonContour(s.carte.bouton.texte, s.carte.bouton.url) }}
+  {% if s.carte.mention %}<p class="t-texte mosaique__mention">{{ s.carte.mention }}</p>{% endif %}
+</div>
+{% elif it.type == "rdv" %}
+<div class="mosaique__rdv" data-reveal="texte">
+  {{ boutonContour(s.carte.bouton.texte, s.carte.bouton.url) }}
+  {% if s.carte.mention %}<p class="t-texte mosaique__mention">{{ s.carte.mention }}</p>{% endif %}
+</div>
+{% elif it.type == "groupe" %}
+<div class="mosaique__groupe">
+  {% for sous in it.items %}{% set c = categories[sous.cat] %}{{ carteCategorie({ nom: c.nom, image: c.image, alt: c.alt, ratio: sous.ratio, numero: sous.numero }) }}{% endfor %}
+</div>
+{% else %}
+{% set c = categories[it.cat] %}
+{{ carteCategorie({ nom: c.nom, image: c.image, alt: c.alt, ratio: it.ratio, numero: it.numero }) }}
+{% endif %}
+{% endmacro %}
+
+{% macro mosaique(s, categories) %}
+<section class="mosaique"{% if s.nom %} aria-label="Sélection — {{ s.nom }}"{% endif %}>
+  <div class="container mosaique__grille" style="grid-template-columns:{% for w in (s.colonnes or [1, 1, 1]) %} minmax(0, {{ w }}fr){% endfor %}">
+    {% for col in s.contenu %}
+    <div class="mosaique__colonne" style="gap: {{ col.espace or 48 }}px">
+      {% for it in col.items %}{{ elementMosaique(it, s, categories) }}{% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endmacro %}

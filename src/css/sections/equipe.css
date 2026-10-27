@@ -7,6 +7,16 @@
 .equipe__texte { width: 528px; flex: 0 1 528px; padding-top: 160px; display: flex; flex-direction: column; gap: 28px; }
 .equipe__texte .t-titre-l { max-width: 520px; }
 .equipe__texte .t-texte { max-width: 480px; opacity: .8; }
+.equipe__paragraphes p + p { margin-top: 1.6em; }
+
+/* Variante une photo (Studio) : photo carrée de 640px teintée Sable (color-burn), texte centré verticalement */
+.equipe--unique .container { align-items: center; }
+.equipe--unique .equipe__portraits { display: block; }
+.equipe__photo { position: relative; aspect-ratio: 1 / 1; overflow: hidden; }
+.equipe__photo img { width: 100%; height: 100%; object-fit: cover; object-position: bottom; }
+.equipe__photo img.equipe__photo-cadree { position: absolute; height: auto; max-width: none; }
+.equipe__photo::after { content: ""; position: absolute; inset: 0; background: var(--innea-sable); mix-blend-mode: color-burn; pointer-events: none; }
+.equipe--unique .equipe__texte { padding-top: 0; }
 
 @media (max-width: 900px) {
   .equipe { padding-bottom: var(--section-y); }

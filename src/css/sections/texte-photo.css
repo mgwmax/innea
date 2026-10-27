@@ -1,0 +1,17 @@
+/* Texte et photo (Showroom) : texte 416px à gauche, photo à droite, centrés verticalement */
+.texte-photo { padding: 140px var(--section-x) 64px; }
+.texte-photo .container { display: flex; align-items: center; gap: 64px; }
+.texte-photo__texte { width: 416px; flex: none; display: flex; flex-direction: column; gap: 28px; }
+.texte-photo__paragraphes { opacity: .8; }
+.texte-photo__paragraphes p + p { margin-top: 1.6em; }
+.texte-photo__photo { flex: 1 1 0; min-width: 0; object-fit: cover; }
+
+@media (max-width: 1180px) {
+  .texte-photo__texte { width: 38%; }
+}
+@media (max-width: 900px) {
+  .texte-photo { padding: var(--section-y) var(--section-x) 48px; }
+  .texte-photo .container { flex-direction: column; align-items: stretch; gap: 40px; }
+  .texte-photo__texte { width: 100%; }
+  .texte-photo__photo { flex: none; width: 100%; }
+}

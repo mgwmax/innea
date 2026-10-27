@@ -1,0 +1,17 @@
+/* Deux projets : deux cartes paysage de même largeur, 160px au-dessus et au-dessous */
+.deux-projets { padding: 160px var(--section-x); }
+.deux-projets .container { display: flex; flex-direction: column; gap: 48px; }
+.deux-projets__rangee { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); align-items: start; }
+
+/* Variante « Autres projets » (fiche) : filet en haut de la colonne, puis 160px avant le titre */
+.deux-projets--filet { padding-top: 0; }
+.deux-projets--filet .container { border-top: 1px solid var(--innea-ligne); padding-top: 160px; }
+
+@media (max-width: 900px) {
+  .deux-projets { padding: var(--section-y) var(--section-x); }
+  .deux-projets--filet { padding-top: 0; }
+  .deux-projets--filet .container { padding-top: var(--section-y); }
+}
+@media (max-width: 640px) {
+  .deux-projets__rangee { grid-template-columns: minmax(0, 1fr); row-gap: 40px; }
+}

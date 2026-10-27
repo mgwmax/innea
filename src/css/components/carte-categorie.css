@@ -1,0 +1,7 @@
+/* Carte catégorie : photo (ratio en style inline), légende Label avec trait de 24px */
+.categorie { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.categorie__photo { width: 100%; overflow: hidden; }
+.categorie__photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+.categorie:hover .categorie__photo img { transform: scale(1.03); }
+.categorie__legende { display: flex; align-items: center; gap: 16px; }
+.categorie__trait { width: 24px; height: 1px; background: var(--innea-encre); flex: none; }

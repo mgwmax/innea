@@ -14,20 +14,20 @@ npm run build-local-static   # génère _site-local/, ouvrable sans serveur : do
 ```
 src/
   index.njk                 page d'accueil : contenu (en-tête YAML) + liste des sections
-  projets.njk               page Projets (/projets/) : intro + grille filtrable
+  projets.njk               page Projets (/projets/) : photos plein cadre et paires de projets, dans l’ordre de realisations.json
   projets/projet.njk        fiche projet : une page par projet de realisations.json (/projets/<slug>/)
   studio.njk                page Studio (/studio/)
-  showroom.njk              page Showroom (/showroom/)
+  showroom.njk              page Showroom (/showroom/) — contient 4 variantes de « Sélection » à départager (liste `selections`)
   contact.njk               page Contact (/contact/) : coordonnées + formulaire
   mentions-legales.njk      page Mentions légales (/mentions-legales/)
   confidentialite.njk       page Confidentialité (/confidentialite/)
   _data/site.json           données communes : navigation, coordonnées, mentions légales
-  _data/realisations.json   liste des projets et contenu de leurs fiches (accueil: true = affiché aussi sur la page d’accueil)
+  _data/realisations.json   liste des projets (ordre de la page Projets) et contenu de leurs fiches
   _includes/
     layouts/base.njk        squelette de page : <head>, header, menu mobile, contact, pied de page
     partials/               blocs présents sur toutes les pages (header, menu mobile, contact, footer, FR/EN)
     sections/               sections de page, une par fichier (hero, manifeste, projets, …)
-    components/             composants : logo, bouton lien, carte projet, filtre, étape, objet, méta projet, bloc label, avant/après, valeur, champ de formulaire
+    components/             composants : logo, bouton lien, carte projet, carte catégorie, bouton contour, étape, objet, méta projet, bloc label, valeur, champ de formulaire
   css/
     base/                   couleurs et espacements (tokens.css), reset, typographie, container
     components/  sections/  un fichier CSS par composant et par section, avec ses règles responsive
