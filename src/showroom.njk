@@ -53,18 +53,6 @@ selections:
       - items: [{ cat: art, ratio: "1" }, { cat: livres, ratio: "416/312" }, { cat: textiles, ratio: "416/520" }]
       - items: [{ cat: bain, ratio: "416/312" }, { cat: tapis, ratio: "416/520" }, { type: carte, ratio: "1" }]
   - <<: *commun
-    nom: "Mosaïque carrés (variante 2)"
-    contenu:
-      - items: [{ type: intro, ratio: "416/453" }, { cat: bougies, ratio: "1" }, { cat: vases, ratio: "1" }]
-      - items: [{ cat: art, ratio: "1" }, { cat: livres, ratio: "1" }, { cat: textiles, ratio: "1" }]
-      - items: [{ cat: bain, ratio: "1" }, { cat: tapis, ratio: "1" }, { type: carte, ratio: "1" }]
-  - <<: *commun
-    nom: "Mosaïque portraits (variante 3)"
-    contenu:
-      - items: [{ type: intro, ratio: "416/557" }, { cat: bougies, ratio: "416/520" }, { cat: vases, ratio: "416/520" }]
-      - items: [{ cat: art, ratio: "416/520" }, { cat: livres, ratio: "416/520" }, { cat: textiles, ratio: "416/520" }]
-      - items: [{ cat: bain, ratio: "416/520" }, { cat: tapis, ratio: "416/520" }, { type: carte, ratio: "416/520" }]
-  - <<: *commun
     nom: "Mosaïque numérotée (variante 4)"
     colonnes: [376, 504, 368]
     contenu:
@@ -77,11 +65,24 @@ selections:
           - { type: groupe, items: [{ cat: textiles, ratio: "236/178", numero: 6 }, { cat: vases, ratio: "236/178", numero: 7 }] }
       - espace: 46
         items: [{ cat: bain, ratio: "368/304", numero: 2 }, { cat: tapis, ratio: "368/380", numero: 5 }, { type: rdv }]
+  - <<: *commun
+    nom: "Mosaïque carrés (variante 2)"
+    contenu:
+      - items: [{ type: intro, ratio: "416/453" }, { cat: bougies, ratio: "1" }, { cat: vases, ratio: "1" }]
+      - items: [{ cat: art, ratio: "1" }, { cat: livres, ratio: "1" }, { cat: textiles, ratio: "1" }]
+      - items: [{ cat: bain, ratio: "1" }, { cat: tapis, ratio: "1" }, { type: carte, ratio: "1" }]
+  - <<: *commun
+    nom: "Mosaïque portraits (variante 3)"
+    contenu:
+      - items: [{ type: intro, ratio: "416/557" }, { cat: bougies, ratio: "416/520" }, { cat: vases, ratio: "416/520" }]
+      - items: [{ cat: art, ratio: "416/520" }, { cat: livres, ratio: "416/520" }, { cat: textiles, ratio: "416/520" }]
+      - items: [{ cat: bain, ratio: "416/520" }, { cat: tapis, ratio: "416/520" }, { type: carte, ratio: "416/520" }]
 
-respiration:
-  image: /assets/photos/showroom-innea.webp
-  alt: Le showroom INNEA, table de travail et étagères d’objets
-  position: "50% 54%"
+# Respiration masquée (pour la réafficher : décommenter ces lignes et l'appel en bas de page)
+# respiration:
+#   image: /assets/photos/showroom-innea.webp
+#   alt: Le showroom INNEA, table de travail et étagères d’objets
+#   position: "50% 54%"
 
 blocContact:
   titre: Prenez rendez-vous.
@@ -96,4 +97,4 @@ blocContact:
 {{ textePhoto(presentation) }}
 {{ categoriesSection(liste) }}
 {% for sel in selections %}{{ mosaique(sel, categories) }}{% endfor %}
-{{ respirationSection(respiration) }}
+{# {{ respirationSection(respiration) }} #}
