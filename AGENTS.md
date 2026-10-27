@@ -167,7 +167,6 @@ There are no tests and no linter. Verify changes visually (see "Verifying change
 
 ## Known placeholders and open items
 
-- Hero slides 2–5 reuse other project photos with captions invented during development. The real hero set is still to come from the client. Figma only has slide 1 (`salon-cheminee.jpg`).
 - Remaining `#` placeholder links: Instagram and Pinterest.
 - The contact form has no back end yet: "Envoyer" only opens a pre-filled e-mail. The client also still has to approve the form itself (the Figma frame calls it « à valider »).
 - The legal texts are placeholders in square brackets. The Confidentialité structure is a suggestion based on the Swiss data-protection law (nLPD) and needs review. It mentions Google Fonts because the site loads its fonts from Google's servers.
